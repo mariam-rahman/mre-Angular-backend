@@ -94,7 +94,7 @@ class CategoryController extends Controller
         else{
              $category->updated($request->all());
          }
-            $var = 5;
+        
           return redirect(route('category.index'));
     }
 
