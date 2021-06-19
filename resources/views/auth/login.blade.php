@@ -1,37 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<body class="form-membership">
-<div class="form-wrapper">
-
-    <!-- logo -->
-    <div id="logo">
-        <img src="media/image/dark-logo.png" alt="image">
-    </div>
-    <!-- ./ logo -->
-    <h5>Sign in</h5>
-
-    <!-- form -->
-    <form>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username or email" required autofocus>
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" required>
-        </div>
-        <div class="form-group d-flex justify-content-between">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" checked="" id="customCheck1">
-                <label class="custom-control-label" for="customCheck1">Remember me</label>
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-10">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-6">
+                                <div class="welcome-content">
+                                    <div class="brand-logo">
+                                        <a href="index.html">Corbin</a>
+                                    </div>
+                                    <h3 class="welcome-title">Welcome to Corbin</h3>
+                                    <div class="intro-social">
+                                        <ul>
+                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4">Sign in your account</h4>
+                                    <form action="index.html">
+                                        <div class="form-group">
+                                            <label><strong>Email</strong></label>
+                                            <input type="email" class="form-control" value="hello@example.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label><strong>Password</strong></label>
+                                            <input type="password" class="form-control" value="Password">
+                                        </div>
+                                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                            <div class="form-group">
+                                                <div class="form-check ml-2">
+                                                    <input class="form-check-input" type="checkbox" id="basic_checkbox_1">
+                                                    <label class="form-check-label" for="basic_checkbox_1">Remember me</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <a href="page-forgot-password.html">Forgot Password?</a>
+                                            </div>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block">Sign me in</button>
+                                        </div>
+                                    </form>
+                                    <div class="new-account mt-3">
+                                        <p>Don't have an account? <a class="text-primary" href="./page-register.html">Sign up</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <a href="recovery-password.html">Reset password</a>
         </div>
-        <button class="btn btn-primary btn-block">Sign in</button>
-        <hr>
-        <p class="text-muted">Don't have an account?</p>
-        <a href="register.html" class="btn btn-outline-light btn-sm">Register now!</a>
-    </form>
-    <!-- ./ form -->
-</div>
-</body>
+    </div>
+
+
 @endsection

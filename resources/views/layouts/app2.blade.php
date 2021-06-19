@@ -14,13 +14,12 @@
     
 
 </head>
+
 <body >
-    @include('partials.loader')
-<div id="main-wrapper">
-@include('partials.header') 
+    
  @yield('content')
  @include('partials.footer')
-</div>
+
 
      <!-- Required vendors -->
      <script src="./vendor/jquery/jquery.min.js"></script>
