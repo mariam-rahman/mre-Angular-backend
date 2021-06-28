@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+       
         $categories = Category::all();
         return view('admin/category/index',compact('categories'));
     }
@@ -88,11 +89,11 @@ class CategoryController extends Controller
                 File::delete($oldimage);     
             }
             $newimage = $request->image->store('images/category','public');
-          $category->updated(array_merge($request->except('image'),
+          $category->update(array_merge($request->except('image'),
                                          ['image'=>$newimage]));
         }
         else{
-             $category->updated($request->all());
+             $category->update($request->except('image'));
          }
         
           return redirect(route('category.index'));
@@ -108,6 +109,9 @@ class CategoryController extends Controller
      
     public function destroy(Category $category)
     {
+      
+        $category->products()->delete();
+    
        if($category->image !="")
        {
           $image_path = "storage/".$category->image;
@@ -115,8 +119,10 @@ class CategoryController extends Controller
           {
               File::delete($image_path);
           }
-          $category->delete();
+         
        }
+       $category->delete();
+
        return redirect(route('category.index'));
     }
     

@@ -14,12 +14,12 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Category</button></li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Stock</button></li>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li>
-                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Category</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('stock.index')}}">Stock</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -28,7 +28,7 @@ $counter = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Category list</h4>
+                        <h4 class="card-title">Stock list</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,32 +36,30 @@ $counter = 0;
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Title</th>
-                                        <th>Description</th>
-                                        <th>Image</th>
+                                        <th>Stock</th>
+                                        <th>Address</th>    
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($categories as $category)
+                                    @foreach($stocks as $stock)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        <td>{{$category->title}}</td>
-                                        <td>{{$category->desc}}</td>
-                                        <td><img src="{{asset('storage/'.$category->image)}}" alt="" width="60"></td>
+                                        <td>{{$stock->stock_type}}</td>
+                                        <td>{{$stock->address}}</td>
                                         <td>
                                         <div class="row">
                                         <div class="col-sm-6 d-flex">
-                                        <form action="{{route('category.destroy',$category)}}" method="post">
+                                        <form action="{{route('stock.destroy',$stock)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                     <button class="btn btn-danger px-1 py-0 ">Delete</button>
                                                 
                                             </form>
 
-                                            <a href="{{route('category.edit',$category)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+                                            <a href="{{route('stock.edit',$stock)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
 
-
+                                            </td>
                                         </div>
                                          </div>
                                             
@@ -79,20 +77,6 @@ $counter = 0;
     </div>
 </div>
 
-<!--Delete model-->
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content m-1">
-            <div class="">
-                <h5 class="modal-title">Would you like to delete this record?</h5>
-            </div>
-            <div class="modal-body">
-
-
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -100,7 +84,7 @@ $counter = 0;
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add a new Category</h5>
+                <h5 class="modal-title">Add a new Stock</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -108,26 +92,19 @@ $counter = 0;
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('stock.store')}}" method="post">
                             @CSRF
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label>Title</label>
-                                    <input type="text" name="title" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
+                                    <label>Stock Name</label>
+                                    <input type="text" name="stock_type" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label>Descriptiion</label>
-                                    <textarea name="desc" id="" cols="30" rows="3" class="form-control" style="border: 1px solid #c9c5c5;"></textarea>
+                                    <label>Location</label>
+                                    <input type="text" name="address" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
                                 </div>
-                                <div class="form-group col-md-12">
-                                    <label>Image</label>
-                                    <div class="input-group mb-3">
-                                        <input type="file" name="image" class="form-control" style="border: 1px solid #c9c5c5;" id="">
-
-                                    </div>
-
-                                </div>
+                               
 
                                 <div class="modal-footer">
                                     <input type="submit" value="Save" class="btn btn-secondary">

@@ -31,11 +31,8 @@
                                         <div class="icon-wrap success">
                                             <i class="mdi mdi-airballoon"></i>
                                         </div>
-                                        <h4>324</h4>
+                                        <h4>{{$category}}</h4>
                                         <span class="type-name">Category</span>
-                                        <span class="text-success ">17%
-                                            <i class="mdi mdi-arrow-up-bold"></i>
-                                        </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -43,23 +40,55 @@
                                         <div class="icon-wrap info">
                                             <i class="mdi mdi-trophy"></i>
                                         </div>
-                                        <h4>24.9%</h4>
-                                        <span class="type-name">Product Purchase</span>
-                                        <span class="text-danger ">4%
-                                            <i class="mdi mdi-arrow-down-bold"></i>
+                                        <h4>{{$products}}</h4>
+                                        <span class="type-name">Products</span>
+                                    </a>
+                                </li>
+                 
+                                <li class="nav-item">
+                                    <a class="nav-link"  href="{{route('stock.index')}}" role="tab" aria-controls="" aria-selected="false">
+                                        <div class="icon-wrap danger">
+                                            <i class="mdi mdi-clock"></i>
+                                        </div>
+                                        <h4>{{$stocks}}</h4>
+                                        <span class="type-name">Stock</span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#session-duration" role="tab" aria-controls="" aria-selected="false">
-                                        <div class="icon-wrap danger">
-                                            <i class="mdi mdi-clock"></i>
+                                    <a  href="{{route('purchase.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
+                                        <div class="icon-wrap info">
+                                            <i class="mdi mdi-trophy"></i>
                                         </div>
-                                        <h4>5m 32s</h4>
-                                        <span class="type-name">Stock</span>
-                                        <span class="text-success ">9%
-                                            <i class="mdi mdi-arrow-up-bold"></i>
-                                        </span>
+                                        <h4>5677</h4>
+                                        <span class="type-name">Purchase</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  href="{{route('product.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
+                                        <div class="icon-wrap info">
+                                            <i class="mdi mdi-trophy"></i>
+                                        </div>
+                                        <h4>77</h4>
+                                        <span class="type-name">Customer</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  href="{{route('product.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
+                                        <div class="icon-wrap info">
+                                            <i class="mdi mdi-trophy"></i>
+                                        </div>
+                                        <h4>56</h4>
+                                        <span class="type-name">Sale</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  href="{{route('product.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
+                                        <div class="icon-wrap info">
+                                            <i class="mdi mdi-trophy"></i>
+                                        </div>
+                                        <h4>560</h4>
+                                        <span class="type-name">Expensies</span>
                                     </a>
                                 </li>
                             </ul>
@@ -75,3 +104,8 @@
         ***********************************-->
         
 @endsection
+
+
+
+
+
