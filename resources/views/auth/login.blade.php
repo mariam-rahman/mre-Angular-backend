@@ -1,18 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="authincation h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100 align-items-center">
+<br><br>
+<br><br>
+    <div class="authincation mt-5" >
+        <div class="container ">
+            <div class="row justify-content-center align-items-center">
                 <div class="col-md-10">
                     <div class="authincation-content">
-                        <div class="row no-gutters">
+                        <div class="row no-gutters mt-5">
                             <div class="col-xl-6">
                                 <div class="welcome-content">
                                     <div class="brand-logo">
-                                        <a href="index.html">Corbin</a>
+                                        <a href="#">Welcome to MRES system</a>
                                     </div>
-                                    <h3 class="welcome-title">Welcome to Corbin</h3>
                                     <div class="intro-social">
                                         <ul>
                                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -26,14 +27,14 @@
                             <div class="col-xl-6">
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Sign in your account</h4>
-                                    <form action="index.html">
+                                    <form action="{{route('login')}}" method="post">
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
-                                            <input type="email" class="form-control" value="hello@example.com">
+                                            <input type="email" name="email" class="form-control" >
                                         </div>
                                         <div class="form-group">
                                             <label><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
+                                            <input type="password" name="password" class="form-control" >
                                         </div>
                                         <div class="form-row d-flex justify-content-between mt-4 mb-2">
                                             <div class="form-group">
@@ -43,16 +44,14 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <a href="page-forgot-password.html">Forgot Password?</a>
+                                                <a href="#">Forgot Password?</a>
                                             </div>
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Sign me in</button>
                                         </div>
                                     </form>
-                                    <div class="new-account mt-3">
-                                        <p>Don't have an account? <a class="text-primary" href="./page-register.html">Sign up</a></p>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
