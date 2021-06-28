@@ -11,16 +11,16 @@
     <link href="{{asset('vendor/summernote/summernote.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
-    <link href="https://developer.snapappointments.com/bootstrap-select/A.ajax,,_libs,,_highlight.js,,_9.15.6,,_css,,_github.min.css+css,,_base.css+css,,_custom.css+dist,,_css,,_bootstrap-select.min.css,Mcc.Sm_E229yq5.css.pagespeed.cf.6VwF0Af9hv.css" rel="stylesheet">
+    <link href="{{asset('css/mre.css')}}" rel="stylesheet">
+    <!-- <link href="https://developer.snapappointments.com/bootstrap-select/A.ajax,,_libs,,_highlight.js,,_9.15.6,,_css,,_github.min.css+css,,_base.css+css,,_custom.css+dist,,_css,,_bootstrap-select.min.css,Mcc.Sm_E229yq5.css.pagespeed.cf.6VwF0Af9hv.css" rel="stylesheet"> -->
 
 
     
 
 </head>
 <body >
-    @include('partials.loader')
+@include('partials.loader')
 <div id="main-wrapper">
-@include('partials.header') 
  @yield('content')
 </div>
 
@@ -43,8 +43,8 @@
         <script src="{{asset('vendor/summernote/js/summernote.min.js')}}"></script>
     <!-- Summernote init -->
     <script src="{{asset('vendor/summernote/js/summernote-init.js')}}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="https://developer.snapappointments.com/bootstrap-select/dist,_js,_bootstrap-select.min.js+search,_main.js+js,_base.js.pagespeed.jc.TbEa0Z3RJi.js"></script><script>eval(mod_pagespeed_2HaUiZdTC$);</script>
+<!-- <script>hljs.initHighlightingOnLoad();</script>
+<script src="https://developer.snapappointments.com/bootstrap-select/dist,_js,_bootstrap-select.min.js+search,_main.js+js,_base.js.pagespeed.jc.TbEa0Z3RJi.js"></script><script>eval(mod_pagespeed_2HaUiZdTC$);</script> -->
 
 </body>
 </html>
