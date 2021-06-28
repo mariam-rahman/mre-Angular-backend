@@ -49,14 +49,14 @@ $counter = 0;
                                     @foreach($purchases as $purchase)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        
+
                                         <td>{{$purchase->product->name ?? 'nil'}}</td>
                                         <td>{{$purchase->qty}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
                                         <td>{{$purchase->stock->stock_type}}</td>
                                         <td>
-                                        <div class="row">
+                                            <div class="row">
                                                 <div class="col-sm-6 d-flex">
                                                     <form action="{{route('purchase.destroy',$purchase)}}" method="post">
                                                         @csrf
@@ -64,8 +64,8 @@ $counter = 0;
                                                         <button class="btn btn-danger px-1 py-0 ">Delete</button>
                                                     </form>
                                                     <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-                                    
-                                                 </div>
+
+                                                </div>
                                         </td>
 
                                     </tr>
@@ -101,7 +101,7 @@ $counter = 0;
                                 <form action="{{route('purchase.store')}}" method="post">
                                     @csrf
                                     <div class="form-row">
-                                    <div class="form-group col-md-6">
+                                        <div class="form-group col-md-6">
                                             <label>Select Product</label>
                                             <select name="product_id" id="inputState" class="form-control mre">
 
@@ -121,41 +121,45 @@ $counter = 0;
                                             <label>Price</label>
                                             <input type="number" name="price" class="form-control mre">
                                         </div>
-    
-                                    
+
+
                                         <div class="form-group col-md-6">
                                             <label>Stocks</label>
                                             <select name="stock_id" id="inputState" class="form-control mre">
                                                 <option>Choose stocks</option>
                                                 @foreach($stocks as $stock)
-                                                <option value="{{$stock->id}}">{{$stock->stock_type}}</option> 
+                                                <option value="{{$stock->id}}">{{$stock->stock_type}}</option>
                                                 @endforeach
                                             </select>
-                                            <div class="row mt-3">
-                                        <div class="form-group col-md-6">
-                                            <select class="selectpicker" data-live-search="true"  class="form-control mre">
-                                                <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-                                                <option data-tokens="mustard">Burger, Shake and a Smile</option>
-                                                <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-                                            </select>
-                                            </div>
-                                            </div>
                                         </div>
-                                    </div>
+
+                                        
+                                            <div class="form-group col-md-6">
+                                                <label>Select Product</label>
+                                                <select class="selectpicker" width="300px" data-live-search="true" class="form-control mre">
+                                                    <option value="">Choose...</option>
+                                                    <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+                                                    <option data-tokens="mustard">Burger, Shake and a Smile</option>
+                                                    <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+                                                </select>
+                                            </div>
+                                        
+                                    
                             </div>
-                            <input type="submit" value="Add Product" class="btn btn-secondary">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-
-                            </form>
                         </div>
+                        <input type="submit" value="Add Product" class="btn btn-secondary">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 
-
+                        </form>
                     </div>
+
+
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 
 @endsection

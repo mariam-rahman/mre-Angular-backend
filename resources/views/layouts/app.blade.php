@@ -17,7 +17,7 @@
     
 
 </head>
-<body >
+<body class="pt-0" >
     @include('partials.loader')
 <div id="main-wrapper">
 @include('partials.header') 
