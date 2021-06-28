@@ -6,8 +6,6 @@
             <a href="index.html" class="brand-logo" >
                 <span class="logo-abbr">Q</span>
                 <span class="logo-compact">Corbin</span>
-             
-                
             </a>
 
             <div class="nav-control" style="right: -0.5rem !important;">
