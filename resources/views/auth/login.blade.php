@@ -28,6 +28,7 @@
                                 <div class="auth-form">
                                     <h4 class="text-center mb-4">Sign in your account</h4>
                                     <form action="{{route('login')}}" method="post">
+                                        @csrf
                                         <div class="form-group">
                                             <label><strong>Email</strong></label>
                                             <input type="email" name="email" class="form-control" >
