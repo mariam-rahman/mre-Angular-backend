@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 @include('partials.sidenav')
         <!--**********************************
@@ -41,7 +42,7 @@
                                             <i class="mdi mdi-trophy"></i>
                                         </div>
                                         <h4>{{$products}}</h4>
-                                        <span class="type-name">Products</span>
+                                        <span class="type-name">Types of Products</span>
                                     </a>
                                 </li>
                  
@@ -60,8 +61,8 @@
                                         <div class="icon-wrap info">
                                             <i class="mdi mdi-trophy"></i>
                                         </div>
-                                        <h4>5677</h4>
-                                        <span class="type-name">Purchase</span>
+                                        <h4>{{$purchase}}</h4>
+                                        <span class="type-name">Purchased Products</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -104,7 +105,6 @@
         ***********************************-->
         
 @endsection
-
 
 
 
