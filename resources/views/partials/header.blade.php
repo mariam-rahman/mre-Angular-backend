@@ -4,8 +4,8 @@
         
         <div class="nav-header" >
             <a href="index.html" class="brand-logo" >
-                <span class="logo-abbr">Q</span>
-                <span class="logo-compact">Corbin</span>
+                <span class="logo-abbr">M</span>
+                <span class="logo-compact">MRES</span>
             </a>
 
             <div class="nav-control" style="right: -0.5rem !important;">
@@ -94,22 +94,20 @@
                                         
                                         <span>My profile</span>
                                     </a>
-                                    <a href="#!" class="dropdown-item">
-                                        
-                                        <span>Calender</span>
-                                    </a>
-                                    <a href="#!" class="dropdown-item">
-                                        
-                                        <span>Inbox</span>
-                                    </a>
+                                   
                                     <a href="#!" class="dropdown-item">
                                         
                                         <span>Settings</span>
                                     </a>
-                                    <a href="#!" class="dropdown-item">
-                                        
-                                        <span>Logout</span>
+                                 
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
                                     </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" >
+                                        @csrf
+                                    </form>
                                 </div>
                             </li>
                         </ul>
