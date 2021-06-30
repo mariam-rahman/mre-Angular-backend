@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stock extends Model
+class Onsale extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    protected function purchases(){
-        return $this->hasMany(Purchase::class);
+    protected function product(){
+        return $this->belongsTo(Product::class);
     }
 
-    protected function onsales(){
-        return $this->hasMany(Onsale::class);
+    protected function stock(){
+        return $this->belongsTo(Stock::class);
     }
 }

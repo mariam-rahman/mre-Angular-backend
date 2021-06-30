@@ -65,7 +65,10 @@ class PurchaseController extends Controller
      */
     public function edit(Purchase $purchase)
     {
-        return view('admin/purchase/edit',compact('purchase'));
+        
+        $stocks = Stock::all();
+        $products = Product::all();
+        return view('admin/purchase/edit',compact('purchase','stocks','products'));
     }
 
     /**
@@ -77,7 +80,9 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, Purchase $purchase)
     {
-        //
+        $purchase->update($request->all());
+
+      return redirect(route('purchase.index'));
     }
 
     /**
@@ -88,6 +93,6 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        //
+        $purchase->delete();
     }
 }

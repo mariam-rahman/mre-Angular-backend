@@ -44,28 +44,6 @@ class ProductConroller extends Controller
 
             Product::create($request->all());
             return redirect(route('product.index'));
-
-
-
-        // $price = $request->Price;
-        //  Product::create($request->except($request->price));
-     
-    // Price::create(array_merge(['price'=>200],['product_id'=>1]));
-
-    // $products = new Product();
-    // $products->name = $request->name;
-    // $products->category_id = $request->category_id;
-    // $products->save();
-    // $pid = $products->id;
-
-    // $purchase = new Purchase();
-    // $purchase->product_id = $pid;
-    // $purchase->price = $request->price;
-    // $purchase->qty = $request->qty;
-    // $purchase->stock_id = 1;
-    // $purchase->save();
-
-    //     return redirect(route('product.index'));
     }
 
     /**

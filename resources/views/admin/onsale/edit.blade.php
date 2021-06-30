@@ -12,7 +12,7 @@
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li>
-                    <li class="breadcrumb-item"><a href="{{route('purchase.index')}}">Purchase</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('onsale.index')}}">On Sale</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -26,16 +26,17 @@
 
                     <div class="card-body">
                         <div class="basic-form">
-                            <form action="{{route('purchase.update',$purchase)}}" method="post">
+                            <form action="{{route('onsale.update',$onsale)}}" method="post">
                             @csrf
                             @method('PUT')
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label>Product Name</label>
-                                        <select name="product_id" id="inputState" class="form-control mre">
+                                        <select name="product_id" id="inputState" class="form-control mre {{$errors->first('product_id') != '' ? 'border-danger':''}}">
+                                       
                                             <option selected>Choose...</option>
                                          @foreach($products as $product)
-                                            <option value="{{$product->id}}" {{$product->id == $purchase->product_id ? 'selected' : ''}} >{{$product->name}}</option>
+                                            <option value="{{$product->id}}" {{$product->id == $onsale->product_id ? 'selected' : ''}} >{{$product->name}}</option>
                                         @endforeach
                                         </select>
                                     </div>
@@ -50,7 +51,7 @@
                                         <select name="stock_id" id="inputState" class="form-control mre">
                                             <option selected>Choose...</option>
                                          @foreach($stocks as $stock)
-                                            <option value="{{$stock->id}}" {{$stock->id == $purchase->stock_id? 'selected':''}} >{{$stock->stock_type}}</option>
+                                            <option value="{{$stock->id}}" {{$stock->id == $onsale->stock_id? 'selected':''}} >{{$stock->stock_type}}</option>
                                         @endforeach 
                                         </select>
                                     </div>
@@ -59,19 +60,20 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label>Quantity</label>
-                                        <input type="number" name="qty" class="form-control mre" value="{{$purchase->qty}}">
+                                        <input type="number" name="qty" class="form-control mre" value="{{$onsale->qty}}">
                                     </div>
                                 </div>
 
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label>Price</label>
-                                        <input type="number" name="price" class="form-control mre" value="{{$purchase->price}}">
+                                        <input type="number" name="sale_price" class="form-control mre " value="{{$onsale->sale_price}}">
+                                        
                                     </div>
                                 </div>
 
                                 <input type="submit" value="Update" class="btn btn-primary">
-                                <a href="{{route('purchase.index')}}" class="btn btn-outline-primary">Close</a>
+                                <a href="{{route('onsale.index')}}" class="btn btn-outline-primary">Close</a>
                             </form>
                         </div>
                     </div>

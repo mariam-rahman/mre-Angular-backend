@@ -19,5 +19,9 @@ class Product extends Model
         return $this->hasMany(Purchase::class);
     }
 
+    protected function onsales(){
+        return $this->hasMany(Onsale::class);
+    }
+
     
 }

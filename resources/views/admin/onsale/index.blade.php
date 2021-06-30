@@ -15,12 +15,12 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Purchase Product</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Put Products On Sale</button>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li>
-                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Product</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('onsale.index')}}">OnSale</a></li>
                     <li class="breadcrumb-item active"><a href="">Dashboard</a></li>
                 </ol>
             </div>
@@ -29,7 +29,7 @@ $counter = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">List of Products</h4>
+                        <h4 class="card-title">Products On Sale</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -39,31 +39,32 @@ $counter = 0;
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Quantity</th>
-                                        <th>Price</th>
-                                        <th>Category</th>
+                                        <th>Sale Price</th>
+                                        <th>Revenue</th>
                                         <th>Stock</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($purchases as $purchase)
+                                    @foreach($onsales as $onsale)
                                     <tr>
                                         <td>{{++$counter}}</td>
+                                        <td>{{$onsale->product->name}}</td>
+                                        <td>{{$onsale->qty}}</td>
+                                        <td>{{$onsale->sale_price}}</td>
 
-                                        <td>{{$purchase->product->name ?? 'nil'}}</td>
-                                        <td>{{$purchase->qty}}</td>
-                                        <td>{{$purchase->price}}</td>
-                                        <td>{{$purchase->product->category->title ?? 'nil'}}</td>
-                                        <td>{{$purchase->stock->stock_type}}</td>
-                                        <td>
+                                        <td></td>
+
+                                        <td>{{$onsale->stock->stock_type}}</td>
+                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-6 d-flex">
-                                                    <form action="{{route('purchase.destroy',$purchase)}}" method="post">
+                                                    <form action="{{route('onsale.destroy',$onsale)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
                                                     </form>
-                                                    <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+                                                    <a href="{{route('onsale.edit',$onsale)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
 
                                                 </div>
                                         </td>
@@ -89,7 +90,7 @@ $counter = 0;
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Purchase Product</h5>
+                <h5 class="modal-title">Products on Sale </h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -98,7 +99,7 @@ $counter = 0;
                     <div class="card pb-0">
                         <div class="card-body pb-0">
                             <div class="basic-form">
-                                <form action="{{route('purchase.store')}}" method="post">
+                                <form action="{{route('onsale.store')}}" method="post">
                                     @csrf
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -118,8 +119,8 @@ $counter = 0;
                                             <input type="number" name="qty" class="form-control mre">
                                         </div>
                                         <div class="form-group col-md-6">
-                                            <label>Price</label>
-                                            <input type="number" name="price" class="form-control mre">
+                                            <label>Sale Price</label>
+                                            <input type="number" name="sale_price" class="form-control mre">
                                         </div>
 
 
@@ -132,22 +133,9 @@ $counter = 0;
                                                 @endforeach
                                             </select>
                                         </div>
-
-                                        
-                                            <div class="form-group col-md-6">
-                                                <label>Select Product</label>
-                                                <select class="selectpicker" width="300px" data-live-search="true" class="form-control mre">
-                                                    <option value="">Choose...</option>
-                                                    <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-                                                    <option data-tokens="mustard">Burger, Shake and a Smile</option>
-                                                    <option data-tokens="frosting">Sugar, Spice and all things nice</option>
-                                                </select>
-                                            </div>
-                                        
-                                    
                             </div>
                         </div>
-                        <input type="submit" value="Add Product" class="btn btn-secondary">
+                        <input type="submit" value="Add Product On Sale" class="btn btn-secondary">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 
                         </form>

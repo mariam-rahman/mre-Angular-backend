@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StockController;
@@ -35,4 +36,5 @@ Route::resource('category',CategoryController::class);
 Route::resource('product',ProductConroller::class);
 Route::resource('purchase',PurchaseController::class);
 Route::resource('stock',StockController::class);
+Route::resource('onsale',OnsaleController::class);
 
