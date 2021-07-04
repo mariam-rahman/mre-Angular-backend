@@ -20,8 +20,8 @@ $counter = 0;
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li>
-                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Product</a></li>
-                    <li class="breadcrumb-item active"><a href="">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Purchase</a></li>
+                    <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
         </div>
@@ -38,7 +38,8 @@ $counter = 0;
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Quantity</th>
+                                        <th>Total products</th>
+                                        <th>Remaining products</th>
                                         <th>Price</th>
                                         <th>Category</th>
                                         <th>Stock</th>
@@ -52,19 +53,20 @@ $counter = 0;
 
                                         <td>{{$purchase->product->name ?? 'nil'}}</td>
                                         <td>{{$purchase->qty}}</td>
+                                        <td>{{$purchase->remaining_qty}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
                                         <td>{{$purchase->stock->stock_type}}</td>
                                         <td>
-                                            <div class="row">
-                                                <div class="col-sm-6 d-flex">
+                                            
+                                                <div class="d-flex">
                                                     <form action="{{route('purchase.destroy',$purchase)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
                                                     </form>
                                                     <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-
+                                                    <a href="{{route('showOnSaleForm',$purchase->id)}}" class="btn btn-success px-1 py-0 ml-1">Move to on sell</a>
                                                 </div>
                                         </td>
 

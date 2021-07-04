@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Onsale;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Laravel\Ui\Presets\React;
 
 class PurchaseController extends Controller
 {
@@ -18,9 +21,10 @@ class PurchaseController extends Controller
     public function index()
     {
     
-        $products = Product::all();
+         $products = Product::all();
         $stocks = Stock::all();
         $purchases = Purchase::all();
+
         return view('admin/purchase/index',compact('stocks','products','purchases'));
     }
 
@@ -42,7 +46,13 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-       Purchase::create($request->all());
+        $purchase = new Purchase();
+        $purchase->qty = $request->qty;
+        $purchase->remaining_qty = $request->qty;
+         $purchase->stock_id = $request->stock_id;
+         $purchase->product_id = $request->product_id;
+         $purchase->price = $request->price;
+         $purchase->save();
        return redirect(route('purchase.index'));
     }
 
@@ -94,5 +104,33 @@ class PurchaseController extends Controller
     public function destroy(Purchase $purchase)
     {
         $purchase->delete();
+    }
+
+
+public function showOnSaleForm($purchaseId){
+    return view('admin/purchase/moveToOnSale',compact('purchaseId')); 
+}
+
+
+
+    public function moveToOnSale(Request $request, $purchaseId){
+        $purchase = Purchase::find($purchaseId);
+        $remainingQty=$purchase->remaining_qty;
+        if($remainingQty > ($request->qty))
+        {
+            $purchase->remaining_qty = ($remainingQty)-($request->qty);
+           $purchase->update();
+            $onSale = new Onsale();
+            $onSale->qty = $request->qty;
+            $onSale->sale_price = $request->price;
+            $onSale->purchase_id = $purchaseId;
+            $onSale->save();
+
+            
+            return redirect(route('onsale.index'));
+        }
+        else {
+           return "No sufficient balance";
+        }
     }
 }

@@ -58,6 +58,7 @@ $counter = 0;
                                             </form>
 
                                             <a href="{{route('stock.edit',$stock)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+                                            <a href="{{route('stock.show',$stock)}}" class="btn btn-success px-1 py-0 ml-1">Show</a>
 
                                             </td>
                                         </div>

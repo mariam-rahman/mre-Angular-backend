@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,14 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stocks = Stock::all();
-        return view('admin/stock/index',compact('stocks'));
+        $purchases = Purchase::Where('stock_id',1)
+        ->selectRaw("SUM(qty) as qty")
+        ->selectRaw("SUM(price) as price")
+        ->selectRaw("SUM(remaining_qty) as remaining_qty")
+        ->selectRaw("product_id")
+        ->groupBy('product_id')
+        ->get();
+        return view('admin/stock/main_stock_items',compact('purchases'));
     }
 
     /**
@@ -48,7 +55,9 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        //
+        
+        return view('admin/stock/show',compact('stock'));
+
     }
 
     /**

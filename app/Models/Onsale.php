@@ -11,11 +11,15 @@ class Onsale extends Model
 
     protected $guarded = [];
 
-    protected function product(){
-        return $this->belongsTo(Product::class);
+    public function purchase(){
+        return $this->belongsTo(Purchase::class);
     }
 
-    protected function stock(){
-        return $this->belongsTo(Stock::class);
+    public function getRevenue()
+    {
+        $actual_price = $this->purchase->purchase_id;
+        $qty = $this->qty;
+        $percentage = (($actual_price * 10) / 100) * $qty;
+           return $percentage;
     }
 }

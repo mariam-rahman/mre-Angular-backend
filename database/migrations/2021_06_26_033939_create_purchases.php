@@ -18,6 +18,7 @@ class CreatePurchases extends Migration
             $table->integer('product_id');
             $table->integer('price');
             $table->integer('qty');
+            $table->integer('remaining_qty');
             $table->integer('stock_id');
             $table->timestamps();
         });

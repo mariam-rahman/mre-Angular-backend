@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Onsale;
-use App\Models\Product;
-use App\Models\Stock;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
-class OnsaleController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,8 @@ class OnsaleController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        $stocks = Stock::all();
-        $onsales = Onsale::all();
-       
-        return view('admin/onsale/index', compact('products', 'stocks', 'onsales'));
+        $customers = Customer::all();
+        return view('admin/customer/index',compact('customers'));
     }
 
     /**
@@ -41,19 +36,17 @@ class OnsaleController extends Controller
      */
     public function store(Request $request)
     {
-        $onsale = Onsale::create($request->all());
-
-        return redirect(route('onsale.index'));
-        //return redirect(route('onsale.index',$revenue));
+        Customer::create($request->all());
+        return redirect(route('customer.index'));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Onsale  $onsale
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Onsale $onsale)
+    public function show(Customer $customer)
     {
         //
     }
@@ -61,38 +54,36 @@ class OnsaleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Onsale  $onsale
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Onsale $onsale)
+    public function edit(Customer $customer)
     {
-        $products = Product::all();
-        $stocks = Stock::all();
-        return view('admin/onsale/edit',compact('onsale','products','stocks'));
+        return view('admin/customer/edit',compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Onsale  $onsale
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Onsale $onsale)
+    public function update(Request $request, Customer $customer)
     {
-        $onsale->update($request->all());
-        return redirect(route('onsale.index'));
+        $customer->update($request->all());
+        return redirect(route('customer.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Onsale  $onsale
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Onsale $onsale)
+    public function destroy(Customer $customer)
     {
-        $onsale->delete();
-        return redirect(route('onsale.index'));
+        $customer->delete();
+        return redirect(route('customer.index'));
     }
 }

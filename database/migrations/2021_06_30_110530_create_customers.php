@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOnsales extends Migration
+class CreateCustomers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateOnsales extends Migration
      */
     public function up()
     {
-        Schema::create('onsales', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->integer('purchase_id');
-            $table->integer('sale_price');
-            $table->integer('qty');
+            $table->string('name');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateOnsales extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('onsales');
+        Schema::dropIfExists('customers');
     }
 }

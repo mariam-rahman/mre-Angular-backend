@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
@@ -37,4 +38,8 @@ Route::resource('product',ProductConroller::class);
 Route::resource('purchase',PurchaseController::class);
 Route::resource('stock',StockController::class);
 Route::resource('onsale',OnsaleController::class);
+Route::resource('customer',CustomerController::class);
+
+Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
+Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
 

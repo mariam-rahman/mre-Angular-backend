@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<br><br>
     <div class="authincation mt-5" >
         <div class="container ">
             <div class="row justify-content-center align-items-center">
