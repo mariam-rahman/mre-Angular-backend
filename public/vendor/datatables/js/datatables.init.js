@@ -71,7 +71,7 @@ let dataSet = [
             $(row).addClass('selected')
         },
 
-        "scrollY":        "42vh",
+        "scrollY": "42vh",
         "scrollCollapse": true,
         "paging":         false
     });
