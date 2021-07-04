@@ -39,7 +39,7 @@ $counter = 0;
                                         <th>Remaining products</th>
                                         <th>Price</th>
                                         <th>Category</th>
-                                        <th>Action</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
