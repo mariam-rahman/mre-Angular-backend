@@ -30,7 +30,7 @@ $counter = 0;
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 845px">
+                        <table id="example" class=" table table-striped table-bordered" style="min-width: 845px;">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -39,7 +39,7 @@ $counter = 0;
                                         <th>Remaining products</th>
                                         <th>Price</th>
                                         <th>Category</th>
-                                        <th>Actions</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +51,9 @@ $counter = 0;
                                         <td>{{$purchase->remaining_qty}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
+                                        <td>
+                                        <a href="{{route('stock.moveForm',$purchase->product_id)}}" class="btn btn-primary btn-sm">Move to</a>
+                                        </td>
                                      
                                     </tr>
                                     @endforeach

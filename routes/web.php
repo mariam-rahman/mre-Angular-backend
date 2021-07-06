@@ -3,9 +3,11 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SlipController;
 use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,3 +45,10 @@ Route::resource('customer',CustomerController::class);
 Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
 Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
 
+Route::resource('employee',EmployeeController::class);
+Route::post('stock/move/{product_id}',[StockController::class,'moveTo'])->name('stock.move');
+Route::get('stock/moveForm/{product_id}',[StockController::class,'moveForm'])->name('stock.moveForm');
+
+Route::resource('slip',SlipController::class);
+Route::get('employee/payForm/{employee_id}',[EmployeeController::class,'payForm'])->name('employee.payForm');
+Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');

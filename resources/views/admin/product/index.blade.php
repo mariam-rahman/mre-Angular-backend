@@ -10,6 +10,13 @@ $counter = 0;
             Content body start
         ***********************************-->
 @include('partials.sidenav')
+<style>
+input[type="search"]{
+    border: 1px solid #dedbfb;
+    border-radius: 0.25rem;
+}
+
+</style>
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0">
@@ -32,7 +39,7 @@ $counter = 0;
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 845px">
+                            <table id="example" class=" table table-striped table-bordered" style="min-width: 845px">
                                 <thead>
                                     <tr>
                                         <th>#</th>

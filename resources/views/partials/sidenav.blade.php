@@ -24,8 +24,8 @@
                     </li>
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-male"></i><span class="nav-text">Employee</span></a>
                         <ul aria-expanded="false">
-                            <li><a href="#">Employees</a></li>
-                            <li><a href="#">Monthly salaries</a></li>
+                            <li><a href="{{route('employee.index')}}">Employees</a></li>
+                            <li><a href="#">Payslip</a></li>
                             <li><a href="#">Daily expenses</a></li>
               
                         </ul>

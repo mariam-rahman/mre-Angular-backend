@@ -6,5 +6,12 @@
 }
 
 
-  
+p{
+    padding: 0px;
+    margin: 0px;
+}
 
+input[type="search"]{
+    border: 1px solid #dedbfb;
+    border-radius: 0.25rem;
+}

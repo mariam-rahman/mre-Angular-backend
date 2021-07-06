@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Purchase;
 use App\Models\Stock;
+use App\Models\Substock;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -93,5 +94,50 @@ class StockController extends Controller
     public function destroy(Stock $stock)
     {
         $stock->delete();
+    }
+
+    public function moveTo(Request $request,$product_id){
+        $countQty = Purchase::Where('stock_id',1)->where('product_id',$product_id)
+        ->selectRaw("SUM(qty) as qty")
+        ->selectRaw("SUM(price) as price")
+        ->selectRaw("SUM(remaining_qty) as remaining_qty")
+        ->selectRaw("product_id")
+        ->groupBy('product_id')
+        ->first()->remaining_qty;
+    
+    $qty = $request->move_qty;
+    $cqty = $qty;
+    if($qty>$countQty){
+        return redirect(route('stock.moveForm',$product_id));
+    }
+    $purchases = Purchase::where('product_id',$product_id)->get();
+foreach($purchases as $purchase)
+ {
+    $remainQty = $purchase->remaining_qty-$cqty;
+     $cqty -= $remainQty;
+    if($cqty<0 || $cqty == 0)
+    {
+        $purchase->remaining_qty = $remainQty;
+        $purchase->update();
+        break;
+    } 
+    $purchase->remaining_qty = $remainQty;
+    $purchase->update();
+ }
+
+ $sub = new Substock();
+
+ $sub->product_id = $product_id;
+ $sub->qty = $qty;
+ $sub->remaining_qty = $qty;
+ $sub->stock_id = 2;
+ $sub->price = 0;
+ $sub->save();
+ return redirect(route('stock.index'));
+    }
+
+    public function moveForm($product_id){
+
+        return view('admin/stock/moveForm',compact('product_id'));
     }
 }
