@@ -16,14 +16,14 @@ class StockController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::Where('stock_id',1)
-        ->selectRaw("SUM(qty) as qty")
-        ->selectRaw("SUM(price) as price")
-        ->selectRaw("SUM(remaining_qty) as remaining_qty")
-        ->selectRaw("product_id")
-        ->groupBy('product_id')
-        ->get();
-        return view('admin/stock/main_stock_items',compact('purchases'));
+        $purchases = Purchase::Where('stock_id', 1)
+            ->selectRaw("SUM(qty) as qty")
+            ->selectRaw("SUM(price) as price")
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->get();
+        return view('admin/stock/main_stock_items', compact('purchases'));
     }
 
     /**
@@ -45,7 +45,7 @@ class StockController extends Controller
     public function store(Request $request)
     {
         Stock::create($request->all());
-        return redirect(route('stock.index'));
+        return redirect(route('stock.display'));
     }
 
     /**
@@ -56,9 +56,6 @@ class StockController extends Controller
      */
     public function show(Stock $stock)
     {
-        
-        return view('admin/stock/show',compact('stock'));
-
     }
 
     /**
@@ -82,7 +79,7 @@ class StockController extends Controller
     public function update(Request $request, Stock $stock)
     {
         $stock->update($request->all());
-        return redirect(route('stock.index'));
+        return redirect(route('stock.display'));
     }
 
     /**
@@ -94,50 +91,72 @@ class StockController extends Controller
     public function destroy(Stock $stock)
     {
         $stock->delete();
+        return redirect(route('stock.display'));
     }
 
-    public function moveTo(Request $request,$product_id){
-        $countQty = Purchase::Where('stock_id',1)->where('product_id',$product_id)
-        ->selectRaw("SUM(qty) as qty")
-        ->selectRaw("SUM(price) as price")
-        ->selectRaw("SUM(remaining_qty) as remaining_qty")
-        ->selectRaw("product_id")
-        ->groupBy('product_id')
-        ->first()->remaining_qty;
-    
-    $qty = $request->move_qty;
-    $cqty = $qty;
-    if($qty>$countQty){
-        return redirect(route('stock.moveForm',$product_id));
-    }
-    $purchases = Purchase::where('product_id',$product_id)->get();
-foreach($purchases as $purchase)
- {
-    $remainQty = $purchase->remaining_qty-$cqty;
-     $cqty -= $remainQty;
-    if($cqty<0 || $cqty == 0)
+    public function moveTo(Request $request, $product_id)
     {
-        $purchase->remaining_qty = $remainQty;
-        $purchase->update();
-        break;
-    } 
-    $purchase->remaining_qty = $remainQty;
-    $purchase->update();
- }
+        $countQty = Purchase::Where('stock_id', 1)->where('product_id', $product_id)
+            ->selectRaw("SUM(qty) as qty")
+            ->selectRaw("SUM(price) as price")
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->first()->remaining_qty;
 
- $sub = new Substock();
+        $qty = $request->move_qty;
+        $cqty = $qty;
+        if ($qty > $countQty) {
+            return redirect(route('stock.moveForm', $product_id));
+        }
 
- $sub->product_id = $product_id;
- $sub->qty = $qty;
- $sub->remaining_qty = $qty;
- $sub->stock_id = 2;
- $sub->price = 0;
- $sub->save();
- return redirect(route('stock.index'));
+        $purchases = Purchase::where('product_id', $product_id)->get();
+        
+        foreach ($purchases as $purchase) {
+            $remain = $purchase->remaining_qty;
+            if ($remain == 0 || $remain < 0) continue;
+
+
+            $remainQty = $remain - $cqty;
+            $cqty -= $remain;
+              
+            if ($cqty < 0 || $cqty == 0) {
+                $purchase->remaining_qty = $remainQty;
+                $purchase->update();
+                break;
+            }
+
+            if ($remainQty < 0 || $remainQty == 0) {
+                $purchase->remaining_qty = 0;
+                $purchase->update();
+                continue;
+            }
+
+
+
+        }
+
+        $sub = new Substock();
+
+        $sub->product_id = $product_id;
+        $sub->qty = $qty;
+        $sub->remaining_qty = $qty;
+        $sub->stock_id = 1;
+        $sub->save();
+        return redirect(route('stock.index'));
     }
 
-    public function moveForm($product_id){
+    public function moveForm($product_id)
+    {
 
-        return view('admin/stock/moveForm',compact('product_id'));
+        return view('admin/stock/moveForm', compact('product_id'));
     }
+
+
+    public function stockDispaly(){
+        $stocks = Stock::all();
+        return view('admin/stock/index',compact('stocks'));
+    }
+
+
 }

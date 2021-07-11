@@ -13,11 +13,13 @@ $counter = 0;
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
-        <div class="row page-titles mx-0">
+        <div class="row page-titles mx-0 mb-0">
+        <div class="col-sm-6 p-md-0">   
+        <h3 class="text-primary m-0">Main Stock</h3>        
+            </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li>
-                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Purchase</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Main Stock</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -52,7 +54,8 @@ $counter = 0;
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
                                         <td>
-                                        <a href="{{route('stock.moveForm',$purchase->product_id)}}" class="btn btn-primary btn-sm">Move to</a>
+                                        <a href="{{route('stock.moveForm',$purchase->product_id)}}" class="btn btn-primary btn-sm">Move to Sub Stock</a>
+                                        <a href="" class="btn btn-success btn-sm">Sale</a>
                                         </td>
                                      
                                     </tr>

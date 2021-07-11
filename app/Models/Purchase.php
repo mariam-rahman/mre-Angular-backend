@@ -16,11 +16,10 @@ class Purchase extends Model
         return $this->belongsTo(Product::class);
     }
 
-    protected function stock(){
+    public function stock(){
         return $this->belongsTo(Stock::class);
     }
+ 
 
     
-
- 
 }

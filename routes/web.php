@@ -4,11 +4,14 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\SubstockController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +41,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('category',CategoryController::class);
 Route::resource('product',ProductConroller::class);
 Route::resource('purchase',PurchaseController::class);
+
 Route::resource('stock',StockController::class);
+Route::get('stockDisplay',[StockController::class,'stockDispaly'])->name('stock.display');
 Route::resource('onsale',OnsaleController::class);
 Route::resource('customer',CustomerController::class);
 
@@ -50,5 +55,12 @@ Route::post('stock/move/{product_id}',[StockController::class,'moveTo'])->name('
 Route::get('stock/moveForm/{product_id}',[StockController::class,'moveForm'])->name('stock.moveForm');
 
 Route::resource('slip',SlipController::class);
-Route::get('employee/payForm/{employee_id}',[EmployeeController::class,'payForm'])->name('employee.payForm');
+Route::get('employee/payform/{employee_id}',[EmployeeController::class,'payForm'])->name('employee.payForm');
 Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');
+
+Route::resource('substock',SubstockController::class);
+Route::get('substock/move-item/{product_id}',[SubstockController::class,'moveItemForm'])->name('substock.move');
+
+Route::resource('sale',SaleController::class);
+
+Route::resource('expense',ExpenseController::class);

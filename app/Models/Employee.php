@@ -11,12 +11,12 @@ class Employee extends Model
 
     protected $guarded = [];
 
-    public function contracts(){
-       return $this->belongsToMany(Contract::class);
-    }
-
     public function slips(){
         return $this->hasMany(Slip::class);
+    }
+
+    public function expenses(){
+        return $this->hasMany(Expense::class);
     }
 
 }

@@ -13,14 +13,13 @@ $counter = 0;
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
-        <div class="row page-titles mx-0">
-            <div class="col-sm-6 p-md-0">
-
+        <div class="row page-titles mx-0 mb-0">
+        <div class="col-sm-6 p-md-0">   
+        <h3 class="text-primary m-0">Sub-Stock</h3>        
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li>
-                    <li class="breadcrumb-item"><a href="{{route('stock.index')}}">Main-Stock</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('substock.index')}}">Sub-Stock</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -29,37 +28,37 @@ $counter = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Products in Main-Stock</h4>
+                        <h4 class="card-title">List of Products</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display" style="min-width: 845px">
+                        <table id="example" class=" table table-striped table-bordered" style="min-width: 845px;">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Total products</th>
-                                      
-                                        <th>Price</th>
+                                        <th>Remaining products</th>
                                         <th>Category</th>
+                                        <th>Transfer Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($stock as $stk)
+                                @foreach($substocks as $substock)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>                                                                            
+                                        <td>{{$substock->product->name}}</td>
+                                        <td>{{$substock->qty}}</td>
+                                        <td>{{$substock->remaining_qty}}</td>
+                                        <td>{{$substock->product->category->title}}</td>
+                                        <td>{{$substock->created_at}}</td>
                                         <td>
-                                                <div class="d-flex">
-                                                    <a href="" class="btn btn-success px-1 py-0 ml-1">Move to sub stock</a>
-                                                </div>
-                                        </td>
+                                        <a href="{{route('substock.move',$substock->product_id)}}" class="btn btn-primary btn-sm">OnSale</a>
+                                        <a href="" class="btn btn-success btn-sm">Sale</a>
+                                        </td> 
                                     </tr>
-                               @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

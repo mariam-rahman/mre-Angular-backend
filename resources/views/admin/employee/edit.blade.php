@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
-                <h3>Edit Employee Information</h3>
+                <h3 class="text-primary">Edit Employee Information</h3>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">

@@ -19,6 +19,10 @@ class Product extends Model
         return $this->hasMany(Purchase::class);
     }
 
+    public function substocks(){
+        return $this->hasMany(Substock::class);
+    }
+
     protected function onsales(){
         return $this->hasMany(Onsale::class);
     }

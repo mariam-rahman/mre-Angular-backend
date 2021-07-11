@@ -13,7 +13,7 @@ $counter = 0;
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
-        <div class="row page-titles mx-0">
+        <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Purchase Product</button>
             </div>
@@ -66,7 +66,6 @@ $counter = 0;
                                                         <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
                                                     </form>
                                                     <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-                                                    <a href="{{route('showOnSaleForm',$purchase->id)}}" class="btn btn-success px-1 py-0 ml-1">Move to on sell</a>
                                                 </div>
                                         </td>
 
@@ -129,9 +128,9 @@ $counter = 0;
                                             <label>Stocks</label>
                                             <select name="stock_id" id="inputState" class="form-control mre">
                                                 <option>Choose stocks</option>
-                                                @foreach($stocks as $stock)
-                                                <option value="{{$stock->id}}">{{$stock->stock_type}}</option>
-                                                @endforeach
+                                                <option value="1">Main stock</option>
+                                                <option value="2">Substock</option>
+                                            
                                             </select>
                                         </div>
 

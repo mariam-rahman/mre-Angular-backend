@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use App\Models\Slip;
+use App\Models\Purchase;
+use App\Models\Substock;
 use Illuminate\Http\Request;
 
-class SlipController extends Controller
+class SubstockController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,12 @@ class SlipController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
-        $slips = Slip::all();
-        return view('admin/slip/index',compact('employees','slips'));
+        $substocks = Substock::selectRaw("SUM(qty) as qty")
+        ->selectRaw("SUM(remaining_qty) as remaining_qty")
+        ->selectRaw("product_id")
+        ->groupBy('product_id')
+        ->get();
+        return view('admin/substock/index',compact('substocks'));
     }
 
     /**
@@ -38,23 +41,16 @@ class SlipController extends Controller
      */
     public function store(Request $request)
     {
-        // $salary = Employee::findOrFail($request->employee_id)->salary;
-
-        // Slip::create(
-        //     array_merge($request->all(),
-        //                 ['salary'=>$salary]
-        //     )
-        // );
-        // return redirect(route('slip.index'));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Substock  $substock
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Substock $substock)
     {
         //
     }
@@ -62,10 +58,10 @@ class SlipController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Substock  $substock
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Substock $substock)
     {
         //
     }
@@ -74,10 +70,10 @@ class SlipController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Substock  $substock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Substock $substock)
     {
         //
     }
@@ -85,11 +81,16 @@ class SlipController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Substock  $substock
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Substock $substock)
     {
         //
+    }
+
+
+    public function moveItemForm(){
+        return view('admin/substock/move_item');
     }
 }

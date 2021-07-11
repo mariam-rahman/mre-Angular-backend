@@ -15,8 +15,9 @@ class CreateOnsales extends Migration
     {
         Schema::create('onsales', function (Blueprint $table) {
             $table->id();
-            $table->integer('purchase_id');
+            $table->integer('product_id');
             $table->integer('sale_price');
+            $table->integer('original_price');
             $table->integer('qty');
             $table->timestamps();
         });

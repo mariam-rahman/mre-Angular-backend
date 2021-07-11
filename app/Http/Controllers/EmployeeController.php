@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Slip;
 use App\Models\Contract;
 use App\Models\Employee;
+use App\Models\User;
 //use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\Empty_;
@@ -41,7 +42,6 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-
         $image_path = "";
         if ($request->image != "")
             $image_path = $request->image->store('images/employee', 'public');
@@ -109,7 +109,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-
+        $employee->slips()->delete();
+        $employee->expenses()->delete();
         if ($employee->image != "") {
             $image_path = "storage/" . $employee->image;
             if (File::exists($image_path)) {
@@ -124,7 +125,7 @@ class EmployeeController extends Controller
     public function payForm($employee_id){
     $employee = Employee::find($employee_id);
 
-    return view('admin/employee/payForm',compact('employee'));
+    return view('admin\employee\payForm1',compact('employee'));
 
     }
 

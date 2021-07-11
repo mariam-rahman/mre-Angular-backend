@@ -6,21 +6,21 @@
 $counter = 0;
 @endphp
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
+
 <!--**********************************
             Content body start
         ***********************************-->
 @include('partials.sidenav')
-
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Stock</button></li>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Sale product</button></li>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li>
-                    <li class="breadcrumb-item"><a href="{{route('stock.display')}}">Stock</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('sale.index')}}">Sale</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -29,40 +29,48 @@ $counter = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Stocks</h4>
+                        <h4 class="card-title">list of Sold product</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive p-2">
-                            <table id="example" class=" table table-striped table-bordered" style="min-width: 845px;">
+                        <div class="table-responsive">
+                        <table id="example" class=" table table-striped table-bordered" style="min-width: 845px;">
                                 <thead>
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Address</th>
+                                        <th>Customer name</th>
+                                        <th>Sold Price</th>
+                                        <th>Descount</th>
+                                        <th>Stock</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($stocks as $stock)
+                                    
                                     <tr>
-                                        <td>{{++$counter}}</td>
-                                        <td>{{$stock->stock_type}}</td>
-                                        <td>{{$stock->address}}</td>
-                                        <td>
-                                        <div class="col-sm-6 d-flex">
-                                        <form action="{{route('stock.destroy',$stock)}}" method="post">
-                                                @csrf
-                                                @method('DELETE')
-                                                    <button class="btn btn-danger px-1 py-0 ">Delete</button>     
-                                            </form>
-                                            <a href="{{route('stock.edit',$stock)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-                                        </div>
-                                   
-                                            
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
 
+                                        <td></td>
+
+                                        <td></td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-6 d-flex">
+                                                    <form action="" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
+                                                    </form>
+                                                    <a href="" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+
+                                                </div>
+                                        </td>
+
+                                    </tr>
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -73,28 +81,16 @@ $counter = 0;
     </div>
 </div>
 
-<!--Delete model-->
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content m-1">
-            <div class="">
-             
-            </div>
-            <div class="modal-body">
 
 
-            </div>
-        </div>
-    </div>
-</div>
 
-
+<!-- Large modal -->
 
 <div class="modal fade" id="basicModal">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add a Stock</h5>
+                <h5 class="modal-title">Add a new Product</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -102,18 +98,23 @@ $counter = 0;
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('stock.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="" method="post">
                             @CSRF
                             <div class="form-row">
+                              
                                 <div class="form-group col-md-12">
-                                    <label>Name</label>
-                                    <input type="text" name="stock_type" class="form-control mre">
+                                    <label>Category</label>
+                                    <select name="category_id" id="inputState" class="form-control">
+
+                                        <option>Choose category</option>
+                                        <option value=""></option>
+                                    </select>
+
                                 </div>
 
                                 <div class="form-group col-md-12">
-                                    <label>Address</label>
-                                    <textarea name="address" id="" cols="30" rows="3" class="form-control mre"></textarea>
-                                </div>
+                                    <label>Product Name</label>
+                                    <input type="text" name="name" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
                                 </div>
 
                                 <div class="modal-footer">
@@ -128,4 +129,5 @@ $counter = 0;
         </div>
     </div>
 </div>
+
 @endsection
