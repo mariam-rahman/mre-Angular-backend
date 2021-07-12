@@ -68,6 +68,7 @@ Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pa
 
 Route::resource('substock',SubstockController::class);
 Route::get('substock/move-item/{product_id}',[SubstockController::class,'moveItemForm'])->name('substock.move');
+Route::get('substock/item/details/{product_id}',[SubstockController::class,'details'])->name('substock.details');
 
 Route::resource('sale',SaleController::class);
 
