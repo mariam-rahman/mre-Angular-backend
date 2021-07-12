@@ -40,6 +40,7 @@ Route::view('dropdown','dropdown');
 Auth::routes();
 
 Route::get('user',[UserController::class,'index'])->name('user.index');
+Route::post('user/store',[UserController::class,'store'])->name('user.store');
 Route::delete('user/{user}',[UserController::class,'destroy'])->name('user.destroy');
 Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
 

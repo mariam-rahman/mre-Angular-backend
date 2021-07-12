@@ -12,10 +12,10 @@ $counter = 0;
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
-        <div class="row page-titles  mx-0">
+        <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Users</button></li>
-                <a href="register">Add User</a>
+               
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -79,7 +79,7 @@ $counter = 0;
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Employee Information</h5>
+                <h5 class="modal-title">User Information</h5>
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -87,7 +87,7 @@ $counter = 0;
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('employee.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('user.store')}}" method="post">
                             @CSRF
                             <div class="form-row">
                                 <div class="form-group col-md-12">
