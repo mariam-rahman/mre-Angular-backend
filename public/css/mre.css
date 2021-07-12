@@ -15,3 +15,12 @@ input[type="search"]{
     border: 1px solid #dedbfb;
     border-radius: 0.25rem;
 }
+
+#user-activity .nav .nav-item .nav-link .icon-wrap.info {
+    background-color: #7bbbec !important;
+}
+
+#user-activity .nav .nav-item .nav-link .icon-wrap.warning {
+    background-color: #d1e263 !important;
+}
+

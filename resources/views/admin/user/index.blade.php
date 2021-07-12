@@ -14,12 +14,13 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles  mx-0">
             <div class="col-sm-6 p-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Employee</button></li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Users</button></li>
+                <a href="register">Add User</a>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li>
-                    <li class="breadcrumb-item"><a href="{{route('employee.index')}}">Employee</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -28,7 +29,7 @@ $counter = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">List of Employees</h4>
+                        <h4 class="card-title">List of Users</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -38,28 +39,24 @@ $counter = 0;
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>email</th>
-                                        <th>phone</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                 @foreach($employees as $employee)
+                                 @foreach($users as $user)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        <td>{{$employee->name}}</td>
-                                        <td>{{$employee->email}}</td>
-                                        <td>{{$employee->phone}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-6 d-flex">
-                                                    <form action="{{route('employee.destroy',$employee)}}" method="post">
+                                                    <form action="{{route('user.destroy',$user)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="submit" value="Delete" class="btn btn-danger px-1 py-0 ">
                                                     </form>
-                                                    <a href="{{route('employee.edit',$employee)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-                                                    <a href="{{route('employee.show',$employee)}}" class="btn btn-success px-1 py-0 ml-1">Show</a>
-                                                    <a href="{{route('employee.payForm',$employee->id)}}" class="btn btn-info px-1 py-0 ml-1">Pay</a>
+                                                    <a href="{{route('user.edit',$user)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
                                                  </div>
                                             </div>
                                             </td>
@@ -94,7 +91,7 @@ $counter = 0;
                             @CSRF
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label>Employee Name</label>
+                                    <label>Name</label>
                                     <input type="text" name="name" class="form-control mre" >
                                 </div>
                             </div>
@@ -102,44 +99,23 @@ $counter = 0;
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>E-mail</label>
-                                    <input type="text" name="email" class="form-control mre" >
+                                    <input type="email" name="email" class="form-control mre" >
                                 </div>
                             </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Phone</label>
-                                    <input type="text" name="phone" class="form-control mre" >
-                                </div>
-                            </div>
+                         
 
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label>Address</label>
-                                    <input type="text" name="Address" class="form-control mre" >
+                                    <label>Password</label>
+                                    <input type="password" name="password" class="form-control mre" >
                                  </div>
                              </div> 
 
-                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Monthly Salary</label>
-                                    <input type="number" name="salary" class="form-control mre" >
-                                 </div>
-                             </div>
+                         
 
-                             <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Position</label>
-                                    <input type="text" name="designation" class="form-control mre" >
-                                 </div>
-                             </div>
-
-                            <div class="form-group col-md-12">
-                                    <label>Image</label>
-                                    <div class="input-group mb-3">
-                                        <input type="file" name="image" class="form-control" style="border: 1px solid #c9c5c5;" id="">
-
-                                    </div>
+                           
+                             
 
                                 </div>
 

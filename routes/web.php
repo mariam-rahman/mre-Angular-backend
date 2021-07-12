@@ -1,18 +1,20 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\ExpenseController;
-use App\Http\Controllers\OnsaleController;
-use App\Http\Controllers\ProductConroller;
-use App\Http\Controllers\PurchaseController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\StockController;
+use App\Http\Controllers\OnsaleController;
+use App\Http\Controllers\ProductConroller;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubstockController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +39,13 @@ Route::view('dropdown','dropdown');
 
 Auth::routes();
 
+Route::get('user',[UserController::class,'index'])->name('user.index');
+Route::delete('user/{user}',[UserController::class,'destroy'])->name('user.destroy');
+Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Route::resource('category',CategoryController::class);
 Route::resource('product',ProductConroller::class);
 Route::resource('purchase',PurchaseController::class);

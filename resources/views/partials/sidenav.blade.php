@@ -33,7 +33,7 @@
                         </ul>
                     </li>
                     
-                    <li><a href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="nav-text">Users</span></a></li>
+                    <li><a href="{{route('user.index')}}" aria-expanded="false"><i class="fa fa-user"></i><span class="nav-text">Users</span></a></li>
                     
                 </ul>
             </div>
