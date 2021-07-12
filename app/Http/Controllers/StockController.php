@@ -116,33 +116,39 @@ class StockController extends Controller
             $remain = $purchase->remaining_qty;
             if ($remain == 0 || $remain < 0) continue;
 
+            $remainQty = $cqty-$remain;
 
-            $remainQty = $remain - $cqty;
-            $cqty -= $remain;
-              
-            if ($cqty < 0 || $cqty == 0) {
-                $purchase->remaining_qty = $remainQty;
+            if($remainQty <= 0){
+
+                $purchase->remaining_qty = -($remainQty);
                 $purchase->update();
+
+                $sub = new Substock();
+                $sub->product_id = $product_id;
+                $sub->purchase_id = $purchase->id;
+                $sub->qty = $cqty;
+                $sub->remaining_qty = $cqty;
+                $sub->stock_id = 2;
+                $sub->save();
                 break;
             }
 
-            if ($remainQty < 0 || $remainQty == 0) {
+            if($remainQty > 0){
                 $purchase->remaining_qty = 0;
                 $purchase->update();
+
+                $sub = new Substock();
+                $sub->purchase_id = $purchase->id;
+                $sub->product_id = $product_id;
+                $sub->qty = $remain;
+                $sub->remaining_qty = $remain;
+                $sub->stock_id = 2;
+                $sub->save();
+                $cqty = $remainQty;
                 continue;
             }
-
-
-
         }
 
-        $sub = new Substock();
-
-        $sub->product_id = $product_id;
-        $sub->qty = $qty;
-        $sub->remaining_qty = $qty;
-        $sub->stock_id = 1;
-        $sub->save();
         return redirect(route('stock.index'));
     }
 

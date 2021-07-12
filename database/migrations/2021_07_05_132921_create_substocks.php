@@ -16,6 +16,7 @@ class CreateSubstocks extends Migration
         Schema::create('substocks', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
+            $table->integer('purchase_id');
             $table->integer('qty');
             $table->integer('remaining_qty');
             $table->integer('stock_id');

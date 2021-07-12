@@ -6,10 +6,6 @@
 $counter = 0;
 @endphp
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
-
-<!--**********************************
-            Content body start
-        ***********************************-->
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
@@ -56,7 +52,7 @@ $counter = 0;
                                         <td>{{$purchase->remaining_qty}}</td>
                                         <td>{{$purchase->price}}</td>
                                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
-                                        <td>{{$purchase->stock->stock_type}}</td>
+                                        <td>{{$purchase->stock_id==1?'Main stock':'Sub stock'}}</td>
                                         <td>
                                             
                                                 <div class="d-flex">

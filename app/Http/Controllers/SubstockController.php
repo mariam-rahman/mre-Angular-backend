@@ -18,6 +18,8 @@ class SubstockController extends Controller
         $substocks = Substock::selectRaw("SUM(qty) as qty")
         ->selectRaw("SUM(remaining_qty) as remaining_qty")
         ->selectRaw("product_id")
+        ->selectRaw("created_at")
+        ->groupBy("created_at")
         ->groupBy('product_id')
         ->get();
         return view('admin/substock/index',compact('substocks'));
@@ -89,7 +91,15 @@ class SubstockController extends Controller
         //
     }
 
-
+   public function details($product_id){
+    $substock = Substock::selectRaw("SUM(qty) as qty")
+    ->selectRaw("SUM(remaining_qty) as remaining_qty")
+    ->selectRaw("product_id")
+    ->groupBy('product_id')
+    ->where('product_id',$product_id)->first();
+       $items = Substock::where('product_id',$product_id)->get();
+       return view('admin/substock/item_details',compact('items','substock'));
+   }
     public function moveItemForm(){
         return view('admin/substock/move_item');
     }
