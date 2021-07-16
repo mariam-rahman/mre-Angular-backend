@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Onsale;
+use App\Models\Customer;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -13,7 +15,11 @@ class SaleController extends Controller
      */
     public function index()
     {
-        return view('admin/sale/index');
+        $onasles = Onsale::all();
+        $customer = Customer::all();
+        
+
+        return view('admin/sale/index',compact('onsales','customer'));
     }
 
     /**
