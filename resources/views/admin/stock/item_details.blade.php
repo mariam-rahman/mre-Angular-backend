@@ -15,7 +15,7 @@ $counter = 0;
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('substock.index')}}">Sub-Stock</a></li>
+                    <li class="breadcrumb-item"><a href="{{route('stock.index')}}">Main-Stock</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -29,22 +29,23 @@ $counter = 0;
                        <div class="col-6">
                          <ul>
                              <li class="mb-2">Name:
-                                 <span class="text-primary"><b>{{$substock->product->name}}</b></span>
-                                </li>
+                                 <span class="text-primary"><b>{{$stocks->product->name}}</b></span>
+                             </li>
                              <li>Category:
-                                 <span class="text-primary"><b>{{$substock->product->category->title}}</b></span>
-                                </li>
+                             <span class="text-primary"><b>{{$stocks->product->category->title}}</b></span> 
+                             </li>
                          </ul>
                        </div>
 
                        <div class="col-6 " style="text-align:right">
                        <ul>
-                             <li class="mb-2">Total products: 
-                            <span class="text-primary"><b>{{$substock->qty}}</b></span> 
+                             <li class="mb-2">Total Product:
+                                 <span class="text-primary"><b>{{$stocks->qty}}</b></span>
+                                </li>
+                             <li>
+                             Remaining Product:
+                             <span class="text-primary"><b>{{$stocks->remaining_qty}}</b></span>
                             </li>
-                             <li>Remaining products: 
-                             <span class="text-primary"><b>{{$substock->remaining_qty}}</b></span>
-                            </li>                             
                          </ul>
                        </div>
                        </div>
@@ -69,8 +70,9 @@ $counter = 0;
                                         <td>{{$item->qty}}</td>
                                         <td>{{$item->remaining_qty}}</td>
                                         <td>{{$item->created_at}}</td>
+                                    
                                     </tr>
-                                    @endforeach
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

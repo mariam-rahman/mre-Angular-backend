@@ -15,6 +15,10 @@ class Stock extends Model
         return $this->hasMany(Purchase::class);
     }
 
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+
     protected function onsales(){
         return $this->hasMany(Onsale::class);
     }

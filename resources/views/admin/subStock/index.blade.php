@@ -55,7 +55,7 @@ $counter = 0;
                                         <td>{{$substock->created_at}}</td>
                                         <td>
                                         <a href="{{route('substock.move',$substock->product_id)}}" class="btn btn-primary btn-sm">OnSale</a>
-                                        <a href="" class="btn btn-success btn-sm">Sale</a>
+                                        <a href="{{route('substock.move',$substock->product_id)}}" class="btn btn-success btn-sm">Sale</a>
                                         <a href="{{route('substock.details',$substock->product_id)}}" class="btn btn-secondary btn-sm">Details</a>
                                         </td> 
                                     </tr>

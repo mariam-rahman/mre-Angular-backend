@@ -20,11 +20,10 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-    
+     
          $products = Product::all();
         $stocks = Stock::all();
         $purchases = Purchase::all();
-
         return view('admin/purchase/index',compact('stocks','products','purchases'));
     }
 

@@ -5,25 +5,18 @@
 @php
 $counter = 0;
 @endphp
-
-@php
-$x=1;
-@endphp
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
-
-<!--**********************************
-            Content body start
-        ***********************************-->
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
-        <div class="row page-titles mx-0 mb-0">
-        <div class="col-sm-6 p-md-0">   
-        <h3 class="text-primary m-0">Main Stock</h3>        
+        <div class="row page-titles mx-0">
+            <div class="col-sm-6 p-md-0">
+              
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{route('category.index')}}">Main Stock</a></li>
+                    <li>
+                    <li class="breadcrumb-item"><a href="{{route('onsale.index')}}">OnSale</a></li>
                     <li class="breadcrumb-item active"><a href="{{route('dashboard.index')}}">Dashboard</a></li>
                 </ol>
             </div>
@@ -32,7 +25,7 @@ $x=1;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">List of Products</h4>
+                        <h4 class="card-title">Products On Sale</h4>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -41,31 +34,39 @@ $x=1;
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Total products</th>
-                                        <th>Remaining products</th>
-                                        <th>Price</th>
-                                        <th>Category</th>
+                                        <th>Quantity</th>
+                                        <th>Sell Price</th>
+                                        <th>Discount</th>
+                                        <th>Stock</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($purchases as $purchase)
+                                    @foreach($onsales as $onsale)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        <td>{{$purchase->product->name ?? 'nil'}}</td>
-                                        <td>{{$purchase->qty}}</td>
-                                        <td>{{$purchase->remaining_qty}}</td>
-                                        <td>{{$purchase->price}}</td>
-                                        <td>{{$purchase->product->category->title ?? 'nil'}}</td>
+                                        <td>{{$onsale->product->name}}</td>
+                                        <td>{{$onsale->qty}}</td>
+                                        <td>{{$onsale->sell_price}}</td>
+
+                                        <td>{{$onsale->discount}}</td>
+
+                                        <td>{{$onsale->stock_id==2?'Sub stock':'Main stock'}}</td>
                                         <td>
-                                        <a href="{{route('stock.moveForm',$purchase->product_id)}}" class="btn btn-primary  px-1 py-1">Move to Sub Stock</a>
-                                        <a href="" class="btn btn-success btn-sm px-1 py-1">Sale</a>
-                                        <a href="{{route('stock.details',$purchase->product_id)}}" class="btn btn-secondary btn-sm px-1 py-1">Details</a>
+                                            <div class="row">
+                                                <div class="col-sm-6 d-flex">
+                                                    <form action="" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
+                                                    </form>
+                                                    <a href="" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+
+                                                </div>
                                         </td>
-                                     
+
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>
@@ -75,5 +76,6 @@ $x=1;
         </div>
     </div>
 </div>
+
 
 @endsection

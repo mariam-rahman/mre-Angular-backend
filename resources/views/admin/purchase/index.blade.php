@@ -11,7 +11,9 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
+            
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Purchase Product</button>
+            
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -62,6 +64,7 @@ $counter = 0;
                                                         <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
                                                     </form>
                                                     <a href="{{route('purchase.edit',$purchase)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+                                                    
                                                 </div>
                                         </td>
 

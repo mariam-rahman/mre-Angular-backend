@@ -49,28 +49,40 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('category',CategoryController::class);
 Route::resource('product',ProductConroller::class);
+
 Route::resource('purchase',PurchaseController::class);
+Route::get('purchase/details/{x}',[PurchaseController::class,'index'])->name('purchase.details');
 
 Route::resource('stock',StockController::class);
 Route::get('stockDisplay',[StockController::class,'stockDispaly'])->name('stock.display');
+
+//onsale
 Route::resource('onsale',OnsaleController::class);
-Route::resource('customer',CustomerController::class);
+Route::get('onsale/sellForm/{product_id}',[OnsaleController::class,'sellForm'])->name('onsale.sellform');
+Route::post('onsale/sellStore/{product_id}',[OnsaleController::class,'sellStore'])->name('onsale.sellStore');
+Route::get('onsale/details/{product_id}',[OnsaleController::class,'details'])->name('onsale.details');
 
 Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
 Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
-
+Route::resource('customer',CustomerController::class);
 Route::resource('employee',EmployeeController::class);
+
+//Main stock
 Route::post('stock/move/{product_id}',[StockController::class,'moveTo'])->name('stock.move');
 Route::get('stock/moveForm/{product_id}',[StockController::class,'moveForm'])->name('stock.moveForm');
+Route::get('stock/item/details/{product_id}',[StockController::class,'details'])->name('stock.details');
 
 Route::resource('slip',SlipController::class);
 Route::get('employee/payform/{employee_id}',[EmployeeController::class,'payForm'])->name('employee.payForm');
 Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');
 
+//substock
 Route::resource('substock',SubstockController::class);
 Route::get('substock/move-item/{product_id}',[SubstockController::class,'moveItemForm'])->name('substock.move');
 Route::get('substock/item/details/{product_id}',[SubstockController::class,'details'])->name('substock.details');
+Route::post('substock/item/move-to-sell/{product_id}',[SubstockController::class,'MoveToSell'])->name('substock.move_to_sell');
 
 Route::resource('sale',SaleController::class);
+
 
 Route::resource('expense',ExpenseController::class);

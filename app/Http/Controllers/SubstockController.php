@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Purchase;
+use App\Models\Onsale;
 use App\Models\Substock;
 use Illuminate\Http\Request;
 
@@ -18,8 +18,6 @@ class SubstockController extends Controller
         $substocks = Substock::selectRaw("SUM(qty) as qty")
         ->selectRaw("SUM(remaining_qty) as remaining_qty")
         ->selectRaw("product_id")
-        ->selectRaw("created_at")
-        ->groupBy("created_at")
         ->groupBy('product_id')
         ->get();
         return view('admin/substock/index',compact('substocks'));
@@ -32,7 +30,7 @@ class SubstockController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -43,7 +41,7 @@ class SubstockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -100,7 +98,63 @@ class SubstockController extends Controller
        $items = Substock::where('product_id',$product_id)->get();
        return view('admin/substock/item_details',compact('items','substock'));
    }
-    public function moveItemForm(){
-        return view('admin/substock/move_item');
+    public function moveItemForm($productId){
+        return view('admin/substock/move_item',compact('productId'));
+    }
+
+    public function MoveToSell(Request $request, $product_id){
+        $countQty = Substock::Where('product_id', $product_id)
+        ->selectRaw("SUM(remaining_qty) as remaining_qty")
+        ->selectRaw("product_id")
+        ->groupBy('product_id')
+        ->first()->remaining_qty;
+
+    $qty = $request->move_qty;
+    $cqty = $qty;
+    if ($qty > $countQty) {
+        return redirect(route('substock.index'));
+    }
+
+    $purchases = Substock::where('product_id', $product_id)->get();
+
+    foreach ($purchases as $purchase) {
+        $remain = $purchase->remaining_qty;
+        if ($remain == 0 || $remain < 0) continue;
+
+        $remainQty = $cqty-$remain;
+
+        if($remainQty <= 0){
+
+            $purchase->remaining_qty = -($remainQty);
+            $purchase->update();
+
+            $sub = new Onsale();
+            $sub->product_id = $product_id;
+            $sub->qty = $cqty;
+            $sub->remaining_qty = $cqty;
+            $sub->stock_id = 2;
+            $sub->sell_price = $request->sell_price;
+            $sub->discount = $request->discount;
+            $sub->save();
+            break;
+        }
+
+        if($remainQty > 0){
+            $purchase->remaining_qty = 0;
+            $purchase->update();
+
+            $sub = new Onsale();
+            $sub->product_id = $product_id;
+            $sub->qty = $remain;
+            $sub->remaining_qty = $remain;
+            $sub->stock_id = 2;
+            $sub->sell_price = $request->sell_price;
+            $sub->discount = $request->discount;
+            $sub->save();
+            $cqty = $remainQty;
+            continue;
+        }
+    }
+     return redirect(route('substock.index'));
     }
 }

@@ -16,6 +16,10 @@ class Purchase extends Model
         return $this->belongsTo(Product::class);
     }
 
+    protected function substocks(){
+        return $this->hasMany(Substock::class);
+    }
+
     public function stock(){
         return $this->belongsTo(Stock::class);
     }

@@ -158,11 +158,18 @@ class StockController extends Controller
         return view('admin/stock/moveForm', compact('product_id'));
     }
 
+public function details($product_id){
 
-    public function stockDispaly(){
-        $stocks = Stock::all();
-        return view('admin/stock/index',compact('stocks'));
-    }
+    $stocks = Purchase::selectRaw("SUM(qty) as qty")
+    ->selectRaw("SUM(remaining_qty) as remaining_qty")
+    ->selectRaw("product_id")
+    ->groupBy('product_id')
+    ->where('product_id',$product_id)->first();
+
+    //this code is for details
+    $items = Purchase::where('product_id',$product_id)->get();
+    return view('admin/stock/item_details',compact('items','stocks'));
+}
 
 
 }

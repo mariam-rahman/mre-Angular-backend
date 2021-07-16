@@ -15,7 +15,7 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-                <a href="{{route('purchase.index')}}" class="btn btn-primary">Put Products On Sale</a>
+              
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -39,8 +39,7 @@ $counter = 0;
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Quantity</th>
-                                        <th>Sale Price</th>
-                                        <th>Descount</th>
+                                        <th>remaining_qty</th>
                                         <th>Stock</th>
                                         <th>Action</th>
                                     </tr>
@@ -49,23 +48,17 @@ $counter = 0;
                                     @foreach($onsales as $onsale)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        <td>{{$onsale->purchase->product->name}}</td>
+                                        <td>{{$onsale->product->name}}</td>
                                         <td>{{$onsale->qty}}</td>
-                                        <td>{{$onsale->sale_price}}</td>
+                                        <td>{{$onsale->remaining_qty}}</td>
 
-                                        <td></td>
-
-                                        <td>{{$onsale->purchase->stock->stock_type}}</td>
+                                        <td>{{$onsale->stock_id==2?'Sub stock':'Main stock'}}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-6 d-flex">
-                                                    <form action="" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
-                                                    </form>
-                                                    <a href="" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-
+                                                   
+                                                    <a href="{{route('onsale.sellform',$onsale->product_id)}}" class="btn btn-success px-1 py-1 ">Sale</a>
+                                                    <a href="{{route('onsale.details',$onsale->product_id)}}" class="btn btn-secondary btn-sm px-1 py-1 ml-1">Details</a>
                                                 </div>
                                         </td>
 

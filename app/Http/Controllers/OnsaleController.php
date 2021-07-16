@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
+use App\Models\Stock;
 use App\Models\Onsale;
 use App\Models\Product;
-use App\Models\Stock;
+use App\Models\Customer;
+use App\Models\Substock;
 use Illuminate\Http\Request;
 
 class OnsaleController extends Controller
@@ -16,11 +19,17 @@ class OnsaleController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        $stocks = Stock::all();
-        $onsales = Onsale::all();
+
+        $onsales = Onsale::selectRaw("SUM(qty) as qty")
+        ->selectRaw("SUM(remaining_qty) as remaining_qty")
+        ->selectRaw("product_id")
+        ->groupBy('product_id')
+        ->get();
+        return view('admin/onsale/index',compact('onsales'));
+
+        // $onsales = Onsale::all();
        
-        return view('admin/onsale/index', compact('products', 'stocks', 'onsales'));
+        // return view('admin/onsale/index', compact('products', 'stocks', 'onsales'));
     }
 
     /**
@@ -94,5 +103,80 @@ class OnsaleController extends Controller
     {
         $onsale->delete();
         return redirect(route('onsale.index'));
+    }
+
+    public function sellForm($product_id){
+        $customers = Customer::all();
+        return view('admin/sale/sellForm',compact('product_id','customers'));
+
+    }
+
+    public function sellStore(Request $request,$product_id){
+        $countQty = Onsale::Where('product_id', $product_id)
+        ->selectRaw("SUM(remaining_qty) as remaining_qty")
+        ->selectRaw("product_id")
+        ->groupBy('product_id')
+        ->first()->remaining_qty;
+
+    $qty = $request->move_qty;
+    $cqty = $qty;
+    if ($qty > $countQty) {
+        return redirect(route('onsale.index'));
+    }
+
+    $purchases = Onsale::where('product_id', $product_id)->get();
+
+    foreach ($purchases as $purchase) {
+        $remain = $purchase->remaining_qty;
+        if ($remain == 0 || $remain < 0) continue;
+
+        $remainQty = $cqty-$remain;
+
+        if($remainQty <= 0){
+
+            $purchase->remaining_qty = -($remainQty);
+            $purchase->update();
+
+            $sub = new Sale();
+            $sub->product_id = $product_id;
+            $sub->qty = $cqty;
+            $sub->stock_id = 3;
+            $sub->sold_price = $request->sold_price;
+            $sub->customer_id = $request->customer_id;
+            $sub->sold_date = $request->sold_date;
+            $sub->save();
+            break;
+        }
+
+        if($remainQty > 0){
+            $purchase->remaining_qty = 0;
+            $purchase->update();
+
+            $sub = new Sale();
+            $sub->product_id = $product_id;
+            $sub->qty = $remain;
+            $sub->stock_id = 3;
+            $sub->sold_price = $request->sold_price;
+            $sub->customer_id = $request->customer_id;
+            $sub->sold_date = $request->sold_date;
+            $sub->save();
+            $cqty = $remainQty;
+            continue;
+        }
+    }
+return redirect(route('onsale.index'));
+    }
+
+
+    public function details($product_id){
+        
+            $onsaleInfo = Onsale::selectRaw("SUM(qty) as qty")
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy("product_id")
+            ->where("product_id",$product_id)->first();
+        $onsales = Onsale::where('product_id',$product_id)->get();
+
+         return view('admin/onsale/item_detail',compact('onsales','onsaleInfo'));
     }
 }
