@@ -84,5 +84,10 @@ Route::post('substock/item/move-to-sell/{product_id}',[SubstockController::class
 
 Route::resource('sale',SaleController::class);
 
+<<<<<<< HEAD
 
 Route::resource('expense',ExpenseController::class);
+=======
+Route::resource('expense',ExpenseController::class);
+Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name('substock.pdf');
+>>>>>>> pdf package is added

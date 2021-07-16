@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Onsale;
 use App\Models\Substock;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SubstockController extends Controller
 {
@@ -23,6 +24,18 @@ class SubstockController extends Controller
         return view('admin/substock/index',compact('substocks'));
     }
 
+   // Generate PDF
+   public function createPDF() {
+    // retreive all records from db
+    $data = Substock::all();
+
+    // share data to view
+    view()->share('substocks',$data);
+    $pdf = PDF::loadView('pdf_view', $data);
+
+    // download PDF file with download method
+    return $pdf->download('pdf_file.pdf');
+  }
     /**
      * Show the form for creating a new resource.
      *

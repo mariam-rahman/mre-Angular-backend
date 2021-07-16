@@ -29,6 +29,7 @@ $counter = 0;
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">List of Products</h4>
+                        <a class="btn btn-primary" href="{{ route('substock.pdf') }}">Export to PDF</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
