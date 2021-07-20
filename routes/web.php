@@ -83,11 +83,11 @@ Route::get('substock/item/details/{product_id}',[SubstockController::class,'deta
 Route::post('substock/item/move-to-sell/{product_id}',[SubstockController::class,'MoveToSell'])->name('substock.move_to_sell');
 
 Route::resource('sale',SaleController::class);
+Route::post('sell',[SaleController::class,'sell'])->name('sale.sell');
 
-<<<<<<< HEAD
+Route::get('invoice/{id}',[SaleController::class,'printInvoice'])->name('sale.invoice');
 
-Route::resource('expense',ExpenseController::class);
-=======
 Route::resource('expense',ExpenseController::class);
 Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name('substock.pdf');
->>>>>>> pdf package is added
+
+Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale.sell_detail');

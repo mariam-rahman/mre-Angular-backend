@@ -164,7 +164,7 @@ class OnsaleController extends Controller
             continue;
         }
     }
-return redirect(route('onsale.index'));
+       return redirect(route('onsale.index'));
     }
 
 

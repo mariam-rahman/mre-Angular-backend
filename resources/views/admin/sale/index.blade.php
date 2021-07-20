@@ -6,16 +6,12 @@
 $counter = 0;
 @endphp
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
-
-<!--**********************************
-            Content body start
-        ***********************************-->
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Sale product</button></li>
+            <a href="{{route('sale.create')}}" class="btn btn-secondary">Sell product</a>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -37,40 +33,37 @@ $counter = 0;
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Name</th>
-                                        <th>Customer name</th>
-                                        <th>Sold Price</th>
-                                        <th>Descount</th>
+                                        <th>Customer</th>
                                         <th>Stock</th>
+                                        <th>Date</th>
+                                        <th>Total amount</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    @foreach($sales as $sale)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-
-                                        <td></td>
-
-                                        <td></td>
+                                      <td>{{++$counter}}</td>
+                                        <td>{{$sale->customer_id == 01 ? 'Counter':$sale->customer->name}}</td>
+                                        <td>{{$sale->getStock()}}</td>
+                                        <td>{{$sale->sell_date}}</td>
+                                        <td>{{$sale->getTotal()}}</td>
                                         <td>
                                             <div class="row">
-                                                <div class="col-sm-6 d-flex">
+                                                <div class="col-12 d-flex">
                                                     <form action="" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
                                                     </form>
-                                                    <a href="" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
+     
+                                                    <a href="{{route('sale.sell_detail',$sale->id)}}" class="btn btn-warning px-1 py-0 ml-1" style="color:white">Details</a>
 
                                                 </div>
                                         </td>
 
                                     </tr>
-                                
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -80,54 +73,4 @@ $counter = 0;
         </div>
     </div>
 </div>
-
-
-
-
-<!-- Large modal -->
-
-<div class="modal fade" id="basicModal">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add a new Product</h5>
-                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <div class="basic-form">
-                    <div class="basic-form custom_file_input">
-                        <form action="" method="post">
-                            @CSRF
-                            <div class="form-row">
-                              
-                                <div class="form-group col-md-12">
-                                    <label>Category</label>
-                                    <select name="category_id" id="inputState" class="form-control">
-
-                                        <option>Choose category</option>
-                                        <option value=""></option>
-                                    </select>
-
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label>Product Name</label>
-                                    <input type="text" name="name" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
-                                </div>
-
-                                <div class="modal-footer">
-                                    <input type="submit" value="Save" class="btn btn-secondary">
-                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-
-                                </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
