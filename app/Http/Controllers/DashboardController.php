@@ -9,6 +9,8 @@ use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Expense;
 use App\Models\Purchase;
+use App\Models\Sale;
+use App\Models\Substock;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 
@@ -16,16 +18,16 @@ class DashboardController extends Controller
 {
    
     public function index(){
-        $purchase = Purchase::count('id');
-        $products = Product::count('id');
-        $stocks = Stock::count('id');
-        $category = Category::count('id');
+        $purchase = Purchase::count();
+        $products = Product::count();
+        $substocks = Substock::count();
+        $category = Category::count();
         $main_stock_items = Purchase::where('stock_id',1)->count();
-        $sub_stock_items = Purchase::where('stock_id',3)->count();
-        $users = User::count('id');
-        $customers = Customer::count('id');
-        $expenses = Expense::count('id');
-        $employees = Employee::count('id');
-        return view('admin/dashboard/index',compact('category','stocks','products','purchase','main_stock_items','sub_stock_items','users','customers','expenses','employees'));
+        $users = User::count();
+        $customers = Customer::count();
+        $expenses = Expense::count();
+        $employees = Employee::count();
+        $sales = Sale::count();
+        return view('admin/dashboard/index',compact('category','products','purchase','main_stock_items','substocks','users','customers','expenses','employees','sales'));
     }
 }

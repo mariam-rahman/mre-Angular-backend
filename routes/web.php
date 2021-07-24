@@ -64,6 +64,7 @@ Route::get('onsale/details/{product_id}',[OnsaleController::class,'details'])->n
 
 Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
 Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
+
 Route::resource('customer',CustomerController::class);
 Route::resource('employee',EmployeeController::class);
 
@@ -71,6 +72,8 @@ Route::resource('employee',EmployeeController::class);
 Route::post('stock/move/{product_id}',[StockController::class,'moveTo'])->name('stock.move');
 Route::get('stock/moveForm/{product_id}',[StockController::class,'moveForm'])->name('stock.moveForm');
 Route::get('stock/item/details/{product_id}',[StockController::class,'details'])->name('stock.details');
+Route::get('stock/sale/{product_id}',[StockController::class,'stockSaleForm'])->name('stock.saleForm');
+Route::post('stock/sellStore/{product_id}',[StockController::class,'sellStore'])->name('stock.sellStore');
 
 Route::resource('slip',SlipController::class);
 Route::get('employee/payform/{employee_id}',[EmployeeController::class,'payForm'])->name('employee.payForm');
@@ -81,13 +84,14 @@ Route::resource('substock',SubstockController::class);
 Route::get('substock/move-item/{product_id}',[SubstockController::class,'moveItemForm'])->name('substock.move');
 Route::get('substock/item/details/{product_id}',[SubstockController::class,'details'])->name('substock.details');
 Route::post('substock/item/move-to-sell/{product_id}',[SubstockController::class,'MoveToSell'])->name('substock.move_to_sell');
+Route::get('substock/sellForm/{product_id}',[SubstockController::class,'sellForm'])->name('substock.sellForm');
+Route::post('substock/sellStore/{product_id}',[SubstockController::class,'sellstore'])->name('substock.sellStore');
 
+//sale
 Route::resource('sale',SaleController::class);
+Route::get('sale/details/{product_id}',[SaleController::class,'details'])->name('sale.details');
+Route::get('sale/customer/{product_id}',[SaleController::class,'saleCustomer'])->name('sale.customer');
 
-<<<<<<< HEAD
-
-Route::resource('expense',ExpenseController::class);
-=======
 Route::resource('expense',ExpenseController::class);
 Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name('substock.pdf');
->>>>>>> pdf package is added
+

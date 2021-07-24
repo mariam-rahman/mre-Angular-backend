@@ -9,7 +9,7 @@
                     
                     <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-widgets"></i><span class="nav-text">Stock</span></a>
                         <ul aria-expanded="false">
-                        <li><a href="{{route('stock.display')}}">Stock</a></li>
+                        
                             <li><a href="{{route('stock.index')}}">Main-Stock</a></li>
                             <li><a href="{{route('substock.index')}}">Sub-Stock</a></li>
                             <li><a href="{{route('category.index')}}">Categories</a></li>

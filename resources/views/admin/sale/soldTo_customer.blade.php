@@ -5,6 +5,8 @@
 @php
 $counter = 0;
 @endphp
+
+
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
 
 <!--**********************************
@@ -15,7 +17,7 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
-            <h4 class="text-primary">Total sold items Information</h4>
+           <h3 class="text-primary">Items to Customers</h3>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -28,6 +30,9 @@ $counter = 0;
         <div class="row">
             <div class="col-12">
                 <div class="card">
+
+                
+                    
                     <div class="card-header">
                         <h4 class="card-title">list of Sold product</h4>
                     </div>
@@ -37,30 +42,22 @@ $counter = 0;
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Action</th>
+                                        <th>Customer name</th>
+                                        <th>Product Name</th>                                    
+                                        <th>qty</th>
+                                        <th>Category</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach($sales as $sale) 
-                                    <tr>
-                                        <th>{{++$counter}}</th>
-                                        <td>{{$sale->product->name}}</td>
-                                       
-                                        <td>{{$sale->qty}}</td>
-
-                                        <td>
-                                        <div class="row">
-                                                <div class="col-sm-6 d-flex">
-                                                   
-                                                    <a href="{{route('sale.customer',$sale->product_id)}}" class="btn btn-success px-1 py-1 ">Customers</a>
-                                                    <a href="{{route('sale.details',$sale->product_id)}}" class="btn btn-secondary btn-sm px-1 py-1 ml-1">Details</a>
-                                                </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
+                                    @foreach($sales as $sale)
+                                 <tr> 
+                                     <td>{{++$counter}}</td>
+                                     <td>{{$sale->customer->name}}</td>
+                                     <td>{{$sale->product->name}}</td>                                     
+                                     <td>{{$sale->qty}}</td>
+                                     <td>{{$sale->product->category->title}}</td>
+                                </tr>
+                               @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -70,7 +67,6 @@ $counter = 0;
         </div>
     </div>
 </div>
-
 
 
 

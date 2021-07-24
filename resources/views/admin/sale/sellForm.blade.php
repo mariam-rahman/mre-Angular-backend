@@ -28,7 +28,13 @@
             <div class="card-body">
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('onsale.sellStore',$product_id)}}" method="post">
+                        @if($x ?? '')
+                        <form action="{{route('stock.sellStore',$product_id)}}" method="post">
+                            @elseif($y ?? '')
+                            <form action="{{route('substock.sellStore',$product_id)}}" method="post">
+                            @else
+                            <form action="{{route('onsale.sellStore',$product_id)}}" method="post">
+                            @endif
                             @csrf
                             <div class="form-row">
                                 <div class="form-group col-md-6">                                    

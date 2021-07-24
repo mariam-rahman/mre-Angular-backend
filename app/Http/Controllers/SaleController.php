@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
 use App\Models\Onsale;
 use App\Models\Customer;
 use Illuminate\Http\Request;
@@ -15,11 +16,8 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $onasles = Onsale::all();
-        $customer = Customer::all();
-        
-
-        return view('admin/sale/index',compact('onsales','customer'));
+        $sales = Sale::latest()->get();
+        return view('admin/sale/index',compact('sales'));
     }
 
     /**
@@ -87,4 +85,31 @@ class SaleController extends Controller
     {
         //
     }
+
+    public function details($product_id){
+        $total_sale = Sale::selectRaw("SUM(qty) as qty")
+        ->selectRaw("product_id")
+        ->groupBy("product_id")
+        ->where('product_id',$product_id)->first();
+
+        $items = Sale::where('product_id',$product_id)->get();
+    
+        return view('admin/sale/item_detail',compact('items','total_sale'));
+
+    }
+
+
+public function saleCustomer($customer_id){
+    $sales = Sale::selectRaw("SUM(qty) as qty")
+    ->selectRaw("customer_id")
+    ->selectRaw("product_id")
+    ->groupBy("customer_id")
+    ->groupBy("product_id")
+    ->get();
+
+    return view('admin/sale/soldTo_customer',compact('sales'));
+
+}
+
+
 }

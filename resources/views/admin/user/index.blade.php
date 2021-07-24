@@ -71,10 +71,6 @@ $counter = 0;
 </div>
 </div>
 </div>
-
-
-
-
 <div class="modal fade" id="basicModal">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -87,37 +83,38 @@ $counter = 0;
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('user.store')}}" method="post">
+                        <form action="{{route('user.store')}}" method="post" onsubmit="return validation()">
                             @CSRF
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>Name</label>
-                                    <input type="text" name="name" class="form-control mre" >
+                                    <input type="text" name="name" class="form-control mre" id="name" >
+                                    <small id="userName" class="text-danger"></small>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>E-mail</label>
-                                    <input type="email" name="email" class="form-control mre" >
+                                    <input type="text" name="email" class="form-control mre" id="email" >
+                                    <small id="userEmail" class="text-danger"></small>
                                 </div>
                             </div>
-
-                         
-
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>Password</label>
-                                    <input type="password" name="password" class="form-control mre" >
+                                    <input type="text" name="password" class="form-control mre" id="password" >
+                                    <small id="userPassword" class="text-danger"></small>
                                  </div>
                              </div> 
-
-                         
-
-                           
-                             
-
-                                </div>
+                            
+                             <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>confirme password</label>
+                                    <input type="text" name="password" class="form-control mre" id="conpass">
+                                    <small id="userConPass" class="text-danter"></small>
+                                 </div>
+                             </div> 
 
                                 <div class="modal-footer">
                                     <input type="submit" value="Save" class="btn btn-secondary">
@@ -131,4 +128,65 @@ $counter = 0;
         </div>
     </div>
 </div>
+
+<script>
+
+function validation(){
+
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+    var compass = document.getElementById('conpass').value;
+
+    //name
+    if(name == ""){
+        document.getElementById('userName').innerHTML = "Name cannot be null";
+        return false;
+    }
+    if(name.lenght <= 2){
+       document.getElementById('userName').innerHTML = "enter correct name";
+       return false;
+    }
+    if(!isNaN(name)){
+        document.getElementById('userName').innerHTML = "Only characters are allowed";
+       return false;
+
+    }
+
+
+//email
+    if(email == ""){
+        document.getElementById('userEmail').innerHTML ="Email cannot be null";
+        return false; 
+    }
+    if(email.indexOf('@') <= 0){
+        document.getElementById('userEmail').innerHTML ="@ is not in right position";
+        return false;
+    }
+    
+
+
+    //password
+    if(password == ""){
+        document.getElementById('userPassword').innerHTML ="Enter password";
+        return false; 
+    }
+    if(password.lenght <= 5){
+        document.getElementById('userPassword').innerHTML ="Password must be 8 characters";
+        return false; 
+    }
+    
+
+
+    //confirm password
+    if(conpass != password){
+        document.getElementById('userConPass').innerHTML ="Password must be mached";
+        return false; 
+    }
+
+
+}
+
+
+</script>
 @endsection

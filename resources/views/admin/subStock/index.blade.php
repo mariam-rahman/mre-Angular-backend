@@ -41,7 +41,7 @@ $counter = 0;
                                         <th>Total products</th>
                                         <th>Remaining products</th>
                                         <th>Category</th>
-                                        <th>Transfer Date</th>
+                                        
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -53,10 +53,10 @@ $counter = 0;
                                         <td>{{$substock->qty}}</td>
                                         <td>{{$substock->remaining_qty}}</td>
                                         <td>{{$substock->product->category->title}}</td>
-                                        <td>{{$substock->created_at}}</td>
+                                        
                                         <td>
                                         <a href="{{route('substock.move',$substock->product_id)}}" class="btn btn-primary btn-sm">OnSale</a>
-                                        <a href="{{route('substock.move',$substock->product_id)}}" class="btn btn-success btn-sm">Sale</a>
+                                        <a href="{{route('substock.sellForm',$substock->product_id)}}" class="btn btn-success btn-sm">Sale</a>
                                         <a href="{{route('substock.details',$substock->product_id)}}" class="btn btn-secondary btn-sm">Details</a>
                                         </td> 
                                     </tr>

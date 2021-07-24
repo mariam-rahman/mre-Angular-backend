@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
+
+ public function __construct()
+ {
+     $this->middleware('auth');
+ }
+
     public function index(){
         $users = User::all();
         return view('admin/user/index',compact('users'));
@@ -43,15 +49,6 @@ class UserController extends Controller
 
 
 
-        /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
 
 
     /**
@@ -67,7 +64,7 @@ class UserController extends Controller
         //     'email' => $request['email'],
         //     'password' => Hash::make($request['password']),
         // ]);
-    
+    $this->validator($request->all());
 
         $data = new User();
         $data->name = $request->name;
