@@ -1,0 +1,40 @@
+.fc{
+    position: relative;
+}
+
+.fc.success input {
+    border-color: #2ecc71;
+    
+}
+
+.fc.error input {
+    border-color: #e74c3c;
+    
+}
+
+.fc i {
+    position: absolute;   
+    right:18px;
+    top: 45px; 
+    visibility: hidden;
+}
+.fc small {
+    color:#e74c3c ;
+    visibility: hidden;
+}
+
+.fc.error small {
+    visibility: visible;
+}
+
+
+
+.fc.success i.fa-check-circle{
+    color: #2ecc71;
+    visibility: visible;
+}
+
+.fc.error i.fa-exclamation-circle{
+    color: #e74c3c;
+    visibility: visible;
+}

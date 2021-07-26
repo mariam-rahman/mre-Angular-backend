@@ -5,7 +5,11 @@
 @php
 $counter = 0;
 @endphp
+
+
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
+<link rel="stylesheet" href="css/all.min.css">
+<link rel="stylesheet" href="css/validation.css">
 <!--**********************************
             Content body start
         ***********************************-->
@@ -15,7 +19,7 @@ $counter = 0;
         <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Users</button></li>
-               
+            
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -83,38 +87,45 @@ $counter = 0;
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('user.store')}}" method="post" onsubmit="return validation()">
+                        <form action="{{route('user.store')}}" method="post" id="form">
                             @CSRF
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
+                            
+                           
+                                    <div class="fc">
                                     <label>Name</label>
                                     <input type="text" name="name" class="form-control mre" id="name" >
-                                    <small id="userName" class="text-danger"></small>
-                                </div>
-                            </div>
+                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>error massge</small>
+                                    </div>
+                               
 
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
+                           
+                                <div class="fc">
                                     <label>E-mail</label>
                                     <input type="text" name="email" class="form-control mre" id="email" >
-                                    <small id="userEmail" class="text-danger"></small>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
+                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>error massge</small>
+                                    </div>
+                               
+                               </div>
+                           
+                                <div class="fc">
                                     <label>Password</label>
                                     <input type="text" name="password" class="form-control mre" id="password" >
-                                    <small id="userPassword" class="text-danger"></small>
-                                 </div>
-                             </div> 
-                            
-                             <div class="form-row">
-                                <div class="form-group col-md-12">
+                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>error massge</small>
+                                </div>
+                    
+                                <div class="fc">
                                     <label>confirme password</label>
                                     <input type="text" name="password" class="form-control mre" id="conpass">
-                                    <small id="userConPass" class="text-danter"></small>
-                                 </div>
-                             </div> 
+                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>error massge</small>
+                                     </div>
 
                                 <div class="modal-footer">
                                     <input type="submit" value="Save" class="btn btn-secondary">
@@ -128,64 +139,164 @@ $counter = 0;
         </div>
     </div>
 </div>
+<script src="https://kit.fontawesome.com/d9de3457bd.js" crossorigin="anonymous"></script>
 
-<script>
 
-function validation(){
 
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var compass = document.getElementById('conpass').value;
+<script type="text/javascript">
 
-    //name
-    if(name == ""){
-        document.getElementById('userName').innerHTML = "Name cannot be null";
-        return false;
+// function validation(){
+
+    const form = document.getElementById('form');
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const compass = document.getElementById('conpass');
+
+    //event
+    form.addEventListener('submit',(event)=>{
+        event.preventDefault();
+        validate();
+
+    })
+
+
+    var isEmail = (emailval)=>{
+      var atSymbol = emailval.indexOf("@");
+      if(atSymbol < 1) return false;
+      var dot = emailval.lastindexOf(".");
+      if(dot < atSymbol + 2) return false;
+      if(dot === emailval.lenght - 1) return false;
+      return true;
+  }
+
+    //validate function
+
+    const validate =() =>{
+
+    const nameval = document.getElementById('name').value.trim();
+    const emailval = document.getElementById('email').value.trim();
+    const passwordval = document.getElementById('password').value.trim();
+    const compassval = document.getElementById('conpass').value.trim();
+
+    if(nameval === ""){
+        setErrorMsg(name,'name cannot be null');
     }
-    if(name.lenght <= 2){
-       document.getElementById('userName').innerHTML = "enter correct name";
-       return false;
+    else if(nameval.lenght <= 2){
+        setErrorMsg(name, 'name cannot have lenght of two charachters');
     }
-    if(!isNaN(name)){
-        document.getElementById('userName').innerHTML = "Only characters are allowed";
-       return false;
-
-    }
-
-
-//email
-    if(email == ""){
-        document.getElementById('userEmail').innerHTML ="Email cannot be null";
-        return false; 
-    }
-    if(email.indexOf('@') <= 0){
-        document.getElementById('userEmail').innerHTML ="@ is not in right position";
-        return false;
+    else{
+        setSuccessMsg(name);
     }
     
+    
+
+
+//email validation
+    if(emailval === ""){
+        setErrorMsg(email,'Email cannot be null');
+    }
+    else if(!isEmail(emailval)){
+        setErrorMsg(email, 'invalid email');
+    }
+    else{
+        setSuccessMsg(email);
+    }
 
 
     //password
-    if(password == ""){
-        document.getElementById('userPassword').innerHTML ="Enter password";
-        return false; 
+    if(passwordval === ""){
+        setErrorMsg(password,'password cannot be null');
     }
-    if(password.lenght <= 5){
-        document.getElementById('userPassword').innerHTML ="Password must be 8 characters";
-        return false; 
+    else if(passwordval.lenght <= 2){
+        setErrorMsg(password, 'name cannot have lenght of two charachters');
     }
+    else{
+        setSuccessMsg(password);
+    }
+
+    //confirm password
+
+    if(compassval === ""){
+        setErrorMsg(compass,'password did not matched');
+    }
+    else if(compassval.lenght <= 2){
+        setErrorMsg(compass, 'name cannot have lenght of two charachters');
+    }
+    else{
+        setSuccessMsg(name);
+    }
+    
+    
+    
+    // SetmassageError
+
+    function setErrorMsg(input, errormsgs){
+       const ffc = input.parentElement;
+       const small = ffc.querySelector('small');
+       ffc.className = "fc error";
+       small.innerText = errormsgs;
+    }
+
+     // SetmassageSuccess
+
+     function setSuccessMsg(input, errormsgs){
+       const ffc = input.parentElement;
+       ffc.className = "fc success";
+       
+    }
+
+}
+
+
+//     //name
+//     if(name == ""){
+//         document.getElementById('userName').innerHTML = "Name cannot be null";
+//         return false;
+//     }
+//     if(name.lenght <= 2){
+//        document.getElementById('userName').innerHTML = "enter correct name";
+//        return false;
+//     }
+//     if(!isNaN(name)){
+//         document.getElementById('userName').innerHTML = "Only characters are allowed";
+//        return false;
+
+//     }
+
+
+// //email
+//     if(email == ""){
+//         document.getElementById('userEmail').innerHTML ="Email cannot be null";
+//         return false; 
+//     }
+//     if(email.indexOf('@') <= 0){
+//         document.getElementById('userEmail').innerHTML ="@ is not in right position";
+//         return false;
+//     }
     
 
 
-    //confirm password
-    if(conpass != password){
-        document.getElementById('userConPass').innerHTML ="Password must be mached";
-        return false; 
-    }
+//     //password
+//     if(password == ""){
+//         document.getElementById('userPassword').innerHTML ="Enter password";
+//         return false; 
+//     }
+//     if(password.lenght <= 5){
+//         document.getElementById('userPassword').innerHTML ="Password must be 8 characters";
+//         return false; 
+//     }
+    
 
 
-}
+//     //confirm password
+//     if(conpass != password){
+//         document.getElementById('userConPass').innerHTML ="Password must be mached";
+//         return false; 
+//     }
+
+
+// }
 
 
 </script>

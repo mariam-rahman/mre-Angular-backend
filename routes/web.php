@@ -89,9 +89,11 @@ Route::post('substock/sellStore/{product_id}',[SubstockController::class,'sellst
 
 //sale
 Route::resource('sale',SaleController::class);
-Route::get('sale/details/{product_id}',[SaleController::class,'details'])->name('sale.details');
-Route::get('sale/customer/{product_id}',[SaleController::class,'saleCustomer'])->name('sale.customer');
+Route::post('sell',[SaleController::class,'sell'])->name('sale.sell');
+
+Route::get('invoice/{id}',[SaleController::class,'printInvoice'])->name('sale.invoice');
 
 Route::resource('expense',ExpenseController::class);
 Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name('substock.pdf');
 
+Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale.sell_detail');

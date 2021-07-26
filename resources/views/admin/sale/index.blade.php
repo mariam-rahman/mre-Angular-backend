@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -7,15 +8,13 @@ $counter = 0;
 @endphp
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
 
-<!--**********************************
-            Content body start
-        ***********************************-->
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
             <h4 class="text-primary">Total sold items Information</h4>
+            <a href="{{route('sale.create')}}" class="btn btn-secondary">Sell product</a>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -39,6 +38,10 @@ $counter = 0;
                                         <th>#</th>
                                         <th>Product Name</th>
                                         <th>Quantity</th>
+                                        <th>Customer</th>
+                                        <th>Stock</th>
+                                        <th>Date</th>
+                                        <th>Total amount</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -56,10 +59,29 @@ $counter = 0;
                                                    
                                                     <a href="{{route('sale.customer',$sale->product_id)}}" class="btn btn-success px-1 py-1 ">Customers</a>
                                                     <a href="{{route('sale.details',$sale->product_id)}}" class="btn btn-secondary btn-sm px-1 py-1 ml-1">Details</a>
+                                    @endforeach
+                                    @foreach($sales as $sale)
+                                    <tr>
+                                      <td>{{++$counter}}</td>
+                                        <td>{{$sale->customer_id == 01 ? 'Counter':$sale->customer->name}}</td>
+                                        <td>{{$sale->getStock()}}</td>
+                                        <td>{{$sale->sell_date}}</td>
+                                        <td>{{$sale->getTotal()}}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-12 d-flex">
+                                                    <form action="" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
+                                                    </form>
+     
+                                                    <a href="{{route('sale.sell_detail',$sale->id)}}" class="btn btn-warning px-1 py-0 ml-1" style="color:white">Details</a>
+
                                                 </div>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
 
                                 </tbody>
                             </table>

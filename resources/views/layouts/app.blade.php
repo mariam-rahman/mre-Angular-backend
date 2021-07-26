@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'MRES') }}</title>
+   
     <link href="{{asset('vendor/summernote/summernote.css')}}" rel="stylesheet">
     <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/mre.css')}}" rel="stylesheet">
