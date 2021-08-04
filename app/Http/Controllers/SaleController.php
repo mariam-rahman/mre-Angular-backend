@@ -147,19 +147,20 @@ public function saleCustomer($customer_id){
     if($request->stock_id==3)
     {
         $countQty = $this->getQtyCount3($request->product_id);
-        $purchases = Onsale::where('product_id', $request->product_id)->get();
+        $purchases = Onsale::where('product_id', $request->product_id)->where('remaining_qty','>',0)->get();
     }
      elseif($request->stock_id == 2)
      {
         $countQty = $this->getQtyCount2($request->product_id);
-        $purchases = Substock::where('product_id', $request->product_id)->get();
+        $purchases = Substock::where('product_id', $request->product_id)->where('remaining_qty','>',0)->get();
  
      }
      else
      {
         $countQty = $this->getQtyCount1($request->product_id);
-        $purchases = Purchase::where('product_id', $request->product_id)->get();
-     }
+        $purchases = Purchase::where('product_id', $request->product_id)->where('remaining_qty','>',0)->get();
+  
+    }
     
 
      $qty = $request->qty;
@@ -222,22 +223,23 @@ public function saleCustomer($customer_id){
         ->selectRaw("SUM(remaining_qty) as remaining_qty")
         ->selectRaw("product_id")
         ->groupBy('product_id')
-        ->first()->remaining_qty;
+        ->first()->remaining_qty ?? 0;
     }
     public function getQtyCount2($product_id){
         return Substock::Where('product_id', $product_id)
        ->selectRaw("SUM(remaining_qty) as remaining_qty")
        ->selectRaw("product_id")
        ->groupBy('product_id')
-       ->first()->remaining_qty;
+       ->first()->remaining_qty ?? 0;
    }
    public function getQtyCount3($product_id){
     return Onsale::Where('product_id', $product_id)
    ->selectRaw("SUM(remaining_qty) as remaining_qty")
    ->selectRaw("product_id")
    ->groupBy('product_id')
-   ->first()->remaining_qty;
+   ->first()->remaining_qty ?? 0;
 }
+
     public function sell_detail($id){
         $sale = Sale::find($id);
         $isVisible = true;

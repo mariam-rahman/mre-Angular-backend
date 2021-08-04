@@ -103,7 +103,7 @@ $counter = 0;
                            
                                 <div class="fc">
                                     <label>E-mail</label>
-                                    <input type="text" name="email" class="form-control mre" id="email" >
+                                    <input type="email" name="email" class="form-control mre" id="email" >
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>error massge</small>
@@ -125,8 +125,12 @@ $counter = 0;
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>error massge</small>
-                                     </div>
-
+                                 </div>
+                                <select name="role_id" id="" class="form-control">
+                                    @foreach($roles as $role)
+                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
+                                </select>
                                 <div class="modal-footer">
                                     <input type="submit" value="Save" class="btn btn-secondary">
                                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
@@ -139,19 +143,19 @@ $counter = 0;
         </div>
     </div>
 </div>
-<script src="https://kit.fontawesome.com/d9de3457bd.js" crossorigin="anonymous"></script>
 
 
 
-<script type="text/javascript">
 
-// function validation(){
+
 
     const form = document.getElementById('form');
     const name = document.getElementById('name');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const compass = document.getElementById('conpass');
+
+ 
 
     //event
     form.addEventListener('submit',(event)=>{
@@ -160,15 +164,37 @@ $counter = 0;
 
     })
 
+ const sendData = (sRate,count) =>{
 
-    var isEmail = (emailval)=>{
-      var atSymbol = emailval.indexOf("@");
-      if(atSymbol < 1) return false;
-      var dot = emailval.lastindexOf(".");
-      if(dot < atSymbol + 2) return false;
-      if(dot === emailval.lenght - 1) return false;
-      return true;
-  }
+     if(sRate == count){
+         alert('done');
+     }
+
+ }
+
+    const finalmassge = ()=>{
+        var conform = document.getElementsByClassName('fc');
+       var sRate = 0;
+        for(var i = 0; i < conform.length; i++){
+            if(conform[i].className == 'fc success'){
+                 sRate += 1;
+            }
+            else {
+                return false;
+            }
+        }
+        sendData(sRate,conform.length);
+    }
+
+
+//     var isEmail = (emailval)=>{
+//       var atSymbol = emailval.indexOf("@");
+//       if(atSymbol < 1) return false;
+//       var dot = emailval.lastindexOf(".");
+//       if(dot < atSymbol + 2) return false;
+//       if(dot === emailval.lenght - 1) return false;
+//       return true;
+//   }
 
     //validate function
 
@@ -179,26 +205,29 @@ $counter = 0;
     const passwordval = document.getElementById('password').value.trim();
     const compassval = document.getElementById('conpass').value.trim();
 
+
+
     if(nameval === ""){
         setErrorMsg(name,'name cannot be null');
     }
-    else if(nameval.lenght <= 2){
-        setErrorMsg(name, 'name cannot have lenght of two charachters');
-    }
+
+    // if(nameval.lenght <= 2){
+    //     setErrorMsg(name, 'name cannot have lenght of two charachters');
+    // }
     else{
         setSuccessMsg(name);
     }
     
-    
+
 
 
 //email validation
     if(emailval === ""){
         setErrorMsg(email,'Email cannot be null');
     }
-    else if(!isEmail(emailval)){
-        setErrorMsg(email, 'invalid email');
-    }
+    // else if(!isEmail(emailval)){
+    //     setErrorMsg(email, 'invalid email');
+    // }
     else{
         setSuccessMsg(email);
     }
@@ -208,9 +237,9 @@ $counter = 0;
     if(passwordval === ""){
         setErrorMsg(password,'password cannot be null');
     }
-    else if(passwordval.lenght <= 2){
-        setErrorMsg(password, 'name cannot have lenght of two charachters');
-    }
+    // else if(passwordval.lenght < 8){
+    //     setErrorMsg(password, 'name cannot have lenght of two charachters');
+    // }
     else{
         setSuccessMsg(password);
     }
@@ -218,16 +247,18 @@ $counter = 0;
     //confirm password
 
     if(compassval === ""){
-        setErrorMsg(compass,'password did not matched');
+        setErrorMsg(compass,'this field cannot be null');
     }
-    else if(compassval.lenght <= 2){
-        setErrorMsg(compass, 'name cannot have lenght of two charachters');
+    else if(compassval != passwordval){
+        setErrorMsg(compass, 'password did not matched');
     }
     else{
-        setSuccessMsg(name);
+        setSuccessMsg(compass);
     }
+
+      finalmassge();
     
-    
+}
     
     // SetmassageError
 
@@ -245,59 +276,5 @@ $counter = 0;
        ffc.className = "fc success";
        
     }
-
-}
-
-
-//     //name
-//     if(name == ""){
-//         document.getElementById('userName').innerHTML = "Name cannot be null";
-//         return false;
-//     }
-//     if(name.lenght <= 2){
-//        document.getElementById('userName').innerHTML = "enter correct name";
-//        return false;
-//     }
-//     if(!isNaN(name)){
-//         document.getElementById('userName').innerHTML = "Only characters are allowed";
-//        return false;
-
-//     }
-
-
-// //email
-//     if(email == ""){
-//         document.getElementById('userEmail').innerHTML ="Email cannot be null";
-//         return false; 
-//     }
-//     if(email.indexOf('@') <= 0){
-//         document.getElementById('userEmail').innerHTML ="@ is not in right position";
-//         return false;
-//     }
-    
-
-
-//     //password
-//     if(password == ""){
-//         document.getElementById('userPassword').innerHTML ="Enter password";
-//         return false; 
-//     }
-//     if(password.lenght <= 5){
-//         document.getElementById('userPassword').innerHTML ="Password must be 8 characters";
-//         return false; 
-//     }
-    
-
-
-//     //confirm password
-//     if(conpass != password){
-//         document.getElementById('userConPass').innerHTML ="Password must be mached";
-//         return false; 
-//     }
-
-
-// }
-
-
-</script>
+ 
 @endsection

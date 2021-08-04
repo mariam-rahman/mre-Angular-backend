@@ -9,6 +9,7 @@ use App\Models\Purchase;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 
+
 class ProductConroller extends Controller
 {
     /**
@@ -16,6 +17,15 @@ class ProductConroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware(['role:super-admin|admin'])->only('index');
+        $this->middleware(['role:super-admin|admin'])->only('edit');
+        $this->middleware(['role:super-admin|admin'])->only('destroy');
+        $this->middleware(['role:super-admin'])->only('store');
+    }
+
     public function index()
     {
          $products = Product::all();
@@ -41,9 +51,16 @@ class ProductConroller extends Controller
      */
     public function store(Request $request)
     {
-
+        if($request->image !=""){
+            $image_path = $request->image->store('images/products','public');
+            Product::create(array_merge($request->except('image'),
+                                           ['image'=>$image_path]));
+        }else{
             Product::create($request->all());
-            return redirect(route('product.index'));
+           
+        }
+
+        return redirect(route('product.index'));
     }
 
     /**

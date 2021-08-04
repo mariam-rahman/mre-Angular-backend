@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\User;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -17,7 +19,8 @@ class UserController extends Controller
 
     public function index(){
         $users = User::all();
-        return view('admin/user/index',compact('users'));
+        $roles = Role::all();
+        return view('admin/user/index',compact('users','roles'));
     }
 
     public function destroy(User $user){
@@ -28,6 +31,29 @@ class UserController extends Controller
     public function edit(User $user){
         return view('admin/user/edit',compact('user'));
     }
+
+
+
+    public function update(Request $request ,$user){
+
+        $users = User::find($user); 
+
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = Hash::make($request->password);
+        $users->update();
+
+        return redirect(route('user.index'));
+
+    }
+
+
+
+ 
+
+
+
+
 
 
  /**
@@ -57,7 +83,7 @@ class UserController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function store(Request $request)
+     function store(Request $request)
     {
         //  User::create([
         //     'name' => $request['name'],
@@ -66,17 +92,30 @@ class UserController extends Controller
         // ]);
     $this->validator($request->all());
 
-        $data = new User();
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->password = Hash::make($request->password);
-        $data->save();
-
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $role = Role::findById($request->role_id);
+         $user->assignRole($role->name);
         return redirect(route('user.index'));
 
 
 
     }
+
+    public function permission(){
+        $permissions = Permission::latest()->get();
+        return view('admin/permission/index',compact('permissions'));
+    }
+
+
+    public function permissionStore(Request $request){
+        Permission::create($request->all());
+        return redirect(route('permission.index'));
+    }
+
 
 
 

@@ -33,7 +33,7 @@
 
                     <div class="card-body">
                         <div class="basic-form">
-                            <form action="" method="post">
+                            <form action="{{route('user.update',$user->id)}}" method="post">
                             @csrf
                             @method('PUT')
                                 <div class="form-row">

@@ -44,6 +44,8 @@ input[type="search"]{
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Image</th>
                                         <th>Category</th>
                                         <th>Action</th>
                                     </tr>
@@ -53,6 +55,8 @@ input[type="search"]{
                                     <tr>
                                         <td>{{++$counter}}</td>
                                         <td>{{$product->name}}</td>
+                                        <td>{{$product->desc}}</td>
+                                        <td><img src="{{asset('storage/'.$product->image)}}" width ="50" alt=""></td>
                                         <td> {{$product->category->title}}</td>
                                         <td>
                                             <div class="row">
@@ -94,18 +98,26 @@ input[type="search"]{
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        <form action="{{route('product.store')}}" method="post">
+                        <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data" >
                             @CSRF
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label>Product Name</label>
-                                    <input type="text" name="name" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
+                                    <input type="text" name="name" class="form-control mre"  required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Description</label>
+                                    <textarea name="desc" id="" cols="30"  class="form-control mre"></textarea> 
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Image</label>
+                                   <input type="file" name="image" id="" class="form-control mre">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Category</label>
-                                    <select name="category_id" id="inputState" class="form-control">
+                                    <select name="category_id" id="inputState" class="form-control mre" required>
 
-                                        <option>Choose category</option>
+                                        <option disabled value="" selected>Choose category</option>
                                         @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->title}}</option>
                                         @endforeach

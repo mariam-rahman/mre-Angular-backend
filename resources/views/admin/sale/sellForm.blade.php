@@ -26,7 +26,7 @@ $counter = 0;
                 <div class="card">
                     <div class="card-header">
                         
-                          <div class="col-3 card-title">Customer:{{$sale->customer_id == 01 ? 'Counter':$sale->customer->name}}</div>
+                          <div class="col-3 card-title">Customer:{{$sale->customer_id == 0 ? 'Counter':$sale->customer->name}}</div>
                           <div class="col-3 card-title">Source:{{$sale->getStock()}}</div>
                          <div class="col-3 card-title">Date:{{$sale->sell_date}}</div>
                          <div class="col-3" style="text-align:right; "><a href="{{route('sale.invoice',$sale->id)}}"  class="btn btn-warning text-white">Print invoice</a></div>
@@ -49,7 +49,7 @@ $counter = 0;
                                     <tr>
                                         <td>{{++$counter}}</td>
 
-                                        <td>{{$sell->product_id}}</td>
+                                        <td>{{$sell->product->name}}</td>
                                         <td>{{$sell->qty}}</td>
                                         <td>{{$sell->sell_price}}</td>
                                         <td>
@@ -93,13 +93,6 @@ $counter = 0;
 
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
-                        @if($x ?? '')
-                        <form action="{{route('stock.sellStore',$product_id)}}" method="post">
-                            @elseif($y ?? '')
-                            <form action="{{route('substock.sellStore',$product_id)}}" method="post">
-                            @else
-                            <form action="{{route('onsale.sellStore',$product_id)}}" method="post">
-                            @endif
                     <form action="{{route('sale.sell')}}" method="post">
                     <input type="hidden" name="sell_id" value="{{$sale->id}}">
                     <input type="hidden" name="stock_id" value="{{$sale->stock_id}}">

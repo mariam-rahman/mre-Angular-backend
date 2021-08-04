@@ -15,6 +15,9 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubstockController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\MresController;
+use App\Http\Controllers\RoleController;
+use App\Models\Purchase;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,22 +40,47 @@ Route::view('table','datatable');
 Route::view('modal','modals');
 Route::view('dropdown','dropdown');
 
+Route::view('index','index');
+
+
+
 Auth::routes();
 
+Route::get('index1',[MresController::class,'view_category'])->name('view.index');
+Route::get('index1/about',[MresController::class,'about'])->name('view.about');
+Route::get('index1/product',[MresController::class,'view_product'])->name('view.product');
+Route::get('index1/contact',[MresController::class,'contact'])->name('view.contact');
+Route::get('index1/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
+
+
+
+
+
+
+//Authenticated pages
+Route::group(['middleware'=>'auth'], function(){
+    //user
 Route::get('user',[UserController::class,'index'])->name('user.index');
 Route::post('user/store',[UserController::class,'store'])->name('user.store');
 Route::delete('user/{user}',[UserController::class,'destroy'])->name('user.destroy');
 Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
+Route::put('user/{user}/update',[UserController::class,'update'])->name('user.update');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Permissions
+Route::get('permission',[UserController::class,'permission'])->name('permission.index');
+Route::post('permission',[UserController::class,'permissionStore'])->name('permission.store');
 
-
+//Categories
 Route::resource('category',CategoryController::class);
+
+//Products
 Route::resource('product',ProductConroller::class);
 
+//Purchase
 Route::resource('purchase',PurchaseController::class);
 Route::get('purchase/details/{x}',[PurchaseController::class,'index'])->name('purchase.details');
 
+//Stock
 Route::resource('stock',StockController::class);
 Route::get('stockDisplay',[StockController::class,'stockDispaly'])->name('stock.display');
 
@@ -97,3 +125,8 @@ Route::resource('expense',ExpenseController::class);
 Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name('substock.pdf');
 
 Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale.sell_detail');
+
+//Roles
+Route::resource('role',RoleController::class);
+
+});

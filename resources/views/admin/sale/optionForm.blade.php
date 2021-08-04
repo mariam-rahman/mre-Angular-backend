@@ -29,7 +29,7 @@
                                 <div class="form-group col-6">
                                     <label>Customer</label>
                                     <select name="customer_id" id="inputState" class="form-control">     
-                                    <option value="01">Counter</option>
+                                    <option value="0">Counter</option>
                                         @foreach($customers as $customer)
                                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                                         @endforeach

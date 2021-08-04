@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -7,13 +6,11 @@
 $counter = 0;
 @endphp
 <link rel="stylesheet" href="{{asset('css/mre.css')}}">
-
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">
-        <div class="row page-titles mx-0 mb-0">
+        <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-            <h4 class="text-primary">Total sold items Information</h4>
             <a href="{{route('sale.create')}}" class="btn btn-secondary">Sell product</a>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -36,8 +33,6 @@ $counter = 0;
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
                                         <th>Customer</th>
                                         <th>Stock</th>
                                         <th>Date</th>
@@ -46,24 +41,10 @@ $counter = 0;
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   @foreach($sales as $sale) 
-                                    <tr>
-                                        <th>{{++$counter}}</th>
-                                        <td>{{$sale->product->name}}</td>
-                                       
-                                        <td>{{$sale->qty}}</td>
-
-                                        <td>
-                                        <div class="row">
-                                                <div class="col-sm-6 d-flex">
-                                                   
-                                                    <a href="{{route('sale.customer',$sale->product_id)}}" class="btn btn-success px-1 py-1 ">Customers</a>
-                                                    <a href="{{route('sale.details',$sale->product_id)}}" class="btn btn-secondary btn-sm px-1 py-1 ml-1">Details</a>
-                                    @endforeach
                                     @foreach($sales as $sale)
                                     <tr>
                                       <td>{{++$counter}}</td>
-                                        <td>{{$sale->customer_id == 01 ? 'Counter':$sale->customer->name}}</td>
+                                        <td>{{$sale->customer_id == 0 ? 'Counter':$sale->customer->name}}</td>
                                         <td>{{$sale->getStock()}}</td>
                                         <td>{{$sale->sell_date}}</td>
                                         <td>{{$sale->getTotal()}}</td>
@@ -80,9 +61,9 @@ $counter = 0;
 
                                                 </div>
                                         </td>
-                                    </tr>
-                                    @endforeach
 
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -92,10 +73,4 @@ $counter = 0;
         </div>
     </div>
 </div>
-
-
-
-
-
-
 @endsection
