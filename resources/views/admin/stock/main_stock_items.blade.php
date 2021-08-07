@@ -59,7 +59,7 @@ $x=1;
                                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
                                         <td>
                                         <a href="{{route('stock.moveForm',$purchase->product_id)}}" class="btn btn-primary  px-1 py-1">Move to Sub Stock</a>
-                                        <a href="{{route('stock.saleForm',$purchase->product_id)}}" class="btn btn-success btn-sm px-1 py-1">Sale</a>
+                 
                                         <a href="{{route('stock.details',$purchase->product_id)}}" class="btn btn-secondary btn-sm px-1 py-1">Details</a>
                                         </td>
                                      

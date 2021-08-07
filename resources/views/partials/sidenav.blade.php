@@ -33,7 +33,16 @@
                         </ul>
                     </li>
                     
-                    <li><a href="{{route('user.index')}}" aria-expanded="false"><i class="fa fa-user"></i><span class="nav-text">Users</span></a></li>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-male"></i><span class="nav-text">Users</span></a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('user.index')}}">Users</a></li>
+                            <li><a href="{{route('permission.index')}}">Permission</a></li>
+                           
+              
+                        </ul>
+                    </li>
+
+                    
                     
                 </ul>
             </div>

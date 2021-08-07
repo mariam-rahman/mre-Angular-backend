@@ -20,14 +20,13 @@ class ProductConroller extends Controller
 
     public function __construct()
     {
-        $this->middleware(['role:super-admin|admin'])->only('index');
-        $this->middleware(['role:super-admin|admin'])->only('edit');
-        $this->middleware(['role:super-admin|admin'])->only('destroy');
-        $this->middleware(['role:super-admin'])->only('store');
+        $this->authorizeResource(Product::class, 'product'); 
     }
 
     public function index()
     {
+   
+
          $products = Product::all();
          $categories = Category::all();
          return view('admin/product/index',compact('categories','products'));
@@ -51,6 +50,8 @@ class ProductConroller extends Controller
      */
     public function store(Request $request)
     {
+        // $this->authorize('create', Product::class);
+
         if($request->image !=""){
             $image_path = $request->image->store('images/products','public');
             Product::create(array_merge($request->except('image'),
@@ -82,6 +83,7 @@ class ProductConroller extends Controller
      */
     public function edit(Product $product)
     {
+
         $categories = Category::all();
         return view('admin/product/edit',compact('product','categories'));
     }

@@ -29,7 +29,7 @@ $counter = 0;
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">List of Products</h4>
-                        <a class="btn btn-primary" href="{{ route('substock.pdf') }}">Export to PDF</a>
+                     
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -49,14 +49,14 @@ $counter = 0;
                                 @foreach($substocks as $substock)
                                     <tr>
                                         <td>{{++$counter}}</td>
-                                        <td>{{$substock->product->name}}</td>
+                                        <td>{{$substock->product->name ?? ''}}</td>
                                         <td>{{$substock->qty}}</td>
                                         <td>{{$substock->remaining_qty}}</td>
-                                        <td>{{$substock->product->category->title}}</td>
+                                        <td>{{$substock->product->category->title ?? ''}}</td>
                                         
                                         <td>
                                         <a href="{{route('substock.move',$substock->product_id)}}" class="btn btn-primary btn-sm">OnSale</a>
-                                        <a href="{{route('substock.sellForm',$substock->product_id)}}" class="btn btn-success btn-sm">Sale</a>
+                                        
                                         <a href="{{route('substock.details',$substock->product_id)}}" class="btn btn-secondary btn-sm">Details</a>
                                         </td> 
                                     </tr>

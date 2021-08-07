@@ -18,7 +18,7 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0 mb-0">
             <div class="col-sm-6 p-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Users</button></li>
+                <a href="{{route('user.create')}}" class="btn btn-primary">Add Users</a></li>
             
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -91,9 +91,9 @@ $counter = 0;
                             @CSRF
                             
                            
-                                    <div class="fc">
+                                    <div >
                                     <label>Name</label>
-                                    <input type="text" name="name" class="form-control mre" id="name" >
+                                    <input type="text" name="name" class="form-control " id="name" >
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>error massge</small>
@@ -101,9 +101,9 @@ $counter = 0;
                                
 
                            
-                                <div class="fc">
+                                <div >
                                     <label>E-mail</label>
-                                    <input type="email" name="email" class="form-control mre" id="email" >
+                                    <input type="email" name="email" class="form-control " id="email" >
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>error massge</small>
@@ -111,26 +111,31 @@ $counter = 0;
                                
                                </div>
                            
-                                <div class="fc">
+                                <div >
                                     <label>Password</label>
-                                    <input type="text" name="password" class="form-control mre" id="password" >
+                                    <input type="text" name="password" class="form-control " id="password" >
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>error massge</small>
                                 </div>
                     
-                                <div class="fc">
+                                <div >
                                     <label>confirme password</label>
-                                    <input type="text" name="password" class="form-control mre" id="conpass">
+                                    <input type="text" name="password" class="form-control " id="conpass">
                                     <i class="fas fa-check-circle"></i>
                                     <i class="fas fa-exclamation-circle"></i>
                                     <small>error massge</small>
                                  </div>
-                                <select name="role_id" id="" class="form-control">
-                                    @foreach($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
-                                    @endforeach
-                                </select>
+                                <ul>
+                                    <label for="">Choose permissions:</label>
+                                @foreach($permissions as $permission)
+                                   <li><input type="checkbox" class=" m-2" name="permissions[]" value="{{$permission->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{$permission->name}}</span></li> 
+                                 @endforeach
+                                </ul>
+                           
+                            
+                                
+                                
                                 <div class="modal-footer">
                                     <input type="submit" value="Save" class="btn btn-secondary">
                                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>

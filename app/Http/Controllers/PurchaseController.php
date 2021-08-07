@@ -18,9 +18,15 @@ class PurchaseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->authorizeResource(Product::class, 'product'); 
+    }
+
+
     public function index()
     {
-     
          $products = Product::all();
         $stocks = Stock::all();
         $purchases = Purchase::all();

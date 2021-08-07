@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-<link rel="stylesheet" href="{{asset('css/mre.css')}}">
+
 
 @section('content')
+<link rel="stylesheet" href="{{asset('css/mre.css')}}">
+<link rel="stylesheet" href="css/zay.css">
 @include('partials.sidenav')
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <!-- row -->
 
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
-                        <div class="card" id="user-activity">
+                        <div class="card pb-5" id="user-activity">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                 <a  href="{{route('user.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
@@ -139,10 +139,86 @@
                 </div>
               
             </div>
-        </div>
+        
         <!--**********************************
             Content body end
         ***********************************-->
+
+
+
+
+
+         <!--**********************************
+            Content body start
+        ***********************************-->
+     
+            <div class="container">
+                <div class="row page-titles">
+                  <h2>Abserive by chart</h2>
+                </div>
+                <!-- row -->
+                
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">                                           
+                                <h4 class="card-title">Finance</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="duration-value-axis"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">                                           
+                                <h4 class="card-title">Revenue</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="revenue-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                   
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-header">                                           
+                                <h4 class="card-title">Zoomable Value Axis</h4>
+                            </div>
+                            <div class="card-body">
+                                <div id="combined-bullet"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+         <!-- Required vendors -->
+    <script src="./vendor/jquery/jquery.min.js"></script>
+
+ 
+
+
+         <!-- AmCharts -->
+    <script src="./vendor/amcharts/amcharts.js"></script>
+    <script src="./vendor/amcharts/serial.js"></script>
+    <script src="./vendor/amcharts/plugins/dataloader.min.js"></script>
+    <script src="./vendor/amcharts/plugins/export.min.js"></script>
+   
+ 
+   
+    <script src="./vendor/amcharts/amstock.js"></script>
+
+
+    <script src="./js/plugins-init/amchart-init.js"></script>
         
 @endsection
 

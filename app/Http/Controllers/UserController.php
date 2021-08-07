@@ -19,8 +19,13 @@ class UserController extends Controller
 
     public function index(){
         $users = User::all();
-        $roles = Role::all();
-        return view('admin/user/index',compact('users','roles'));
+        $permissions = Permission::all();
+        return view('admin/user/index',compact('users','permissions'));
+    }
+
+    public function create(){
+        $permissions = Permission::all();
+        return view('admin/user/create',compact('permissions'));
     }
 
     public function destroy(User $user){
@@ -47,15 +52,6 @@ class UserController extends Controller
 
     }
 
-
-
- 
-
-
-
-
-
-
  /**
      * Get a validator for an incoming registration request.
      *
@@ -70,13 +66,6 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
-
-
-
-
-
-
-
     /**
      * Create a new user instance after a valid registration.
      *
@@ -85,11 +74,7 @@ class UserController extends Controller
      */
      function store(Request $request)
     {
-        //  User::create([
-        //     'name' => $request['name'],
-        //     'email' => $request['email'],
-        //     'password' => Hash::make($request['password']),
-        // ]);
+
     $this->validator($request->all());
 
         $user = new User();
@@ -97,12 +82,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        $role = Role::findById($request->role_id);
-         $user->assignRole($role->name);
+        $user->syncPermissions($request->permissions);
         return redirect(route('user.index'));
-
-
-
     }
 
     public function permission(){

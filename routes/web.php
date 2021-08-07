@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Purchase;
+use App\Http\Livewire\LoginComponent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MresController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
 use App\Http\Controllers\UserController;
@@ -15,9 +19,6 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubstockController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\MresController;
-use App\Http\Controllers\RoleController;
-use App\Models\Purchase;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +31,7 @@ use App\Models\Purchase;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 Route::view('note','summernote');
 Route::view('form','form');
@@ -46,11 +45,11 @@ Route::view('index','index');
 
 Auth::routes();
 
-Route::get('index1',[MresController::class,'view_category'])->name('view.index');
-Route::get('index1/about',[MresController::class,'about'])->name('view.about');
-Route::get('index1/product',[MresController::class,'view_product'])->name('view.product');
-Route::get('index1/contact',[MresController::class,'contact'])->name('view.contact');
-Route::get('index1/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
+Route::get('/',[MresController::class,'view_category'])->name('view.index');
+Route::get('view/about',[MresController::class,'about'])->name('view.about');
+Route::get('view/product',[MresController::class,'view_product'])->name('view.product');
+Route::get('view/contact',[MresController::class,'contact'])->name('view.contact');
+Route::get('view/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
 
 
 
@@ -65,6 +64,7 @@ Route::post('user/store',[UserController::class,'store'])->name('user.store');
 Route::delete('user/{user}',[UserController::class,'destroy'])->name('user.destroy');
 Route::get('/user/{user}/edit',[UserController::class,'edit'])->name('user.edit');
 Route::put('user/{user}/update',[UserController::class,'update'])->name('user.update');
+Route::get('user/create',[UserController::class,'create'])->name('user.create');
 
 //Permissions
 Route::get('permission',[UserController::class,'permission'])->name('permission.index');
@@ -130,3 +130,6 @@ Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale
 Route::resource('role',RoleController::class);
 
 });
+
+
+Route::get('login_wire',LoginComponent::class);

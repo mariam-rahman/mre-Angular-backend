@@ -18,6 +18,8 @@ class SubstockController extends Controller
      */
     public function index()
     {
+
+
         $substocks = Substock::selectRaw("SUM(qty) as qty")
         ->selectRaw("SUM(remaining_qty) as remaining_qty")
         ->selectRaw("product_id")

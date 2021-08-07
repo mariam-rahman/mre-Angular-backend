@@ -1,5 +1,5 @@
 
-<link href="{{asset('css/mre.css')}}" rel="stylesheet">
+
 
 
     
@@ -7,8 +7,8 @@
 @extends('layouts.app')
 @section('content')
 
-
-<div class="row justify-content-center">
+<link href="{{asset('css/mre.css')}}" rel="stylesheet">
+<div class="row justify-content-center mt-5">
 
      <div class="col-sm-8 d-flex " style="justify-content: space-between;">
          <ol class="ml-2 p-2">

@@ -10,6 +10,7 @@ $counter = 0;
             Content body start
         ***********************************-->
 @include('partials.sidenav')
+<livewire:styles />
 
 <div class="content-body">
     <div class="container">
@@ -107,39 +108,10 @@ $counter = 0;
             </div>
             <div class="modal-body">
 
-                <div class="basic-form">
-                    <div class="basic-form custom_file_input">
-                        <form action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
-                            @CSRF
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Title</label>
-                                    <input type="text" name="title" class="form-control" style="border: 1px solid #c9c5c5;" placeholder="Enter Title">
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    <label>Descriptiion</label>
-                                    <textarea name="desc" id="" cols="30" rows="3" class="form-control" style="border: 1px solid #c9c5c5;"></textarea>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label>Image</label>
-                                    <div class="input-group mb-3">
-                                        <input type="file" name="image" class="form-control" style="border: 1px solid #c9c5c5;" id="">
-
-                                    </div>
-
-                                </div>
-
-                                <div class="modal-footer">
-                                    <input type="submit" value="Save" class="btn btn-secondary">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-
-                                </div>
-                        </form>
-                    </div>
-                </div>
+            @livewire('category-component')
             </div>
         </div>
     </div>
 </div>
+<livewire:scripts />
 @endsection
