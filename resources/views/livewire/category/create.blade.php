@@ -1,7 +1,25 @@
+<div class="modal fade" id="basicModal"  >
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+      
+        @if (session()->has('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+            @else
+            <h5 class="modal-title">Add a new Category</h5>
+            @endif
+         
+                
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
     <div class="basic-form">
         <div class="basic-form custom_file_input" >
-            <form wire:submit.prevent="submit" >
-                @CSRF
+            <form wire:submit.prevent >
+
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>Title</label>
@@ -31,10 +49,16 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-secondary">Save</button>
+                  
+                        <button wire:click='save()' class="btn btn-secondary">Save</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                     </div>
             </form>
         </div>
     </div>
+
+    </div>
+        </div>
+    </div>
+</div>

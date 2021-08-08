@@ -12,7 +12,7 @@
                         
                             <li><a href="{{route('stock.index')}}">Main-Stock</a></li>
                             <li><a href="{{route('substock.index')}}">Sub-Stock</a></li>
-                            <li><a href="{{route('category.index')}}">Categories</a></li>
+                            <li><a href="{{route('category')}}">Categories</a></li>
                             <li><a href="{{route('product.index')}}">Products</a></li>
                             <li><a href="{{route('purchase.index')}}">Purchases</a></li>
                         </ul>

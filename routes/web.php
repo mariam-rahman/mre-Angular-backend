@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\CategoryComponent;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
@@ -57,7 +58,7 @@ Route::get('view/category-filer/{category}',[MresController::class,'category_fil
 
 
 //Authenticated pages
-Route::group(['middleware'=>'auth'], function(){
+Route::group([  ], function(){
     //user
 Route::get('user',[UserController::class,'index'])->name('user.index');
 Route::post('user/store',[UserController::class,'store'])->name('user.store');
@@ -71,7 +72,7 @@ Route::get('permission',[UserController::class,'permission'])->name('permission.
 Route::post('permission',[UserController::class,'permissionStore'])->name('permission.store');
 
 //Categories
-Route::resource('category',CategoryController::class);
+Route::view('category','admin/category/index')->name('category');
 
 //Products
 Route::resource('product',ProductConroller::class);
@@ -132,4 +133,3 @@ Route::resource('role',RoleController::class);
 });
 
 
-Route::get('login_wire',LoginComponent::class);
