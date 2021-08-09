@@ -38,3 +38,18 @@
     color: #e74c3c;
     visibility: visible;
 }
+
+
+
+
+
+
+
+
+
+
+
+.input-group > .form-control, .input-group > .form-control-plaintext, .input-group > .custom-select, .input-group > .custom-file {
+  
+    width: unset; 
+}
