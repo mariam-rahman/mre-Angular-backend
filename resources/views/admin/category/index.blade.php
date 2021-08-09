@@ -94,5 +94,12 @@ $counter = 0;
         </div>
     </div>
 </div>
-
+<script>
+ toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("hrkjjkjkjk");
+</script>
 @endsection
