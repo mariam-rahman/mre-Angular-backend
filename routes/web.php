@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\CategoryComponent;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
@@ -57,7 +58,7 @@ Route::get('view/category-filer/{category}',[MresController::class,'category_fil
 
 
 //Authenticated pages
-Route::group(['middleware'=>'auth'], function(){
+Route::group([  ], function(){
     //user
 Route::get('user',[UserController::class,'index'])->name('user.index');
 Route::post('user/store',[UserController::class,'store'])->name('user.store');
@@ -70,7 +71,12 @@ Route::get('user/create',[UserController::class,'create'])->name('user.create');
 Route::get('permission',[UserController::class,'permission'])->name('permission.index');
 Route::post('permission',[UserController::class,'permissionStore'])->name('permission.store');
 
+<<<<<<< HEAD
 
+=======
+//Categories
+Route::view('category','admin/category/index')->name('category');
+>>>>>>> 5bd29036f6211ff67bde4d141f84bcd146401553
 
 //Products
 Route::resource('product',ProductConroller::class);
@@ -129,4 +135,9 @@ Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale
 Route::resource('role',RoleController::class);
 
 });
+<<<<<<< HEAD
 Route::get('category',CategoryComponent::class);
+=======
+
+
+>>>>>>> 5bd29036f6211ff67bde4d141f84bcd146401553

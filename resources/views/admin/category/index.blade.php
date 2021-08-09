@@ -11,7 +11,7 @@ $counter = 0;
     <div class="container">
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Add Category</button></li>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Add Category</button></li>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
@@ -72,6 +72,7 @@ $counter = 0;
                             </table>
                         </div>
                     </div>
+                    <livewire:category.category-component />
                 </div>
             </div>
         </div>
@@ -81,4 +82,17 @@ $counter = 0;
 @include('admin.category.create')
 
 <livewire:scripts />
+<!--Delete model-->
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content m-1">
+            <div class="">
+                <h5 class="modal-title">Would you like to delete this record?</h5>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
