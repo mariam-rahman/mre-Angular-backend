@@ -17,6 +17,11 @@ class CategoryComponent extends Component
     public $updateMode = false;
     
 
+    public function render()
+    {
+        $this->categories = Category::latest()->get();
+        return view('livewire.category.category');
+    }
 
 
     protected $rules = [
@@ -48,14 +53,17 @@ class CategoryComponent extends Component
     } else {
         Category::create($validatedData);
     }
-        session()->flash('message', 'Category successfully created!');
+     session()->flash('message', 'Category successfully created!');
+
       $this->resetInputFields();
+
     }
 
 public function delete($id){
     Category::destroy($id);
     session()->flash('message', 'Category successfully deleted!');
 }
+
 public function edit($id){
     $category = Category::findOrFail($id);
     $this->record_id = $category->id;
@@ -81,10 +89,5 @@ public function resetInputFields(){
 }
 
 
-    public function render()
-    {
-        $this->categories = Category::latest()->get();
-        return view('livewire.category.category');
-    }
     
 }

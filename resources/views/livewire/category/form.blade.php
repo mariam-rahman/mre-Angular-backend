@@ -13,7 +13,7 @@
             @else
             <h5 class="modal-title">Add a new Category</h5>
             @endif
-            @endif
+         @endif
          
                 
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
