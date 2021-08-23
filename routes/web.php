@@ -75,12 +75,21 @@ Route::get('permission',[UserController::class,'permission'])->name('permission.
 Route::post('permission',[UserController::class,'permissionStore'])->name('permission.store');
 
 
-//Categories
+//Categories livewire
 Route::view('category','admin/category/index')->name('category');
 
-//Products
-Route::resource('product',ProductConroller::class);
 
+//Products  livewire
+Route::view('product','admin/product/index')->name('product.index');
+
+//customer livewire
+Route::view('customer','admin/customer/index')->name('customer.index');
+
+//employee
+Route::resource('employee',EmployeeController::class);
+Route::post('employee/promote',[EmployeeController::class,'promote'])->name('employee.promote');
+Route::get('employee/payform/{employee}',[EmployeeController::class,'payForm'])->name('employee.payForm');
+Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');
 //Purchase
 Route::resource('purchase',PurchaseController::class);
 Route::get('purchase/details/{x}',[PurchaseController::class,'index'])->name('purchase.details');
@@ -98,8 +107,7 @@ Route::get('onsale/details/{product_id}',[OnsaleController::class,'details'])->n
 Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
 Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
 
-Route::resource('customer',CustomerController::class);
-Route::resource('employee',EmployeeController::class);
+
 
 //Main stock
 Route::post('stock/move/{product_id}',[StockController::class,'moveTo'])->name('stock.move');
@@ -108,10 +116,9 @@ Route::get('stock/item/details/{product_id}',[StockController::class,'details'])
 Route::get('stock/sale/{product_id}',[StockController::class,'stockSaleForm'])->name('stock.saleForm');
 Route::post('stock/sellStore/{product_id}',[StockController::class,'sellStore'])->name('stock.sellStore');
 
-Route::resource('slip',SlipController::class);
-Route::get('employee/payform/{employee_id}',[EmployeeController::class,'payForm'])->name('employee.payForm');
-Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');
 
+
+Route::resource('slip',SlipController::class);
 //substock
 Route::resource('substock',SubstockController::class);
 Route::get('substock/move-item/{product_id}',[SubstockController::class,'moveItemForm'])->name('substock.move');

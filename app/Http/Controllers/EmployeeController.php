@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Slip;
 use App\Models\Contract;
 use App\Models\Employee;
+use App\Models\Salary;
 use App\Models\User;
 //use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\Empty_;
 use Illuminate\Support\Facades\File;
 
 class EmployeeController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -45,13 +46,31 @@ class EmployeeController extends Controller
         $image_path = "";
         if ($request->image != "")
             $image_path = $request->image->store('images/employee', 'public');
-        Employee::create(array_merge(
-            $request->except('image'),
-            ['image' => $image_path]
-        ));
+        // Employee::create(array_merge(
+        //     $request->except('image'),
+        //     ['image' => $image_path]
+        // ));
 
+        $employee = new Employee();
+        $employee->name = $request->name;
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->image = $image_path;
+        $employee->joining_date = $request->joining_date;
+        
+        $employee->save();
+
+        $salary = new Salary();
+        $salary->employee_id = $employee->id;
+        $salary->salary = $request->salary;
+        $salary->designation = $request->designation;
+        $salary->save();
         return redirect(route('employee.index'));
+
+    
     }
+
 
     /**
      * Display the specified resource.
@@ -59,9 +78,23 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
+
     public function show(Employee $employee)
     {
+        // $this->promote($id);
+      
         return view('admin/employee/show', compact('employee'));
+    }
+
+    
+    public function promote(Request $request){
+
+        $salary = new Salary();
+        $salary->employee_id = $request->emp_id;
+        $salary->salary = $request->salary;
+        $salary->designation = $request->designation;
+        $salary->save();
+       
     }
 
     /**
@@ -72,6 +105,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        
         return view('admin/employee/edit', compact('employee'));
     }
 
@@ -94,10 +128,10 @@ class EmployeeController extends Controller
                 $request->except('image'),
                 ['image' => $newimage]
             ));
-        } else {
+        } else { 
             $employee->update($request->except('image'));
         }
-
+        
         return redirect(route('employee.index'));
     }
 
@@ -109,29 +143,32 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        $employee->slips()->delete();
-        $employee->expenses()->delete();
-        if ($employee->image != "") {
-            $image_path = "storage/" . $employee->image;
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
-        }
-        $employee->delete();
+        // $employee->slips()->delete();
+        // $employee->expenses()->delete();
+        // if ($employee->image != "") {
+        //     $image_path = "storage/" . $employee->image;
+        //     if (File::exists($image_path)) {
+        //         File::delete($image_path);
+        //     }
+        // }
+        // $employee->delete();
 
-        return redirect(route('employee.index'));
+        // return redirect(route('employee.index'));
     }
 
-    public function payForm($employee_id){
-    $employee = Employee::find($employee_id);
-
-    return view('admin\employee\payForm1',compact('employee'));
-
+    public function payForm(Employee $employee){
+    return view('admin\employee\payForm2',compact('employee'));
     }
 
     public function pay(Request $request)
 {
     Slip::create($request->all());
-    return redirect(route('employee.index'));
+    // $slip = new Slip();
+    // $slip->employee_id = $request->employee_id;
+    // $slip->payment = $request->payment;
+    // $slip->payment_date = $request->payment_date;
+    //  $slip->save();
+ 
+    return redirect()->back();
 }
 }

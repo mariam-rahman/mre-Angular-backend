@@ -2,9 +2,11 @@
 
 @section('content')
 
-
+@php
+$counter = 0;
+@endphp
 @include('partials.sidenav')
-
+<livewire:styles />
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0">
@@ -32,30 +34,6 @@
     </div>
 </div>
 
-<<<<<<< HEAD
-=======
-@include('admin.category.create')
-
 <livewire:scripts />
-<!--Delete model-->
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content m-1">
-            <div class="">
-                <h5 class="modal-title">Would you like to delete this record?</h5>
-            </div>
-            <div class="modal-body">
-            </div>
-        </div>
-    </div>
-</div>
-<script>
- toastr.options =
-  {
-  	"closeButton" : true,
-  	"progressBar" : true
-  }
-  		toastr.error("hrkjjkjkjk");
-</script>
->>>>>>> 4fc3bdf6be38c12416202a8533156d6515dc0e50
+
 @endsection

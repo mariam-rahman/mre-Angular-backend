@@ -48,7 +48,7 @@ $counter = 0;
                                     <tr>
                                         <td>{{++$counter}}</td>
                                         <td>{{$slip->employee->name}}</td>
-                                        <td>{{$slip->salary}}</td>
+                                        <td>{{$slip->employee->salaries[0]->salary}}</td>
                                         <td>{{$slip->payment}}</td>
                                         <td>{{$slip->payment_date}}</td>
                                      </tr>

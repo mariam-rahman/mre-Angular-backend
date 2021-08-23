@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\Salary;
-use App\Models\Slip;
 use Illuminate\Http\Request;
 
-class SlipController extends Controller
+class SalaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class SlipController extends Controller
      */
     public function index()
     {
-        $slips = Slip::latest()->get();
-        return view('admin/slip/index',compact('slips'));
+        //
     }
 
     /**
@@ -38,23 +35,16 @@ class SlipController extends Controller
      */
     public function store(Request $request)
     {
-        // $salary = Employee::findOrFail($request->employee_id)->salary;
-
-        // Slip::create(
-        //     array_merge($request->all(),
-        //                 ['salary'=>$salary]
-        //     )
-        // );
-        // return redirect(route('slip.index'));
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Salary $salary)
     {
         //
     }
@@ -62,10 +52,10 @@ class SlipController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Salary $salary)
     {
         //
     }
@@ -74,10 +64,10 @@ class SlipController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Salary $salary)
     {
         //
     }
@@ -85,10 +75,10 @@ class SlipController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Salary $salary)
     {
         //
     }

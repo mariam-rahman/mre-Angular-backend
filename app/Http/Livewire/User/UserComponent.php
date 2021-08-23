@@ -10,6 +10,7 @@ class UserComponent extends Component
 {
     public $email;
     public $password;
+    
     public function render()
     {
         return view('livewire.user.user-component');

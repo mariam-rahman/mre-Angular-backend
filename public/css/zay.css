@@ -202,3 +202,7 @@ body, ul, li, p, a, label, input, div {
     font-size: 30px !important;
 }
 
+.disply{
+    display: flex;
+    justify-content: right;
+}

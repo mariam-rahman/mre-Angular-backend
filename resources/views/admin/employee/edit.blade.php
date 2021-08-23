@@ -39,40 +39,36 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-12">
                                         <label>Employee Name</label>
-                                        <input type="text" name="name" class="form-control mre" value="{{$employee->name}}">
+                                        <input type="text" name="name" class="form-control" value="{{$employee->name}}">
                                     </div>
 
                                     <div class="form-group col-md-12">
                                         <label>E-mail</label>
-                                        <input type="text" name="email" class="form-control mre" value="{{$employee->email}}">
+                                        <input type="text" name="email" class="form-control" value="{{$employee->email}}">
                                     </div>
 
                                     <div class="form-group col-md-12">
                                         <label>Phone</label>
-                                        <input type="text" name="phone" class="form-control mre" value="{{$employee->phone}}">
+                                        <input type="text" name="phone" class="form-control" value="{{$employee->phone}}">
                                     </div>
 
                                     <div class="form-group col-md-12">
                                         <label>Address</label>
-                                        <textarea name="Address" cols="30" name="address" class="form-control mre">{{$employee->address}}"</textarea>
+                                        <textarea name="Address" cols="30" name="address" class="form-control">{{$employee->address}}"</textarea>
                                     </div>
-
-                                    <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label>Salary</label>
-                                    <input type="number" name="salary" class="form-control mre" value="{{$employee->salary}}" >
-                                 </div>
-                             </div>
-
                                     <div class="form-group col-md-12">
                                     <img src="{{asset('storage/'.$employee->image)}}" width ="80" alt="">
                                     <label>Image</label>
                                     <div class="input-group mb-3">
-                                        <input type="file" name="image" class="form-control" style="border: 1px solid #c9c5c5;" id="">
+                                        <input type="file" name="image" class="form-control" >
 
                                     </div>
 
                                 </div>
+                                <div class="form-group col-md-12">
+                                        <label>Joining Date</label>
+                                        <input type="date" name="joining_date" class="form-control" value="{{$employee->joining_date}}" >
+                                    </div>
 
 
                                 </div>
@@ -96,6 +92,10 @@
 </div>
 </div>
 </div>
+
+
+
+
 
 
 

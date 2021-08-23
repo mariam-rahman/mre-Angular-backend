@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
 
+
 class CategoryComponent extends Component
 {
     use WithFileUploads;
@@ -16,18 +17,10 @@ class CategoryComponent extends Component
     public $image;
     public $updateMode = false;
     
-
-    public function render()
-    {
-        $this->categories = Category::latest()->get();
-        return view('livewire.category.category');
-    }
-
-
     protected $rules = [
         'title' => 'required',
         'desc' => 'required',
-        'image' =>'image|max:1024|nullable'
+        'image' => 'image|max:1024|nullable'
     ];
 
     public function updated($property)
@@ -39,55 +32,67 @@ class CategoryComponent extends Component
 
     public function save()
     {
-       $validatedData = $this->validate();
-      if($this->image != null)
-      {
-          $image = $this->image->store('images/category','public');
+        $validatedData = $this->validate();
+        if ($this->image != null) {
+            $image = $this->image->store('images/category', 'public');
 
-       Category::create(
-          array_merge(
-              $validatedData,
-              ['image'=>$image]
-          )
-        );
-    } else {
-        Category::create($validatedData);
+            $category = Category::create(
+                array_merge(
+                    $validatedData,
+                    ['image' => $image]
+                )
+            );
+        } else {
+            $category =  Category::create($validatedData);
+        }
+        if ($category)
+            session()->flash('success', 'Category successfully created!');
+        else
+            session()->flash('error', 'Category cannot be deleted!');
+        $this->resetInputFields();
     }
-     session()->flash('message', 'Category successfully created!');
 
-      $this->resetInputFields();
-
+    public function delete($id)
+    {
+        if (Category::destroy($id))
+            session()->flash('success', 'Category successfully deleted!');
+        else
+            session()->flash('error', 'Category cannot be deleted!');
+    }
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        $this->record_id = $category->id;
+        $this->title = $category->title;
+        $this->desc = $category->desc;
+        $this->updateMode = true;
     }
 
-public function delete($id){
-    Category::destroy($id);
-    session()->flash('message', 'Category successfully deleted!');
-}
+    public function update()
+    {
+        $validatedData = $this->validate();
+        $category = Category::findOrFail($this->record_id);
 
-public function edit($id){
-    $category = Category::findOrFail($id);
-    $this->record_id = $category->id;
-    $this->title = $category->title;
-    $this->desc = $category->desc;
-    $this->updateMode = true;
-  
-}
+        if ($category->update($validatedData))
+            session()->flash('info', 'Category successfully updated!');
+        else
+            session()->flash('error', 'Category cannot be deleted!');
+        $this->resetInputFields();
+    }
 
-public function update(){
-    $validatedData = $this->validate();
-    $category = Category::findOrFail($this->record_id);
-    $category->update($validatedData);
-    session()->flash('message', 'Category successfully updated!');
-    $this->resetInputFields();
-}
-
-public function resetInputFields(){
-    $this->title = null;
-    $this->desc = null;
-    $this->image = null;
-    $this->updateMode = false;
-}
+    public function resetInputFields()
+    {
+        $this->title = null;
+        $this->desc = null;
+        $this->image = null;
+        $this->updateMode = false;
+    }
 
 
-    
+    public function render()
+    {
+        $this->categories = Category::latest()->get();
+
+        return view('livewire.category.category');
+    }
 }
