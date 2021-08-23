@@ -1,0 +1,216 @@
+
+.container1{
+    width: 90%;
+
+}
+
+.navbar{
+    background-color: cornflowerblue;
+
+}
+
+.navbar-brand img{
+    width:70px;
+    height:30px;
+}
+
+.navbar {
+   
+    justify-content: center !important;
+  
+}
+
+.nav-link img{
+
+    width: 20px;
+    height: 20px;
+    
+}
+
+.b-color{
+    background-color: #8f8c8c;
+    display: flex;
+    justify-content: center;
+    border:2px dotted transparent;
+}
+.text-color a{
+    text-decoration: none;
+}
+.b-color:hover{
+border: 2px dotted black;
+text-decoration: underline;
+
+}
+
+.text-color{
+    color: white;
+}
+
+.card img{
+    width: 40px;
+    display: block;
+    margin: 0px auto;
+    margin-top: 80px;
+    
+   
+}
+
+
+
+.sec-space{
+    padding: 50px 0;
+}
+.outline{
+    border: 0px;
+}
+.section2 img{
+    width: 300px;
+    margin-top: 80px;
+}
+.section2 a{
+    color: rgb(209, 22, 22);
+    font-weight: bold;
+}
+
+.section2{
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom:unset;
+    top: 20%;
+    color: black;
+    text-align:left;
+}
+
+
+/*.carousel-caption .shop-now{
+    background-color:#a80000;
+    padding:8px 20px;
+    color:white;
+}
+.carousel-caption .oppintment{
+    margin-left: 10px;
+    color:#a80000 ;
+    font-weight: 500;
+}*/
+
+.nav-link {
+    display: block;
+    padding:unset;
+}
+
+.nav-link1 {
+    display: block;
+    padding: unset;
+    margin-right: 20px;
+    background-color:#a80000;
+    padding: 4px 50px;
+    color: white;
+}
+
+.compair{
+    color: white;
+}
+
+
+
+  /*when i give the parent name white the a:hover why it doesnt work*/
+  /* the size of only font should be change become bigger but over all siz is going to change*/
+  .nav-link a:hover{
+    color:white;
+    font-size: 18px;
+}
+.appointment{
+    color:#a80000 ;
+}
+
+
+
+
+.mariam-utility{
+    display: block;
+    padding: 4px 50px;
+    margin-right: 20px;
+    background-color:white;
+    
+}
+
+.text-color{
+    color: white;
+}
+
+.for-business{
+    color: black;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.center-covid19{
+    text-align: center;
+    margin: 50px 0px;
+}
+.covid-19{
+    font-size: 40px;
+    font-weight:bold;
+    color: black;
+    margin-top: ;
+}
+
+.navbar {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: unset;
+    padding: .5rem 1rem;
+}
+.follow-microsoft{
+
+    margin-right: 10px;
+    text-align: center;
+    align-items: center;           /* why this center is not working*/
+    margin-top: 30px ;
+    margin-bottom: 30px;
+}
+
+.in{
+    background-color: lightblue;
+    box-sizing: border-box;         /* box-sizing :border box is not working why in become bigger*/
+    padding: 6px;
+}
+
+
+.footer-clor{
+    background-color:#f2f2f2;
+}
+
+.footer-margin{
+    margin-top: 10px;
+}
+
+.text-space{
+    padding: 40px 10px;
+}
+
+.row col a{                        /*why its not working*/
+    padding:10px;
+}
+
+.nav-link1 {
+
+    background-color:cornflowerblue;
+   
+}
+
+.socail-media{
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
