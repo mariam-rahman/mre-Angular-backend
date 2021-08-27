@@ -13,29 +13,26 @@ class CreatePermissionTables extends Migration
      */
     public function up()
     {
+       
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
 
         if (empty($tableNames)) {
             throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
-
+        Schema::defaultStringLength(191);
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->string('name')->unique();       // For MySQL 8.0 use string('name', 125);
+            $table->string('guard_name')->unique(); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
-
-            $table->unique(['name', 'guard_name']);
         });
 
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');       // For MySQL 8.0 use string('name', 125);
-            $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->string('name')->unique();       // For MySQL 8.0 use string('name', 125);
+            $table->string('guard_name')->unique(); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
-
-            $table->unique(['name', 'guard_name']);
         });
 
         Schema::create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {

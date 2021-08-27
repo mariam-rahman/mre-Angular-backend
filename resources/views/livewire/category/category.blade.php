@@ -1,5 +1,4 @@
                         <div>
-    
                         <div class="table-responsive p-2">
                             <table id="example" class=" table table-striped table-bordered" style="min-width: 845px;">
                                 <thead>
@@ -36,11 +35,7 @@
                             </table>
                             
                         </div>
-                        
                           @include('livewire.category.form')
-
-                 
-                      
                         </div>
                   
                         

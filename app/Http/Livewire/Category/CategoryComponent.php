@@ -17,9 +17,6 @@ class CategoryComponent extends Component
     public $image;
     public $updateMode = false;
     
-
-
-
     protected $rules = [
         'title' => 'required',
         'desc' => 'required',

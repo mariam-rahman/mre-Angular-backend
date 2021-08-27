@@ -8,7 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
 use App\Http\Controllers\UserController;
-use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\Category\CategoryComponent;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\OnsaleController;
 use App\Http\Controllers\ProductConroller;
@@ -19,19 +19,6 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubstockController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Livewire\CategoryComponent;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 Route::view('note','summernote');
@@ -42,8 +29,6 @@ Route::view('dropdown','dropdown');
 
 Route::view('index','index');
 
-
-
 Auth::routes();
 
 Route::get('/',[MresController::class,'view_category'])->name('view.index');
@@ -51,12 +36,6 @@ Route::get('view/about',[MresController::class,'about'])->name('view.about');
 Route::get('view/product',[MresController::class,'view_product'])->name('view.product');
 Route::get('view/contact',[MresController::class,'contact'])->name('view.contact');
 Route::get('view/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
-
-
-
-
-
-
 //Authenticated pages
 Route::group([  ], function(){
     //user
@@ -70,13 +49,6 @@ Route::get('user/create',[UserController::class,'create'])->name('user.create');
 //Permissions
 Route::get('permission',[UserController::class,'permission'])->name('permission.index');
 Route::post('permission',[UserController::class,'permissionStore'])->name('permission.store');
-
-<<<<<<< HEAD
-
-=======
-//Categories
-Route::view('category','admin/category/index')->name('category');
->>>>>>> 5bd29036f6211ff67bde4d141f84bcd146401553
 
 //Products
 Route::resource('product',ProductConroller::class);
@@ -97,7 +69,6 @@ Route::get('onsale/details/{product_id}',[OnsaleController::class,'details'])->n
 
 Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
 Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
-
 Route::resource('customer',CustomerController::class);
 Route::resource('employee',EmployeeController::class);
 
@@ -135,9 +106,4 @@ Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale
 Route::resource('role',RoleController::class);
 
 });
-<<<<<<< HEAD
 Route::get('category',CategoryComponent::class);
-=======
-
-
->>>>>>> 5bd29036f6211ff67bde4d141f84bcd146401553
