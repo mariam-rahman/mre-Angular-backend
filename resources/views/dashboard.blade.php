@@ -27,7 +27,7 @@
                                 </li>
                                 <li class="nav-item">
                                 
-                                <a href="{{route('category.index')}}" class="nav-link" role="tab" aria-controls="" aria-selected="false">
+                                <a href="{{route('category')}}" class="nav-link" role="tab" aria-controls="" aria-selected="false">
                                         <div class="icon-wrap success">
                                             <i class="mdi mdi-airballoon"></i>
                                         </div>

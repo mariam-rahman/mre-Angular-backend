@@ -16,7 +16,6 @@ class CreateSlips extends Migration
         Schema::create('slips', function (Blueprint $table) {
             $table->id();
             $table->integer('employee_id');
-            $table->decimal('salary',12);
             $table->decimal('payment',12);
             $table->date('payment_date');
             $table->timestamps();

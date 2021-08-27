@@ -12,11 +12,15 @@ class Employee extends Model
     protected $guarded = [];
 
     public function slips(){
-        return $this->hasMany(Slip::class);
+        return $this->hasMany(Slip::class)->orderBy('id','desc');
     }
 
     public function expenses(){
         return $this->hasMany(Expense::class);
+    }
+
+    public function salaries(){
+        return $this->hasMany(Salary::class)->latest();
     }
 
 }

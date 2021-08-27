@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -82,20 +81,20 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->save();
-        $user->syncPermissions($request->permissions);
+        //$user->syncPermissions($request->permissions);
         return redirect(route('user.index'));
     }
 
-    public function permission(){
-        $permissions = Permission::latest()->get();
-        return view('admin/permission/index',compact('permissions'));
-    }
+    // public function permission(){
+    //     $permissions = Permission::latest()->get();
+    //     return view('admin/permission/index',compact('permissions'));
+    // }
 
 
-    public function permissionStore(Request $request){
-        Permission::create($request->all());
-        return redirect(route('permission.index'));
-    }
+    // public function permissionStore(Request $request){
+    //     Permission::create($request->all());
+    //     return redirect(route('permission.index'));
+    // }
 
 
 

@@ -11,8 +11,8 @@
     <link href="{{asset('vendor/datatables/css/jquery.dataTables.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <livewire:styles />
-  <!-- Toaster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <!-- Toaster -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" 
  href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
@@ -25,8 +25,9 @@
 <div id="main-wrapper">
 @include('partials.header')
  @yield('content')
+ <link rel="stylesheet" href="{{asset('css/mre.css')}}">
 </div>
-    <livewire:scripts />
+
      <!-- Required vendors -->
      <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
@@ -42,6 +43,6 @@
     <script src="{{asset('vendor/datatables/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatables/js/datatables.init.js')}}"></script>
 
-    
+    <livewire:scripts />
 </body>
 </html>
