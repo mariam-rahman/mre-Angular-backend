@@ -70,6 +70,7 @@ class CategoryComponent extends Component
 
     public function update()
     {
+
         $updateCategory = null;
         $validatedData = $this->validate();
 
@@ -101,6 +102,8 @@ class CategoryComponent extends Component
     
             $this->resetInputFields();
 }
+
+
 
     public function resetInputFields()
     {
