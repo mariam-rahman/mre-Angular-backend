@@ -141,7 +141,6 @@ $counter = 0;
 </div>
 </div>
 </div>
-
 <!--model for promote-->
 <div class="modal fade" id="basicModal">
     <div class="modal-dialog " role="document">
@@ -178,7 +177,6 @@ $counter = 0;
     </div>
 </div>
 
-
 <!--model for Edit Promote-->
 <div class="modal fade" id="editModal">
     <div class="modal-dialog " role="document">
@@ -214,5 +212,4 @@ $counter = 0;
         </div>
     </div>
 </div>
-
 @endsection

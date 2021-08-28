@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Product;
 
+use Livewire\WithFileUploads;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 
 class ProductComponent extends Component
 {
+    use WithFileUploads;
     public $name;
     public $desc;
     public $image;
@@ -89,9 +91,10 @@ class ProductComponent extends Component
 
     public function resetInputFields()
     {
-        $this->title = null;
-        $this->desc = null;
+        $this->name = null;
+        $this->category = null;
         $this->image = null;
-        $this->updateMode = false;
+        $this->desc = null;
+        $this->category_id = null;
     }
 }

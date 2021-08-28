@@ -7,7 +7,6 @@ use App\Models\Category;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
 
-
 class CategoryComponent extends Component
 {
     use WithFileUploads;
@@ -71,33 +70,40 @@ class CategoryComponent extends Component
 
     public function update()
     {
+
+        $updateCategory = null;
         $validatedData = $this->validate();
+
         $category = Category::findOrFail($this->record_id);
 
-        if($this->image !=null){
-        
-            $oldimage = "storage/".$category->image;
-            if(File::exists($oldimage)){
-                File::delete($oldimage);  
-                       
-            } 
-            $image = $this->image->store('images/category','public');  
-            if ($category->update(array_merge($validatedData,
-                                            ['image'=>$image])))
+        if ($this->image != null) {
+            $image = $this->image->store('images/category', 'public');
+            $oldimage = "storage/" . $category->image;
+            if (File::exists($oldimage)) {
+                File::delete($oldimage);
+            }
+            $updateCategory = $category->update(array_merge(
+               $validatedData,
+               ['image'=>$image]
+                ));
+            }
+            else 
+            {
+            $updateCategory = $category->update(array_merge(
+                    $validatedData,
+                    ['image'=>$category->image]
+                     ));
+            }
 
-            session()->flash('info', 'Category successfully updated!');
-              
-        }
-        
-        if($this->image = null){
-            $category->update($validatedData);
-            session()->flash('info', 'Category successfully updated!');
-        }
-        else
-        
-            session()->flash('error', 'Category cannot update!');
-        $this->resetInputFields();
-    }
+            if($updateCategory)
+             session()->flash('info', 'Category successfully updated!');
+             else
+            session()->flash('error', 'Category cannot be updated!');
+    
+            $this->resetInputFields();
+}
+
+
 
     public function resetInputFields()
     {
