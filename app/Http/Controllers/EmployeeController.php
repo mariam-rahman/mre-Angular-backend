@@ -60,7 +60,6 @@ class EmployeeController extends Controller
         $employee->joining_date = $request->joining_date;
         
         $employee->save();
-
         $salary = new Salary();
         $salary->employee_id = $employee->id;
         $salary->salary = $request->salary;
