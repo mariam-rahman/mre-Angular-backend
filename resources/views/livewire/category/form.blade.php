@@ -35,7 +35,8 @@
                                     @endif
 
                                     <div class="input-group mb-3">
-                                        <input type="file" wire:model="image" class="form-control" id="">
+
+                                        <input type="file" wire:model="image" class="form-control">
                                         <p>
                                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
 

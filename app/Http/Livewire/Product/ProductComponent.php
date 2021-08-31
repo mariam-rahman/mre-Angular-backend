@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire\Product;
+
 use Livewire\WithFileUploads;
 use App\Models\Category;
 use App\Models\Product;

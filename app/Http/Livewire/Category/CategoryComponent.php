@@ -98,6 +98,7 @@ class CategoryComponent extends Component
     //Update record
     public function update()
     {
+
         $updateCategory = null;
         $validatedData = $this->validate();
 

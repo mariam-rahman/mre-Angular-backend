@@ -122,6 +122,7 @@ $counter = 0;
                                                     @method('DELETE')
                                                     <input type="submit" value="Delete" class="btn btn-danger px-1 py-0 ">
                                                 </form>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Promote edit</button>
                                                 <a href="{{route('employee.edit',$employee)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
                                             </div>
                                         </div>
@@ -140,8 +141,7 @@ $counter = 0;
 </div>
 </div>
 </div>
-
-
+<!--model for promote-->
 <div class="modal fade" id="basicModal">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
@@ -177,4 +177,39 @@ $counter = 0;
     </div>
 </div>
 
+<!--model for Edit Promote-->
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Salary</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="basic-form">
+                    <div class="basic-form custom_file_input">
+                    <form action="{{route('employee.promote')}}" method="post">
+                            @CSRF
+                            <input type="hidden" name="emp_id" value="{{$employee->id}}">
+                            <div>
+                                <label>Salary</label>
+                                <input type="number" name="salary" class="form-control">
+                            </div>
+                            <div>
+                                <label>Designation</label>
+                                <input type="text" name="designation" class="form-control ">
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" value="Save" class="btn btn-secondary">
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
