@@ -18,21 +18,12 @@
                     <td>{{$product->name}}</td>
                     <td>{{$product->desc}}</td>
                     <td><img src="{{asset('storage/'.$product->image)}}" width="50" alt=""></td>
-                    <td> {{$product->category->title}}</td>
+                    <td> {{$product->category->title??''}}</td>
                     <td>
                         <div class="row">
                             <div class="col-sm-6 d-flex">
-                                @can('Delete_product')
-                                <form action="{{route('product.destroy',$product)}}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger px-1 py-0 ">Delete</button>
-                                </form>
-                                @endcan
-
-                                @can('Edit_product')
-                                <a href="{{route('product.edit',$product)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
-                                @endcan
+                            <button class="btn btn-danger px-1 py-0 " wire:click="delete({{$product->id}})">Delete</button>
+                             <button type="button" class="btn btn-secondary px-1 py-0 ml-1" data-toggle="modal" data-target="#basicModal" wire:click="edit({{$product->id}})">Edit</button>
                             </div>
                         </div>
                     </td>
@@ -43,3 +34,4 @@
     </div>
     @include('livewire.product.form')
 </div>
+@include('partials.toaster')
