@@ -26,25 +26,29 @@
                             @error('desc') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-12">
-                            <label>Image</label>
+                           @if ($image)
+                          <img width="100" src="{{ $image->temporaryUrl() }}">
+                             @endif
                             <input type="file" wire:model="image" id="" class="form-control">
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-12">
                             <label>Category</label>
                             <select wire:model="category_id" id="inputState" class="form-control">
-                                @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
-
-                                <option disabled value="" selected>Choose category</option>
+                                <option  selected>Choose category</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                                 @endforeach
 
                             </select>
-
+                            @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" value="Save" wire:click="save()" class="btn btn-secondary">
+                                  @if($updateMode)
+                                    <button wire:click='update()' class="btn btn-secondary">Update</button>
+                                    @else
+                                    <button wire:click='save()' class="btn btn-secondary">Save</button>
+                                    @endif
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                         </div>

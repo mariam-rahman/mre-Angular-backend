@@ -16,7 +16,18 @@ class CategoryComponent extends Component
     public $record_id;
     public $image;
     public $updateMode = false;
-    
+
+    //Get record list
+    public function render()
+    {
+        $this->categories = Category::latest()->get();
+
+        return view('livewire.category.category');
+    }
+    //End 
+
+
+    //Data validation
     protected $rules = [
         'title' => 'required',
         'desc' => 'required',
@@ -27,9 +38,9 @@ class CategoryComponent extends Component
     {
         $this->validateOnly($property);
     }
+    //End data validation
 
-
-
+    //Store record
     public function save()
     {
         $validatedData = $this->validate();
@@ -48,26 +59,43 @@ class CategoryComponent extends Component
         if ($category)
             session()->flash('success', 'Category successfully created!');
         else
-            session()->flash('error', 'Category cannot be deleted!');
+            session()->flash('error', 'Category cannot be created!');
         $this->resetInputFields();
     }
+    //End store record
 
+    //Delete record
     public function delete($id)
     {
-        if (Category::destroy($id))
+        $category = Category::find($id);
+        $oldimage = "storage/" . $category->image;
+    
+        if ($category->delete())
+        {
+            if (File::exists($oldimage)) {
+                File::delete($oldimage);
+            }
+
             session()->flash('success', 'Category successfully deleted!');
+        }
         else
             session()->flash('error', 'Category cannot be deleted!');
     }
+    //End delete
+
+    //Edit record
     public function edit($id)
     {
         $category = Category::findOrFail($id);
+
         $this->record_id = $category->id;
         $this->title = $category->title;
         $this->desc = $category->desc;
         $this->updateMode = true;
     }
+    //End edit
 
+    //Update record
     public function update()
     {
         $updateCategory = null;
@@ -101,7 +129,9 @@ class CategoryComponent extends Component
     
             $this->resetInputFields();
 }
+//End update
 
+    //Clean input fields
     public function resetInputFields()
     {
         $this->title = null;
@@ -109,12 +139,7 @@ class CategoryComponent extends Component
         $this->image = null;
         $this->updateMode = false;
     }
+    //End
 
 
-    public function render()
-    {
-        $this->categories = Category::latest()->get();
-
-        return view('livewire.category.category');
-    }
 }
