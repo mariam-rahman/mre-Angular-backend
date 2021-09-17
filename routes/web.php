@@ -21,6 +21,9 @@ use App\Http\Controllers\SubstockController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Livewire\Category\CategoryComponent;
+use App\Http\Livewire\Employee\EmployeeComponent;
+use App\Http\Livewire\EmployeeComponent\Employee;
+
 //use App\Http\Livewire\CategoryComponent;
 
 /*
@@ -85,14 +88,22 @@ Route::view('product','admin/product/index')->name('product.index');
 //customer livewire
 Route::view('customer','admin/customer/index')->name('customer.index');
 
-//employee
+//Employee livewire
 Route::resource('employee',EmployeeController::class);
-Route::post('employee/promote',[EmployeeController::class,'promote'])->name('employee.promote');
-Route::get('employee/payform/{employee}',[EmployeeController::class,'payForm'])->name('employee.payForm');
-Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');
+
+//Purchase livewire
+Route::view('purchase','admin/purchase/index')->name('purchase.index');
+
+
+// // //employee
+// // Route::resource('employee',EmployeeController::class);
+// // Route::post('employee/promote',[EmployeeController::class,'promote'])->name('employee.promote');
+// Route::get('employee/payform/{employee}',[EmployeeController::class,'payForm'])->name('employee.payForm');
+// Route::post('employee/pay',[EmployeeController::class,'pay'])->name('employee.pay');
+
 //Purchase
-Route::resource('purchase',PurchaseController::class);
-Route::get('purchase/details/{x}',[PurchaseController::class,'index'])->name('purchase.details');
+//Route::resource('purchase',PurchaseController::class);
+//Route::get('purchase/details/{x}',[PurchaseController::class,'index'])->name('purchase.details');
 
 //Stock
 Route::resource('stock',StockController::class);

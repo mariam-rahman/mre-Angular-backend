@@ -68,7 +68,7 @@ class StockController extends Controller
      */
     public function edit(Stock $stock)
     {
-        return view('admin/stock/edit',compact('stock'));
+        return view('admin/stock/edit', compact('stock'));
     }
 
     /**
@@ -113,16 +113,16 @@ class StockController extends Controller
         }
 
         $purchases = Purchase::where('product_id', $product_id)->get();
-        
+
         foreach ($purchases as $purchase) {
             $remain = $purchase->remaining_qty;
             if ($remain == 0 || $remain < 0) continue;
 
-            $remainQty = $cqty-$remain;
+            $remainQty = $cqty - $remain;
 
-            if($remainQty <= 0){
+            if ($remainQty <= 0) {
 
-                $purchase->remaining_qty = -($remainQty);
+                $purchase->remaining_qty = - ($remainQty);
                 $purchase->update();
 
                 $sub = new Substock();
@@ -135,7 +135,7 @@ class StockController extends Controller
                 break;
             }
 
-            if($remainQty > 0){
+            if ($remainQty > 0) {
                 $purchase->remaining_qty = 0;
                 $purchase->update();
 
@@ -160,81 +160,82 @@ class StockController extends Controller
         return view('admin/stock/moveForm', compact('product_id'));
     }
 
-public function details($product_id){
+    public function details($product_id)
+    {
 
-    $stocks = Purchase::selectRaw("SUM(qty) as qty")
-    ->selectRaw("SUM(remaining_qty) as remaining_qty")
-    ->selectRaw("product_id")
-    ->groupBy('product_id')
-    ->where('product_id',$product_id)->first();
+        $stocks = Purchase::selectRaw("SUM(qty) as qty")
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->where('product_id', $product_id)->first();
 
-    //this code is for details
-    $items = Purchase::where('product_id',$product_id)->get();
-    return view('admin/stock/item_details',compact('items','stocks'));
-}
-
-public function stockSaleForm($product_id){
-
-    $x= 1;
-    $customers = Customer::all();
-    return view('admin/sale/sellForm',compact('product_id','customers','x'));
-}
-
-public function sellStore(Request $request,$product_id){
-    $countQty = Purchase::Where('product_id', $product_id)
-    ->selectRaw("SUM(remaining_qty) as remaining_qty")
-    ->selectRaw("product_id")
-    ->groupBy('product_id')
-    ->first()->remaining_qty;
-
-$qty = $request->move_qty;
-$cqty = $qty;
-if ($qty > $countQty) {
-    return redirect(route('onsale.index'));
-}
-
-$purchases = Purchase::where('product_id', $product_id)->get();
-
-foreach ($purchases as $purchase) {
-    $remain = $purchase->remaining_qty;
-    if ($remain == 0 || $remain < 0) continue;
-
-    $remainQty = $cqty-$remain;
-
-    if($remainQty <= 0){
-
-        $purchase->remaining_qty = -($remainQty);
-        $purchase->update();
-
-        $sub = new Sale();
-        $sub->product_id = $product_id;
-        $sub->qty = $cqty;
-        $sub->stock_id = 1;
-        $sub->sold_price = $request->sold_price;
-        $sub->customer_id = $request->customer_id;
-        $sub->sold_date = $request->sold_date;
-        $sub->save();
-        break;
+        //this code is for details
+        $items = Purchase::where('product_id', $product_id)->get();
+        return view('admin/stock/item_details', compact('items', 'stocks'));
     }
 
-    if($remainQty > 0){
-        $purchase->remaining_qty = 0;
-        $purchase->update();
+    public function stockSaleForm($product_id)
+    {
 
-        $sub = new Sale();
-        $sub->product_id = $product_id;
-        $sub->qty = $remain;
-        $sub->stock_id = 1;
-        $sub->sold_price = $request->sold_price;
-        $sub->customer_id = $request->customer_id;
-        $sub->sold_date = $request->sold_date;
-        $sub->save();
-        $cqty = $remainQty;
-        continue;
+        $x = 1;
+        $customers = Customer::all();
+        return view('admin/sale/sellForm', compact('product_id', 'customers', 'x'));
     }
-}
-return redirect(route('stock.index'));
-}
 
+    public function sellStore(Request $request, $product_id)
+    {
+        $countQty = Purchase::Where('product_id', $product_id)
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->first()->remaining_qty;
 
+        $qty = $request->move_qty;
+        $cqty = $qty;
+        if ($qty > $countQty) {
+            return redirect(route('onsale.index'));
+        }
+
+        $purchases = Purchase::where('product_id', $product_id)->get();
+
+        foreach ($purchases as $purchase) {
+            $remain = $purchase->remaining_qty;
+            if ($remain == 0 || $remain < 0) continue;
+
+            $remainQty = $cqty - $remain;
+
+            if ($remainQty <= 0) {
+
+                $purchase->remaining_qty = - ($remainQty);
+                $purchase->update();
+
+                $sub = new Sale();
+                $sub->product_id = $product_id;
+                $sub->qty = $cqty;
+                $sub->stock_id = 1;
+                $sub->sold_price = $request->sold_price;
+                $sub->customer_id = $request->customer_id;
+                $sub->sold_date = $request->sold_date;
+                $sub->save();
+                break;
+            }
+
+            if ($remainQty > 0) {
+                $purchase->remaining_qty = 0;
+                $purchase->update();
+
+                $sub = new Sale();
+                $sub->product_id = $product_id;
+                $sub->qty = $remain;
+                $sub->stock_id = 1;
+                $sub->sold_price = $request->sold_price;
+                $sub->customer_id = $request->customer_id;
+                $sub->sold_date = $request->sold_date;
+                $sub->save();
+                $cqty = $remainQty;
+                continue;
+            }
+        }
+        return redirect(route('stock.index'));
+    }
 }

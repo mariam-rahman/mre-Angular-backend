@@ -6,7 +6,7 @@
 $counter = 0;
 @endphp
 @include('partials.sidenav')
-<livewire:styles />
+
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0">
@@ -34,6 +34,5 @@ $counter = 0;
     </div>
 </div>
 
-<livewire:scripts />
 
 @endsection

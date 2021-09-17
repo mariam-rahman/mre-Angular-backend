@@ -1,4 +1,8 @@
 <div>
+
+<!--this code is to display message-->
+
+<!--end code for message-->
     <div class="table-responsive">
         <table id="example" class=" table table-striped table-bordered" style="min-width: 845px">
             <thead>

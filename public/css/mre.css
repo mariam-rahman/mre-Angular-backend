@@ -5,5 +5,7 @@ input[type="search"]{
     border-radius: 0.25rem;
 }
 
-
+.border {
+    border: 4px solid #9638d4 !important;
+}
 

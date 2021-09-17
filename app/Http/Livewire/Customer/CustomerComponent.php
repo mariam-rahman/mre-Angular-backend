@@ -36,12 +36,12 @@ class CustomerComponent extends Component
 
     public function save(){
       $validateCustomer = $this->validate();
-     $customerss = Customer::create($validateCustomer);
+     $customers = Customer::create($validateCustomer);
      
-     if ($customerss)
-     session()->flash('success', 'Category successfully created!');
+     if ($customers)
+     session()->flash('success', 'Customer successfully created!');
  else
-     session()->flash('error', 'Category cannot be deleted!');
+     session()->flash('error', 'Customer cannot be deleted!');
  $this->resetField();
 }
    

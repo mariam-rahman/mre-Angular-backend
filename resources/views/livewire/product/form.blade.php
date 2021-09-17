@@ -16,6 +16,24 @@
                 <form wire:submit.prevent>
                     <div class="form-row">
                         <div class="form-group col-md-12">
+      <!--this code is to display message-->
+                            <div>
+                                @if(session()->has('message'))
+                                <script>
+                                    toastr.success("{{session()->get('message')}}");
+                                </script>
+                                @endif
+                            </div>     
+                            <div>
+                                @if(session()->has('update'))
+
+                                <script>
+                                    toastr.info("{{session()->get('update')}}");
+                                </script>
+                                @endif
+                            </div>
+    <!--end code for message-->
+    
                             <label>Product Name</label>
                             <input type="text" wire:model="name" class="form-control">
                             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
@@ -26,16 +44,16 @@
                             @error('desc') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-12">
-                           @if ($image)
-                          <img width="100" src="{{ $image->temporaryUrl() }}">
-                             @endif
+                            @if ($image)
+                            <img width="100" src="{{ $image->temporaryUrl() }}">
+                            @endif
                             <input type="file" wire:model="image" id="" class="form-control">
                             @error('image') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group col-md-12">
                             <label>Category</label>
                             <select wire:model="category_id" id="inputState" class="form-control">
-                                <option  selected>Choose category</option>
+                                <option selected>Choose category</option>
                                 @foreach($categories as $category)
                                 <option value="{{$category->id}}">{{$category->title}}</option>
                                 @endforeach
@@ -44,11 +62,11 @@
                             @error('category_id') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="modal-footer">
-                                  @if($updateMode)
-                                    <button wire:click='update()' class="btn btn-secondary">Update</button>
-                                    @else
-                                    <button wire:click='save()' class="btn btn-secondary">Save</button>
-                                    @endif
+                            @if($updateMode)
+                            <button wire:click='update()' class="btn btn-secondary">Update</button>
+                            @else
+                            <button wire:click='save()' class="btn btn-secondary">Save</button>
+                            @endif
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 
                         </div>

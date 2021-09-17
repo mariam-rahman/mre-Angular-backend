@@ -23,4 +23,6 @@ class Employee extends Model
         return $this->hasMany(Salary::class)->latest();
     }
 
+    
+
 }

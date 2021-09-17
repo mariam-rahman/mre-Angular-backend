@@ -10,12 +10,8 @@ $counter = 0;
             Content body start
         ***********************************-->
 @include('partials.sidenav')
-<style>
-    input[type="search"] {
-        border: 1px solid #dedbfb;
-        border-radius: 0.25rem;
-    }
-</style>
+<livewire:styles />
+
 <div class="content-body">
     <div class="container">
         <div class="row page-titles mx-0">

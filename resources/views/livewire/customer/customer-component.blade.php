@@ -43,4 +43,3 @@ $counter = 0;
   @include('livewire.customer.form')
 </div>
 
-@include('partials.toaster')

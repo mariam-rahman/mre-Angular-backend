@@ -115,6 +115,8 @@ class SubstockController extends Controller
        $items = Substock::where('product_id',$product_id)->get();
        return view('admin/substock/item_details',compact('items','substock'));
    }
+
+   
     public function moveItemForm($productId){
         return view('admin/substock/move_item',compact('productId'));
     }

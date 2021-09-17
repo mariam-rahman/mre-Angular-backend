@@ -56,17 +56,23 @@ class ProductComponent extends Component
                     ['image' => $image]
                 )
             );
+
+            
            
         } else {
             $product =  Product::create($validatedData);
         }
+        
         if ($product)
-            session()->flash('success', 'Product successfully created!');
+        
+        session()->flash('message', 'Product successfully created!');
         else
-            session()->flash('error', 'Product cannot be deleted!');
-        $this->resetInputFields();
+            session()->flash('error', 'Product cannot be created!');
+         $this->resetInputFields();
     }
     //End store
+
+
 
     //Delete record
     public function delete($id)
@@ -78,7 +84,7 @@ class ProductComponent extends Component
             if (File::exists($oldimage)) {
                 File::delete($oldimage);
             }
-            session()->flash('success', 'Product successfully deleted!');
+            session()->flash('message', 'Product successfully deleted!');
         }
         else
             session()->flash('error', 'Product cannot be deleted!');
@@ -125,7 +131,7 @@ class ProductComponent extends Component
             }
 
         if ($updateProduct)
-            session()->flash('info', 'Product successfully updated!');
+            session()->flash('update', 'Product successfully updated!');
         else
             session()->flash('error', 'Product cannot be deleted!');
 

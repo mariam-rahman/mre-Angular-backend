@@ -33,6 +33,7 @@
                             <div class="form-group col-md-12">
                                 <label>Move To</label>
                                 <input type="number" name="move_qty" class="form-control mre">
+                                
                             </div>
 
                         <input type="submit" value="Move" class="btn btn-primary">

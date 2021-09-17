@@ -69,12 +69,18 @@ class CategoryComponent extends Component
     {
         $category = Category::find($id);
         $oldimage = "storage/" . $category->image;
-    
+        if(count($category->products)>0) 
+        {
+            session()->flash('error', 'You cannot delete this category, unless its children are deleted!');
+        } 
+        else
         if ($category->delete())
         {
             if (File::exists($oldimage)) {
                 File::delete($oldimage);
             }
+
+            // $category->products()->delete();
 
             session()->flash('success', 'Category successfully deleted!');
         }

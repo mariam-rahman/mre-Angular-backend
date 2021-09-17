@@ -21,8 +21,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
-        return view('admin/employee/index', compact('employees'));
+        return view('admin/employee/index');
     }
 
     /**
@@ -58,8 +57,8 @@ class EmployeeController extends Controller
         $employee->address = $request->address;
         $employee->image = $image_path;
         $employee->joining_date = $request->joining_date;
-        
         $employee->save();
+        
         $salary = new Salary();
         $salary->employee_id = $employee->id;
         $salary->salary = $request->salary;
@@ -78,11 +77,9 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show(Employee $employee)
+    public function show($id)
     {
-        // $this->promote($id);
-      
-        return view('admin/employee/show', compact('employee'));
+        return view('admin/employee/show', compact('id'));
     }
 
     
