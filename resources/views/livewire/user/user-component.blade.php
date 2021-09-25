@@ -1,13 +1,7 @@
 <div>
     <form wire:submit.prevent>
         <div class="form-group">
-            <div>
-                @if(session()->has('message'))
-                <script>
-                    toastr.success("{{session()->get('message')}}");
-                </script>
-                @endif
-            </div>
+        
             <label><strong>Email</strong></label>
             <input type="email" wire:model='email' class="form-control">
             @error('email') <span class="text-danger">{{ $message }}</span> @enderror
