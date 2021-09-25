@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
+use Illuminate\Auth\Access\Response;    
 class ProductPolicy
 {
     use HandlesAuthorization;
@@ -18,7 +18,8 @@ class ProductPolicy
      */
     public function viewAny(User $user)
     {
-        return false;
+        if(count($user->permissions->whereIn('name','view_product'))>0) return true;
+        else  return Response::deny('You are not allow to view product list');
     }
 
     /**
@@ -30,7 +31,9 @@ class ProductPolicy
      */
     public function view(User $user, Product $product)
     {
-        //
+        if(count($user->permissions->whereIn('name','view_product'))>0) return true;
+        else 
+         return Response::deny('You are not allow to view this product');
     }
 
     /**
@@ -41,7 +44,9 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return false;
+      if(count($user->permissions->whereIn('name','creatd_product'))>0) return true;
+       else 
+       return Response::deny('You are not allow to create  product');
     }
 
     /**
@@ -53,7 +58,8 @@ class ProductPolicy
      */
     public function update(User $user, Product $product)
     {
-        //
+        if(count($user->permissions->whereIn('name','edit_product'))>0) return true;
+        else return Response::deny('You are not allow to update  product');
     }
 
     /**
@@ -65,7 +71,8 @@ class ProductPolicy
      */
     public function delete(User $user, Product $product)
     {
-        return false;
+        if(count($user->permissions->whereIn('name','delete_product'))>0) return true;
+        else return Response::deny('You are not allow to delete  product');;
     }
 
     /**

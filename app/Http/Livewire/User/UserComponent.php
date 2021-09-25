@@ -33,7 +33,7 @@ class UserComponent extends Component
         if(Auth::attempt(['email'=>$this->email,'password'=>$this->password]))
         return redirect(route('dashboard.index'));
         else
-      session()->flash('message','Your username or password is wrong');
+     session()->flash('message','Your username or password is wrong');
     }
 
 }

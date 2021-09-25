@@ -7,7 +7,7 @@ use App\Models\Onsale;
 use App\Models\Customer;
 use App\Models\Substock;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade as PDF;
+
 
 class SubstockController extends Controller
 {
