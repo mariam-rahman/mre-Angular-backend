@@ -39,8 +39,8 @@ $counter = 0;
 
                             <td>
                                 <button type="button" class="btn btn-secondary  px-1 py-0" data-toggle="modal" data-target="#moveModal" wire:click="setId({{$substock->product_id}})">Move to OnSale</button>
-                                <button wire:click="details({{$substock->product_id}})" class="btn btn-success px-1 py-0">Details</button>
-                                <button wire:click="" class="btn btn-info px-1 py-0">Sale</button>
+                                <button wire:click="details({{$substock->product_id}})" class="btn btn-info px-1 py-0">Details</button>
+                                <a href="{{route('sale.index')}}" class="btn btn-success px-1 py-0">Sale</a>
                             </td>
                         </tr>
                         @endforeach

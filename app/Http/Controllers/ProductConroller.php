@@ -20,7 +20,7 @@ class ProductConroller extends Controller
 
     public function __construct()
     {
-        //$this->authorizeResource(Product::class, 'product'); 
+      // $this->authorizeResource(Product::class, 'product'); 
     }
 
     public function index()

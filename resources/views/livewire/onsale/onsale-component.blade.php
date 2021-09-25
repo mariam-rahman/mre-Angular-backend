@@ -4,7 +4,10 @@ $counter = 0;
 <div>
     @if($isVisible)
     <div class="card">
-        <div class="card-header">
+    <div class="card-header d-flex justify-content-center">       
+            <h2 class="text-secondary">MRES Shop</h2>
+        </div>
+        <div class="card-header">       
             <h4 class="card-title">Products On Sale</h4>
         </div>
         <div class="card-body">
@@ -30,14 +33,9 @@ $counter = 0;
 
                             <td>{{$onsale->stock_id==2?'Sub stock':'Main stock'}}</td>
                             <td>
-                                <div class="row">
-                                    <div class="col-sm-6 d-flex">
-
-                                        <a href="{{route('onsale.sellform',$onsale->product_id)}}" class="btn btn-success px-1 py-1 ">Sale</a>
-                                        <button wire:click="details({{$onsale->product_id}})" class="btn btn-secondary btn-sm px-1 py-1 ml-1">Details</button>
-                                    </div>
+                                <button wire:click="details({{$onsale->product_id}})" class="btn btn-info btn-sm px-1 py-1 ml-1">Details</button>
+                                <a href="{{route('sale.index')}}" class="btn btn-success px-1 py-1 ">Sale</a>
                             </td>
-
                         </tr>
                         @endforeach
                     </tbody>

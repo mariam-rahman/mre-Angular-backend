@@ -20,6 +20,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubstockController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Livewire\Category\CategoryComponent;
 use App\Http\Livewire\Employee\EmployeeComponent;
 use App\Http\Livewire\EmployeeComponent\Employee;
@@ -94,6 +95,11 @@ Route::resource('employee',EmployeeController::class);
 //Purchase livewire
 Route::view('purchase','admin/purchase/index')->name('purchase.index');
 
+//Permission livwwire
+Route::resource('permission',PermissionController::class);
+
+//Roles livewire
+Route::resource('role',RoleController::class);
 
 // // //employee
 // // Route::resource('employee',EmployeeController::class);
@@ -140,17 +146,19 @@ Route::post('substock/sellStore/{product_id}',[SubstockController::class,'sellst
 
 //sale
 Route::resource('sale',SaleController::class);
-Route::post('sell',[SaleController::class,'sell'])->name('sale.sell');
+//Route::post('sell',[SaleController::class,'sell'])->name('sale.sell');
 
 Route::get('invoice/{id}',[SaleController::class,'printInvoice'])->name('sale.invoice');
+
+
+
 
 Route::resource('expense',ExpenseController::class);
 Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name('substock.pdf');
 
 Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale.sell_detail');
 
-//Roles
-Route::resource('role',RoleController::class);
+
 
 });
 //Route::get('category',CategoryComponent::class);

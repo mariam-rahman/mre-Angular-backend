@@ -37,8 +37,8 @@ $counter = 0;
                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
                         <td>
                             <button type="button" class="btn btn-secondary  px-1 py-1" data-toggle="modal" data-target="#moveModal" wire:click="setProductId({{$purchase->product_id}})">Move to Sub Stock</button>
-                            <button wire:click="details({{$purchase->product_id}})" class="btn btn-success btn-sm px-1 py-1">Details</button>
-                            <button wire:click="d" class="btn btn-info btn-sm px-1 py-1">Sale</button>
+                            <button wire:click="details({{$purchase->product_id}})" class="btn btn-info btn-sm px-1 py-1">Details</button>
+                            <a href="{{route('sale.index')}}" class="btn btn-success btn-sm px-1 py-1">Sale</a>
                         </td>
 
                     </tr>

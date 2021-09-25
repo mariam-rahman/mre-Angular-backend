@@ -56,7 +56,7 @@
                                 @else
                                 <input type="submit" value="Save" wire:click="save()" class="btn btn-secondary">
                                 @endif
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
 
                             </div>
                         </form>

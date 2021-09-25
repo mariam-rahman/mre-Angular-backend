@@ -16,6 +16,8 @@ class UserComponent extends Component
         return view('livewire.user.user-component');
     }
 
+
+
     protected $rules = [
         'email' => 'required|email',
         'password' => 'required',
@@ -28,10 +30,10 @@ class UserComponent extends Component
 
     public function login(){
         $this->validate();
-
         if(Auth::attempt(['email'=>$this->email,'password'=>$this->password]))
         return redirect(route('dashboard.index'));
-   
+        else
+      session()->flash('message','Your username or password is wrong');
     }
 
 }

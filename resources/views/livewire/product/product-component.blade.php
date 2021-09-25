@@ -37,5 +37,6 @@
         </table>
     </div>
     @include('livewire.product.form')
+
 </div>
 @include('partials.toaster')

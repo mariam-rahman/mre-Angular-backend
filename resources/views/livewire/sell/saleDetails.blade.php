@@ -1,21 +1,14 @@
-<div class="mb-4">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sellModal">Add Product</button>
-</div>
 <div class="card">
     <div class="card-header">
-
-    <div><a href="{{route('sale.invoice',$sale->id)}}" class="btn btn-warning text-white">Print invoice</a></div>
-    <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
+    <h2>Sales Details</h2>
+        
+        <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
     </div>
-
-    <div>
-   
-    </div>
-
-    <div class="row d-flex mt-4 pl-4">
+    
+     <div class="row d-flex mt-4 pl-4">
         <div class="col-4">
             <ul>
-            <li class=" d-flex mb-2">
+                <li class=" d-flex mb-2">
                 <h4 class="text-primary">Customer:</h4>
                 <div class="card-title ml-2">{{$sale->customer_id == 0 ? 'Counter':$sale->customer->name}}</div>
                 </li>
@@ -23,22 +16,43 @@
             <ul>
         </div>
         <div class="col-4 d-flex">
-        <li class=" d-flex mb-2">
+            <li class="d-flex">
                 <h4 class="text-primary">Source:</h4>
-                <div class="card-title ml-2">{{$sale->getStock()}}</div>
-                </li>
+            <div class=" card-title ml-2">{{$sale->getStock()}}</div>
+            </li>
             </ul>
           
         </div>
         <div class="col-4 d-flex">
         <ul>
-        <li class=" d-flex mb-2">
-                <h4 class="text-primary">Date:</h4>
-                <div class="card-title ml-2">{{$sale->sell_date}}</div>
-                </li>
+            <li class="d-flex">
+            <h4 class="text-primary">Date:</h4>
+            <div class=" card-title ml-2">{{$sale->sell_date}}</div>
+            </li>
             </ul>
         </div>
-    </div>
+</div>
+<div class="row d-flex pl-4 mt-1">
+        <div class="col-4 d-flex">
+        <ul>
+            <li class="d-flex">
+            <h4 class="text-primary">Paid:</h4>
+            <div class=" card-title ml-2">{{$payment_record->paid }}</div>
+            </li>
+            </ul>
+        </div>
+        <div class="col-4 d-flex">
+        <ul>
+            <li class="d-flex">
+            <h4 class="text-primary">Debt:</h4>
+            <div class=" card-title ml-2">{{$payment_record->debt }}</div>
+            </li>
+            </ul>
+        </div>
+        </div>  
+    
+
+
 
 
     <div class="card-body">
@@ -49,7 +63,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Qty</th>
-                        <th>Price</th>
+                        <th>Total payment</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -65,9 +79,9 @@
                             <div class="d-flex">
                                 
                                   
-                                    <button wire:click="" class="btn btn-danger px-1 py-0">Delete</button>
+                                    
                                 
-                                <button wire:click="" class="btn btn-secondary px-1 py-0 ml-1">Edit</button>
+                                <button  wire:click="deleteProduct({{$sell->product_id}},{{$sell->id}},{{$sell->qty}},{{$sale->stock_id}})" class="btn btn-danger px-1 py-0 ml-1" >Delete</button>
 
                             </div>
                         </td>
@@ -78,8 +92,7 @@
                 </tbody>
             </table>
         </div>
-        <button class="btn btn-outline-success px-5 pt-2 pb-1" data-toggle="modal" data-target="#paymentModal" wire:click="changeState()" ><div class="font-weight-bold" ><h3 class="text-center">Pay</h3></div></button>
-        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal">Add Product</button> -->
     </div>
+</div>
 </div>
 @include('partials.toaster')

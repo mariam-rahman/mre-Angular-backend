@@ -37,6 +37,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('user.index')}}">Users</a></li>
                             <li><a href="{{route('permission.index')}}">Permission</a></li>
+                            <li><a href="{{route('role.index')}}">Roles</a></li>
                            
               
                         </ul>

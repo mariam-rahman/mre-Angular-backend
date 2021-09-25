@@ -32,17 +32,10 @@ $counter = 0;
                             <td>
                                 <div class="row">
                                     <div class="col-12 d-flex">
-                                        <form action="" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" value="Delete" class="btn btn-danger px-1 py-0">
-                                        </form>
-
-                                        <a href="{{route('sale.sell_detail',$sale->id)}}" class="btn btn-warning px-1 py-0 ml-1" style="color:white">Details</a>
-
+                                            <button wire:click="" class="btn btn-danger px-1 py-0">Delete</button>
+                                        <button wire:click="sell_details({{$sale->id}})" class="btn btn-info px-1 py-0 ml-1" >Details</button>
                                     </div>
                             </td>
-
                         </tr>
                         @endforeach
                     </tbody>
@@ -52,7 +45,14 @@ $counter = 0;
     </div>
     @elseif($visible == 1)
     @include('livewire.sell.sellOption')
+    @elseif($visible == 2)
+    @include('livewire.sell.saleDetails')
+    
+    @elseif($visible == 4)
+    @include('livewire.sell.paymentModel')
     @else
     @include('livewire.sell.sellForm')
+    @include('livewire.sell.productModel')
+    
     @endif
 </div>

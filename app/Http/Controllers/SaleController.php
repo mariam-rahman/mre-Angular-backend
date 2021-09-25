@@ -217,7 +217,6 @@ public function saleCustomer($customer_id){
         return view('pdf_view',compact('sale'));
     }
   
-    
     public function getQtyCount1($product_id){
          return Purchase::Where('product_id', $product_id)
         ->selectRaw("SUM(remaining_qty) as remaining_qty")

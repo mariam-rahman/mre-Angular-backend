@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Product;
 
-use Livewire\WithFileUploads;
-use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class ProductComponent extends Component
 {
@@ -19,15 +21,17 @@ class ProductComponent extends Component
     public  $updateMode = false;
     public $categories;
     public $record_id;
-
+    use AuthorizesRequests;
     //Get record list
     public function render()
     {
+       
         $this->categories = Category::all();
         $this->products = Product::latest()->get();
         return view('livewire.product.product-component');
     }
    //End
+
 
    //Data validation
    protected $rules = [
@@ -47,6 +51,7 @@ class ProductComponent extends Component
    //Store record
     public function save()
     {
+      
         $validatedData = $this->validate();
         if ($this->image != null) {
             $image = $this->image->store('images/product', 'public');
@@ -78,6 +83,8 @@ class ProductComponent extends Component
     public function delete($id)
     {
         $product = Product::find($id);
+        $this->authorize('delete', $product);
+        
         $oldimage = "storage/" . $product->image;
         if ($product->delete())
         {

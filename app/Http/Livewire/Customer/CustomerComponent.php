@@ -2,9 +2,14 @@
 
 namespace App\Http\Livewire\Customer;
 
-use Livewire\Component;
+use App\Models\Sale;
 
+use Livewire\Component;
 use App\Models\Customer;
+use App\Models\Payment;
+use GuzzleHttp\Psr7\Query;
+use App\Models\Sale_detail;
+use Illuminate\Support\Facades\DB;
 
 class CustomerComponent extends Component
 {
@@ -16,6 +21,11 @@ class CustomerComponent extends Component
     public $customers;
     public $record_id;
     public $updateMode=false;
+    public $isVisible = 0;
+    public $customer_details;
+    public $sell_details;
+    public $detail_of_sales;
+    public $customer_data;
     public function render() //it acts as index function
     {
         $this->customers = Customer::latest()->get();
@@ -75,6 +85,28 @@ class CustomerComponent extends Component
   else
       session()->flash('error', 'Category cannot be deleted!');
       $this->resetField();
+    }
+
+
+
+    public function details($customer_id){
+        $this->isVisible = 1;
+
+      $this->sell_details = Sale::query()
+      ->select('p.name as name', 's.sell_date as date', 'd.sell_price as price', 'd.qty as qty')
+      ->from('sales AS s')
+      ->join('sale_details as d','s.id','=','d.sale_id')
+      ->join('products as p','p.id','=','d.product_id')
+      ->where('customer_id',$customer_id)->get();
+     $this->customer_data = Payment::where('customer_id',$customer_id)
+     ->selectRaw("SUM(debt) as debt")
+     ->selectRaw("SUM(paid) as paid")
+     ->first();
+
+    }
+
+    public function goBack(){
+        $this->isVisible = 0;
     }
 
     public function resetField()
