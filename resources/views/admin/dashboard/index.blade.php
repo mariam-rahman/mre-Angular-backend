@@ -30,8 +30,8 @@
 
                                 <li class="nav-item">
                                     <a  href="{{route('product.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
-                                        <div class="icon-wrap warning">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="30px" height="30px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><g data-name="Layer 3"><circle cx="16.86" cy="9.73" r="6.46" fill="#6f7a20"/><path d="M21 28h7v1.4h-7z" fill="#6f7a20"/><path d="M15 30v3a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V23a1 1 0 0 0-1-1h-7v-1.47a1 1 0 0 0-2 0V22h-2v-3.58a32.12 32.12 0 0 0-5.14-.42a26 26 0 0 0-11 2.39a3.28 3.28 0 0 0-1.88 3V30zm17 2H17v-8h7v.42a1 1 0 0 0 2 0V24h6z" fill="#6f7a20"/></g></svg>
+                                        <div class="icon-wrap " >
+                                        <i class=" fa fa-spin fa-user-o" aria-hidden="true"></i>
                                         </div>
                                         <h4>{{$employees}}</h4>
                                         <span class="type-name">Employees</span>
@@ -108,6 +108,16 @@
                                         </div>
                                         <h4>{{$sales}}</h4>
                                         <span class="type-name">Sale</span>
+                                  
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a  href="{{route('onsale.index')}}" class="nav-link"  role="tab" aria-controls="" aria-selected="false">
+                                        <div class="icon-wrap primary">
+                                       
+                                        </div>
+                                        <h4>{{$onsales}}</h4>
+                                        <span class="type-name">OnSale</span>
                                   
                                     </a>
                                 </li>

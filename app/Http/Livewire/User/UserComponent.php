@@ -37,6 +37,10 @@ class UserComponent extends Component
             $this->clearData();
             session()->flash('message', 'Your username or password is wrong');
         }
+        if(Auth::attempt(['email'=>$this->email,'password'=>$this->password]))
+        return redirect(route('dashboard.index'));
+        else
+     session()->flash('message','Your username or password is wrong');
     }
 
     public function clearData()

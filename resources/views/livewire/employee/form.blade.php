@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button wire:click='update()' class="btn btn-secondary" >Update</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">Close</button>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" wire:click="resetInputFields()">Close</button>
                                 </div>
                             </form>
                         </div>

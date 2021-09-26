@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Expense;
+use App\Models\Onsale;
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Substock;
@@ -28,6 +29,7 @@ class DashboardController extends Controller
         $expenses = Expense::count();
         $employees = Employee::count();
         $sales = Sale::count();
-        return view('admin/dashboard/index',compact('category','products','purchase','main_stock_items','substocks','users','customers','expenses','employees','sales'));
+        $onsales = Onsale::count();
+        return view('admin/dashboard/index',compact('category','products','purchase','main_stock_items','substocks','users','customers','expenses','employees','sales','onsales'));
     }
 }

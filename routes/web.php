@@ -98,8 +98,6 @@ Route::view('purchase','admin/purchase/index')->name('purchase.index');
 //Permission livwwire
 Route::resource('permission',PermissionController::class);
 
-//Roles livewire
-Route::resource('role',RoleController::class);
 
 // // //employee
 // // Route::resource('employee',EmployeeController::class);

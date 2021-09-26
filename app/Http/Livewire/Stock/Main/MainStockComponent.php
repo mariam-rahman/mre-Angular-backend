@@ -100,15 +100,19 @@ class MainStockComponent extends Component
                 continue;
             }
         }
+        $this->clearData();
     }
+
+
 public function setProductId($id){
     $this->product_id = $id;
 }
 
 public function goBack(){
-    $this->visible = 0;
+    $this->visible = 0;    
+}
 
-    
-    
+public function clearData(){
+    $this->move_qty = null;
 }
 }

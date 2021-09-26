@@ -27,9 +27,9 @@ class OnsaleController extends Controller
         ->get();
         return view('admin/onsale/index',compact('onsales'));
 
-        // $onsales = Onsale::all();
+        // $onsale = Onsale::all();
        
-        // return view('admin/onsale/index', compact('products', 'stocks', 'onsales'));
+        // return view('admin/onsale/index', compact('onsale'));
     }
 
     /**

@@ -2,14 +2,6 @@
     @php
     $counter = 0;
     @endphp
-    <div class="mb-4">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userModal"  wire:click="create()">Add Users</button>
-    </div>
-    <div class="card px-3">
-                    <div class="card-header">
-                        <h4 class="card-title">List of Users</h4>
-                    </div>
-   
     <div class="table-responsive">
         <table id="example" class=" table table-striped table-bordered" style="min-width: 845px;">
             <thead>
@@ -29,9 +21,12 @@
                     <td>
                         <div class="row">
                             <div class="col-sm-6 d-flex">
-                               
-                                    <button wire:click="delete({{$user->id}})" class="btn btn-danger px-1 py-0 ">Delete</button>
-                                <button wire:click="edit({{$user->id}})" class="btn btn-secondary px-1 py-0 ml-1" data-toggle="modal" data-target="#userModal">Edit</button>
+                                <form action="{{route('user.destroy',$user)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Delete" class="btn btn-danger px-1 py-0 ">
+                                </form>
+                                <a href="{{route('user.edit',$user)}}" class="btn btn-secondary px-1 py-0 ml-1">Edit</a>
                             </div>
                         </div>
                     </td>
@@ -40,7 +35,4 @@
             </tbody>
         </table>
     </div>
-    @include('livewire.userm.form')
 </div>
-</div>
-@include('partials.toaster')

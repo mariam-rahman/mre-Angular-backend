@@ -1,4 +1,9 @@
 <div class="card">
+<div class="card-header">
+    <h2>OnSales Details</h2>
+        
+        <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
+    </div>
     <div class="card-body">
         <div class="row">
             <div class="col-6">

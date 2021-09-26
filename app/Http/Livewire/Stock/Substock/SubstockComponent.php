@@ -98,14 +98,25 @@ class SubstockComponent extends Component
             continue;
         }
     }
+   
     $this->product_id = null;
+    $this->clearData();
      return;
+    
     }
+
+
 
      function setId($id){
         $this->product_id = $id;
     }
     function goBack(){
         $this->visible = 0;
+    }
+
+    public function clearData(){
+        $this->move_qty = null;
+        $this->discount = null;
+        $this->sell_price = null;
     }
 }

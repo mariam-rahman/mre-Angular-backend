@@ -235,4 +235,8 @@ class EmployeeComponent extends Component
         $this->pdate = null;
 
     }
+
+    public function goBack(){
+        $this->isVisible = true;
+    }
 }

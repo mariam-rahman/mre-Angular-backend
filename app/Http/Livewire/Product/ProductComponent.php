@@ -6,12 +6,13 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Auth;
 
 class ProductComponent extends Component
 {
+    use AuthorizesRequests;
     use WithFileUploads;
     public $name;
     public $desc;
@@ -21,7 +22,7 @@ class ProductComponent extends Component
     public  $updateMode = false;
     public $categories;
     public $record_id;
-    use AuthorizesRequests;
+
     //Get record list
     public function render()
     {
@@ -31,8 +32,9 @@ class ProductComponent extends Component
         return view('livewire.product.product-component');
     }
    //End
-
-
+public function mount(){
+    $this->authorize('viewAny', Product::class);
+}
    //Data validation
    protected $rules = [
     'name' => 'required',
@@ -51,7 +53,7 @@ class ProductComponent extends Component
    //Store record
     public function save()
     {
-      
+        $this->authorize('create', Product::class);
         $validatedData = $this->validate();
         if ($this->image != null) {
             $image = $this->image->store('images/product', 'public');
@@ -61,37 +63,29 @@ class ProductComponent extends Component
                     ['image' => $image]
                 )
             );
-
-            
            
         } else {
             $product =  Product::create($validatedData);
         }
-        
         if ($product)
-        
-        session()->flash('message', 'Product successfully created!');
+            session()->flash('success', 'Product successfully created!');
         else
-            session()->flash('error', 'Product cannot be created!');
-         $this->resetInputFields();
+            session()->flash('error', 'Product cannot be deleted!');
+        $this->resetInputFields();
     }
     //End store
-
-
 
     //Delete record
     public function delete($id)
     {
         $product = Product::find($id);
-        $this->authorize('delete', $product);
-        
         $oldimage = "storage/" . $product->image;
         if ($product->delete())
         {
             if (File::exists($oldimage)) {
                 File::delete($oldimage);
             }
-            session()->flash('message', 'Product successfully deleted!');
+            session()->flash('success', 'Product successfully deleted!');
         }
         else
             session()->flash('error', 'Product cannot be deleted!');
@@ -102,6 +96,7 @@ class ProductComponent extends Component
     public function edit($id)
     {
         $product = Product::findOrFail($id);
+        $this->authorize('update', $product);
         $this->record_id = $product->id;
         $this->name = $product->name;
         $this->desc = $product->desc;
@@ -138,7 +133,7 @@ class ProductComponent extends Component
             }
 
         if ($updateProduct)
-            session()->flash('update', 'Product successfully updated!');
+            session()->flash('info', 'Product successfully updated!');
         else
             session()->flash('error', 'Product cannot be deleted!');
 

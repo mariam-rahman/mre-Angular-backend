@@ -2,8 +2,11 @@
 $counter = 0;
 @endphp
 
-<div class="content-body">
-    <div class="container">
+
+
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-10">
         <div class="row ">
             <div class="col-md-4">
                 <span class="text-primary mr-3">Name:</span>{{$employee->name}}
@@ -22,9 +25,13 @@ $counter = 0;
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Pay</button>
-
+                        <h3>Employees payment Details</h3>
+                        <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
                     </div>
+                    <div class="ml-4">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#basicModal">Pay</button>
+                    </div>
+
                     <div class="card-body ">
                         <div class="table-responsive">
                             <table id="example" class=" table table-striped table-bordered" style="min-width: 845px">
@@ -52,6 +59,9 @@ $counter = 0;
         </div>
     </div>
 </div>
+</div>
+
+
 
 
 <!--model-->
@@ -91,7 +101,7 @@ $counter = 0;
             </div>
         </div>
     </div>
-</div>
 
 
-@include('partials.toaster')
+
+    @include('partials.toaster')

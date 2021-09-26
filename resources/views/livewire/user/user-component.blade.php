@@ -12,6 +12,7 @@
             </div>
             <!--end code-->
 
+        
             <label><strong>Email</strong></label>
             <input type="email" wire:model='email' class="form-control">
             @error('email') <span class="text-danger">{{ $message }}</span> @enderror

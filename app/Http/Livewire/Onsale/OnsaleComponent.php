@@ -30,4 +30,8 @@ class OnsaleComponent extends Component
     $this->onsals = Onsale::where('product_id',$product_id)->get();
     $this->isVisible = false;
     }
+
+    public function goBack(){
+        $this->isVisible = true;
+    }
 }
