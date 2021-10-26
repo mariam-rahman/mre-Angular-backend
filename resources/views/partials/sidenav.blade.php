@@ -24,7 +24,7 @@
                             <li><a href="{{route('customer.index')}}">Customers</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="fa fa-male"></i><span class="nav-text">Employee</span></a>
+                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="mdi mdi-account-group"></i><span class="nav-text">Employee</span></a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('employee.index')}}">Employees</a></li>
                            

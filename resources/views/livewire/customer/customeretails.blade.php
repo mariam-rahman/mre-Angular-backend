@@ -4,20 +4,20 @@
         <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
     </div>
     <div class="row d-flex mt-4">
-    
+
         <div class="col-4 d-flex">
-        <li class=" d-flex mb-2">
+            <li class=" d-flex mb-2">
                 <h4 class="text-primary">Total Paid:</h4>
                 <div class="card-title ml-2">{{$customer_data->paid}}</div>
-                </li>
+            </li>
             </ul>
-          
+
         </div>
         <div class="col-4 d-flex">
-        <ul>
-        <li class=" d-flex mb-2">
-                <h4 class="text-primary">Total Debt:</h4>
-                <div class="card-title ml-2">{{$customer_data->debt}}</div>
+            <ul>
+                <li class=" d-flex mb-2">
+                    <h4 class="text-primary">Total Debt:</h4>
+                    <div class="card-title ml-2">{{$customer_data->debt}}</div>
                 </li>
             </ul>
         </div>
@@ -37,20 +37,19 @@
                 </tr>
             </thead>
             <tbody>
-          @foreach($sell_details as $sell)
+                @foreach($sell_details as $sell)
                 <tr>
                     <td>1</td>
                     <td>{{$sell->name}}</td>
                     <td>{{$sell->qty}}</td>
                     <td>{{$sell->price}}</td>
-                        <td>stock</td>
+                    <td>stock</td>
                     <td>{{$sell->date}}</td>
-                 
+
                 </tr>
                 @endforeach
-           
+
             </tbody>
         </table>
     </div>
-</div>
 </div>

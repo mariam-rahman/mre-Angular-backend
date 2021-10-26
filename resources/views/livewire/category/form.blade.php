@@ -48,11 +48,11 @@
 
                                 <div class="modal-footer">
                                     @if($updateMode)
-                                    <button wire:click='update()' class="btn btn-secondary">Update</button>
+                                    <button wire:click='update()' class="btn btn-secondary"><i class="fa fa-pencil-square-o"></i>  Update</button>
                                     @else
                                     <button wire:click='save()' class="btn btn-secondary">Save</button>
                                     @endif
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">Close</button>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" wire:click="resetInputFields()"><i class="fa fa-times-circle"></i> Close</button>
 
                                 </div>
                         </form>

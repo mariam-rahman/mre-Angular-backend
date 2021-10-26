@@ -51,8 +51,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button wire:click='update()' class="btn btn-secondary" >Update</button>
-                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" wire:click="resetInputFields()">Close</button>
+                                    <button wire:click='update()' class="btn btn-secondary" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Update</button>
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal" wire:click="resetInputFields()"><i class="fa fa-times-circle" aria-hidden="true"></i> Close</button>
                                 </div>
                             </form>
                         </div>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button wire:click='save()' class="btn btn-secondary">Save</button>
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" wire:click="resetInputFields()">Close</button>
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal" wire:click="resetInputFields()"><i class="fa fa-times-circle" aria-hidden="true"></i> Close</button>
                             </div>
                         </form>
                     </div>

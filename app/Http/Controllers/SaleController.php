@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Models\Onsale;
-use App\Models\Customer;
 use App\Models\Product;
-
+use App\Models\Customer;
+use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\Substock;
 use App\Models\Sale_detail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\SellNotification;
+use Illuminate\Support\Facades\Notification;
 
 class SaleController extends Controller
 {
@@ -214,7 +217,9 @@ public function saleCustomer($customer_id){
 
     public function printInvoice($id){
         $sale = Sale::find($id);
-        return view('pdf_view',compact('sale'));
+        $payment = Payment::Where('sale_id',$id)->first();
+        Notification::send(Auth::user(), new SellNotification($sale,$payment));
+        return view('pdf_view',compact('sale','payment'));
     }
   
     public function getQtyCount1($product_id){

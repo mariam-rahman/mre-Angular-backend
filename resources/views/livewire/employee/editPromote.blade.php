@@ -25,7 +25,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" wire:click="updatePromote()" class="btn btn-secondary">save</button>
-                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> <i class="fa fa-times-circle fa-fw"></i> Close</button>
                             </div>
                         </form>
                     </div>

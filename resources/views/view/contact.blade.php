@@ -7,9 +7,6 @@
     <!--link for fontAwsom-->
    
     @section('content')
-    
-   
-
     <!-- Start Content Page -->
     <div class="container-fluid bg-light py-5">
         <div class="col-md-6 m-auto text-center">
@@ -26,7 +23,11 @@
      <div class="container py-5">
          <div class="card">
              <div class="card-header text-center text-success fw">
+                 @if(session()->has('msg'))
+                 {{session()->get('msg')}}
+                  @else
                   Enter the Required Information
+                  @endif
              </div>
         
 
@@ -34,8 +35,9 @@
              
         
         <div class="row py-5">
-            <form class="col-md-9 m-auto" method="post" role="form">
-                <div class="row">
+            <form class="col-md-9 m-auto" method="post" role="form" action="{{route('send.email')}}">
+                @csrf
+            <div class="row">
                     <div class="form-group col-md-6 mb-3">
                         <label for="inputname">Name</label>
                         <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Name">

@@ -27,7 +27,7 @@ class OnsaleComponent extends Component
         ->selectRaw("product_id")
         ->groupBy("product_id")
         ->where("product_id",$product_id)->first();
-    $this->onsals = Onsale::where('product_id',$product_id)->get();
+    $this->onsals = Onsale::latest()->where('product_id',$product_id)->get();
     $this->isVisible = false;
     }
 

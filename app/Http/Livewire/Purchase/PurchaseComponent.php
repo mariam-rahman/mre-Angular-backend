@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Purchase;
 
+use App\Models\Onsale;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Substock;
 use Livewire\Component;
+use Mockery\Matcher\Subset;
 
 class PurchaseComponent extends Component
 {
@@ -14,7 +17,7 @@ public $product_id;
 public $qty;
 public $price;
 public $stock_id;
-public $update = true;
+public $update = false;
 public $purchase_id;
     public function render()
     {
@@ -44,9 +47,18 @@ public $purchase_id;
                                       'price'=>$this->price,
                                       'qty'=>$this->qty,
                                       'remaining_qty'=>$this->qty,
-                                      'stock_id'=>$this->stock_id
-        ]);
-        $this->clearData();
+                                      'stock_id'=>$this->stock_id ]);
+        if($purchase->id)               
+      {
+       Substock::create(['product_id'=>$this->product_id,
+               'qty'=>$this->qty,
+               'purchase_id'=>$purchase->id,
+               'remaining_qty'=>$this->qty,
+               'stock_id'=>$this->stock_id ]);
+         }
+           
+                                       
+    $this->clearData();
     if($purchase)
         session()->flash('success', 'Purchase successfully created!');
     else
@@ -65,7 +77,7 @@ public $purchase_id;
     }
 
     public function edit($id){
-        $this->update = false;
+        $this->update = true;
         $purchase = Purchase::findOrfail($id);
         $this->purchase_id = $id;
         $this->qty = $purchase->qty;

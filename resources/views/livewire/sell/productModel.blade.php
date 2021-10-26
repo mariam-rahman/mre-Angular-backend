@@ -21,18 +21,23 @@
                                         <option value="{{$product->id}}">{{$product->name}}</option>
                                         @endforeach
                                     </select>
+                                    @error('product_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Sell price</label>
                                     <input type="number" wire:model="sell_price" class="form-control">
-                                  
+                                    @error('sell_price') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Qauntity</label>
                                     <input type="number" wire:model="qty" class="form-control">
+                                    @error('qty') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-                            <button type="button" class="btn btn-primary" wire:click="sell({{$sale->id}},{{$sale->stock_id}})">Add</button>
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                <div>
+                                <button type="button" class="btn btn-primary" wire:click="sell({{$sale->id}},{{$sale->stock_id}})">Add</button>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> <i class="fa fa-times-circle"></i> Close</button>
+                                </div>
+                            
                         </form>
                     </div>
                 </div>

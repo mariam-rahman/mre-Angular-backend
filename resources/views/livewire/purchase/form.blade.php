@@ -1,11 +1,11 @@
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" wire:ignore.self>
+<div class="modal fade" id="basicModal" wire:ignore.self>
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 @if($update)
-                <h5 class="modal-title">Purchase Product</h5>
-                @else
                 <h5 class="modal-title">Update Product</h5>
+                @else
+                <h5 class="modal-title">Purchase Product</h5>
                 @endif
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
@@ -46,6 +46,7 @@
                                                 <option>Choose stocks</option>
                                                 <option value="1">Main stock</option>
                                                 <option value="2">Substock</option>
+                                                <option value="3">On sale</option>
                                             </select>
                                             @error('stock_id') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>
@@ -53,11 +54,12 @@
                                     </div>
                             </div>
                             @if($update)
-                            <button wire:click="save()" class="btn btn-secondary">Save</button>
+                            <button wire:click="update()" class="btn btn-secondary"><i class="fa fa-pencil-square-o"></i>  Update</button>
                             @else
-                            <button wire:click="update()" class="btn btn-secondary">Update</button>
+                            
+                            <button wire:click="save()" class="btn btn-secondary">Save</button>
                             @endif
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i> Close</button>
 
                             </form>
                         </div>

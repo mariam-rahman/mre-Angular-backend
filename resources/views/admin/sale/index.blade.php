@@ -5,7 +5,7 @@
 @php
 $counter = 0;
 @endphp
-<link rel="stylesheet" href="{{asset('css/mre.css')}}">
+
 @include('partials.sidenav')
 <div class="content-body">
     <div class="container">

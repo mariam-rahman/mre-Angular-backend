@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,6 @@ class UserController extends Controller
 
     public function index(){
         $users = User::all();
-       
         return view('admin/user/index',compact('users'));
     }
 

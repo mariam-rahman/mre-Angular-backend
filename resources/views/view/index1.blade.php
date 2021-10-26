@@ -138,7 +138,13 @@
                 <p class="text-center"><a class="btn btn-success">view</a></p>
             </div>
             @endforeach
+           
         </div>
+        
+        <div class="text-right">
+        {{ $categories->links() }}
+        </div>
+       
     </section>
     <!-- End Categories of The Month -->
 
@@ -178,15 +184,20 @@
                             </ul>
                             <a href="shop-single.html" class="h2 text-decoration-none text-dark">{{$product->name}}</a>
                             <p class="card-text">
-                                {{$product->desc}}
+                            Reviews (24)
                             </p>
-                            <p class="text-muted">Reviews (24)</p>
+                            <form action="{{route('Mres.image_deatils',$product)}}" method="get">
+                            <input type="submit" value="View" class="btn btn-outline-success p-1 px-2" >
+                            </form>
                         </div>
                     </div>
                 </div>
                 @endforeach
-
             </div>
+             
+        <div class="text-right">
+        {{ $categories->links() }}
+        </div>
         </div>
     </section>
     <!-- End Featured Product -->

@@ -27,14 +27,14 @@ $counter = 0;
                         @foreach($onsales as $onsale)
                         <tr>
                             <td>{{++$counter}}</td>
-                            <td>{{$onsale->product->name}}</td>
+                            <td>{{@$onsale->product->name}}</td>
                             <td>{{$onsale->qty}}</td>
                             <td>{{$onsale->remaining_qty}}</td>
 
                             <td>{{$onsale->stock_id==2?'Sub stock':'Main stock'}}</td>
                             <td>
-                                <button wire:click="details({{$onsale->product_id}})" class="btn btn-info btn-sm px-1 py-1 ml-1">Details</button>
-                                <a href="{{route('sale.index')}}" class="btn btn-success px-1 py-1 ">Sale</a>
+                                <button wire:click="details({{$onsale->product_id}})" class="btn btn-outline-info btn-sm px-1 py-1 ml-1"> <i class="fa fa-snowflake-o" aria-hidden="true"></i> Details</button>
+                                <a href="{{route('sale.index')}}" class="btn btn-outline-success px-1 py-1 "> <i class="fa fa-check fa-fw"></i> Sale</a>
                             </td>
                         </tr>
                         @endforeach

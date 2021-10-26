@@ -24,7 +24,7 @@ $counter = 0;
                             <div class="bg-white shadow rounded overflow-hidden">
                                 <div class="px-4 pt-0 pb-4 bg-info">
                                     <div class="media align-items-end profile-header">
-                                        <div class="profile mr-3 mt-3"><img src="{{asset('storage/'.@$employee->image)}}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                                        <div class="profile mr-3 mt-3"><img src="{{asset('storage/'.$employee->image)}}" alt="..." width="130" class="rounded mb-2 img-thumbnail">
 
                                             <button onclick="history.back()" class="btn btn-dark btn-sm btn-block">Go back</button>
                                         </div>
@@ -116,7 +116,7 @@ $counter = 0;
                                         <td>
                                             <div class="row">
                                                 <div class="col-sm-10 d-flex">
-                                                    <button type="button" wire:click="editPromote({{$sal->id}})" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#editModal">Edit</button>
+                                                    <button type="button" wire:click="editPromote({{$sal->id}})" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#editModal"> <i class="fa fa-pencil fa-fw"></i> Edit</button>
 
                                                 </div>
                                             </div>

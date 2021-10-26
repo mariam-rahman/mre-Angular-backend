@@ -1,3 +1,6 @@
+<div class="card p-2">
+
+
 <div class="row">
                        <div class="col-6">
                          <ul>
@@ -47,4 +50,5 @@
                                 </tbody>
                             </table>
                         </div>
+                    </div>
                     </div>

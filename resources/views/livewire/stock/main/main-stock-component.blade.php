@@ -2,6 +2,11 @@
 $counter = 0;
 @endphp
 <div>
+<div class="row page-titles mx-0 mb-0">
+            <div class="col-sm-6 p-md-0">
+                <h3 class="text-primary m-0">Main Stock</h3>
+            </div>
+        </div>
 <div class="card">
         <div class="card-header">
            @if($visible == 0)
@@ -36,9 +41,9 @@ $counter = 0;
                         <td>{{$purchase->price}}</td>
                         <td>{{$purchase->product->category->title ?? 'nil'}}</td>
                         <td>
-                            <button type="button" class="btn btn-secondary  px-1 py-1" data-toggle="modal" data-target="#moveModal" wire:click="setProductId({{$purchase->product_id}})">Move to Sub Stock</button>
-                            <button wire:click="details({{$purchase->product_id}})" class="btn btn-info btn-sm px-1 py-1">Details</button>
-                            <a href="{{route('sale.index')}}" class="btn btn-success btn-sm px-1 py-1">Sale</a>
+                            <button type="button" class="btn btn-outline-secondary  px-1 py-1" data-toggle="modal" data-target="#moveModal" wire:click="setProductId({{$purchase->product_id}})"><i class="fa fa-arrow-right" aria-hidden="true"></i> Move to Sub Stock</button>
+                            <button wire:click="details({{$purchase->product_id}})" class="btn btn-outline-info btn-sm px-1 py-1"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Details</button>
+                            <a href="{{route('sale.index')}}" class="btn btn-outline-success btn-sm px-1 py-1"><i class="fa fa-check" aria-hidden="true"></i>Sale</a>
                         </td>
 
                     </tr>

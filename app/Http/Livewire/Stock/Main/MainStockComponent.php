@@ -16,12 +16,12 @@ class MainStockComponent extends Component
     public $product_id;
     public function render()
     {
-        $this->purchases = Purchase::where('stock_id', 1)
-        ->selectRaw("SUM(qty) as qty")
+        $this->purchases = Purchase::selectRaw("SUM(qty) as qty")
         ->selectRaw("SUM(price) as price")
         ->selectRaw("SUM(remaining_qty) as remaining_qty")
         ->selectRaw("product_id")
         ->groupBy('product_id')
+        ->where('stock_id', 1)
         ->get();
         return view('livewire.stock.main.main-stock-component');
     }
@@ -36,7 +36,8 @@ class MainStockComponent extends Component
         ->where('product_id',$product_id)->first();
 
         //this code is for details
-        $this->items = Purchase::where('product_id',$product_id)->get();
+        $this->items = Purchase::where('product_id',$product_id)
+        ->where('stock_id',1)->get();
         $this->visible = 1;
         
     }

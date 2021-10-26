@@ -4,12 +4,13 @@ namespace App\Http\Livewire\Sell;
 
 use App\Models\Sale;
 use App\Models\Onsale;
+use App\Models\Payment;
 use Livewire\Component;
 use App\Models\Customer;
-use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\Substock;
 use App\Models\Sale_detail;
+
 
 class SellComponent extends Component
 {
@@ -57,8 +58,14 @@ class SellComponent extends Component
         $this->visible = 1;
     }
 
+
+
     function sellCreate()
     {
+        $this->validate(['customer_id'=>'required',
+                          'sell_date'=>'required',
+                          'stock_id'=>'required'  ]);
+                          
         $this->sale = Sale::create(
             [
                 'customer_id' => $this->customer_id,
@@ -69,6 +76,8 @@ class SellComponent extends Component
 
         $this->visible = 3;
     }
+
+
 
     public function sell($sell_id, $stock_id)
     {
@@ -230,10 +239,22 @@ class SellComponent extends Component
     public function savePayment(){
         $payment = new Payment();
         $payment->customer_id = $this->sale->customer_id;
+        $payment->sale_id = $this->sale->id;
         $payment->debt = ($this->totalPayment) - ($this->paid);
         $payment->paid = $this->paid;
-       
         $payment->save();
-        $this->visible = 0;
+        redirect()->route('sale.invoice',$this->sale->id);
+    }
+
+    public function delete($sell_id){
+        $sell = Sale::findOrfail($sell_id);
+        if(count($sell->sell_details)>0){
+            session()->flash('error', 'You cannot delete this Permission, it has been used for user/users!');
+        }
+        else{
+            $sell->delete();
+            session()->flash('success', 'sale Record has been deleted successfully!');
+
+        }
     }
 }

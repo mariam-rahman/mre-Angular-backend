@@ -24,8 +24,8 @@
                         <div class="row">
                             <div class="col-sm-6 d-flex">
 
-                                <button class="btn btn-danger px-1 py-0 " wire:click="delete({{$category->id}})"> <i class="fa fa-trash-o "></i> Delete</a></button>
-                                <button type="button" class="btn btn-secondary px-1 py-0 ml-1" data-toggle="modal" data-target="#editModal" wire:click="edit({{$category->id}})"><i class="fa fa-pen "></i></button>
+                                <button class="btn btn-outline-danger px-1 py-1 " wire:click="delete({{$category->id}})"> <i class="fa fa-trash-o " aria-hidden="true"></i> Delete</button>
+                                <button type="button" class="btn btn-outline-secondary px-1 py-1 ml-1" data-toggle="modal" data-target="#editModal" wire:click="edit({{$category->id}})"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>Edit</button>
 
                             </div>
                         </div>

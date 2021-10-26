@@ -10,8 +10,8 @@ class MresController extends Controller
 {
     public function view_category(){
 
-        $categories = Category::all();
-        $products = Product::all();
+        $categories = Category::simplePaginate(3);
+        $products = Product::simplePaginate(6);
         return view('view/index1',compact('categories','products'));
     }
 
@@ -36,6 +36,12 @@ class MresController extends Controller
         $categories = Category::all();
         $products = Product::where('category_id',$category)->get();
         return view('view/view_product',compact('products','categories'));
+
+    }
+
+    public function image_deatils(Product $product){
+
+        return view('admin/dashboard/product_details',compact('product'));
 
     }
 

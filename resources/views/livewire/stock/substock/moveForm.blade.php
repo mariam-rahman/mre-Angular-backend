@@ -28,7 +28,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" wire:click="moveToSell()">Move</button>
-                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> <i class="fa fa-times-circle"></i> Close</button>
                             </div>
                         </form>
                     </div>

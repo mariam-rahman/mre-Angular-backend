@@ -2,39 +2,51 @@
 
 namespace App\Http\Livewire\Product;
 
+
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Classes\MREPolicy;
+
 
 class ProductComponent extends Component
 {
-    use AuthorizesRequests;
     use WithFileUploads;
     public $name;
     public $desc;
     public $image;
     public $category_id;
-    public $products;
+    public $products = [];
     public  $updateMode = false;
-    public $categories;
+    public $categories = [];
     public $record_id;
+    private $policy;
+    public $canCreate,$canEdit,$canDelete,$canView;
 
+    function __construct()
+    {
+        $this->policy = new MREPolicy();
+        $this->canCreate = $this->policy->check(Auth::user(),'add_product');
+        $this->canEdit = $this->policy->check(Auth::user(),'edit_product');
+        $this->canDelete = $this->policy->check(Auth::user(),'delete_product');
+        $this->canView = $this->policy->check(Auth::user(),'view_products');
+    }
     //Get record list
     public function render()
     {
-       
+       if($this->canView)
+       {
         $this->categories = Category::all();
         $this->products = Product::latest()->get();
-        return view('livewire.product.product-component');
+       }
+       return view('livewire.product.product-component');
+     
     }
    //End
-public function mount(){
-    $this->authorize('viewAny', Product::class);
-}
+
    //Data validation
    protected $rules = [
     'name' => 'required',
@@ -53,7 +65,8 @@ public function mount(){
    //Store record
     public function save()
     {
-        $this->authorize('create', Product::class);
+    if($this->canCreate)
+    {
         $validatedData = $this->validate();
         if ($this->image != null) {
             $image = $this->image->store('images/product', 'public');
@@ -71,37 +84,47 @@ public function mount(){
             session()->flash('success', 'Product successfully created!');
         else
             session()->flash('error', 'Product cannot be deleted!');
+        
         $this->resetInputFields();
+    }
     }
     //End store
 
     //Delete record
     public function delete($id)
     {
-        $product = Product::find($id);
-        $oldimage = "storage/" . $product->image;
-        if ($product->delete())
+        if($this->canDelete)
         {
-            if (File::exists($oldimage)) {
-                File::delete($oldimage);
+            $product = Product::find($id);
+            $oldimage = "storage/" . $product->image;
+            if ($product->delete())
+            {
+                if (File::exists($oldimage)) {
+                    File::delete($oldimage);
+                }
+                session()->flash('success', 'Product successfully deleted!');
             }
-            session()->flash('success', 'Product successfully deleted!');
+            else
+                session()->flash('error', 'Product cannot be deleted!');
+       
         }
-        else
-            session()->flash('error', 'Product cannot be deleted!');
+    
     }
     //End delete
 
     //Edit record
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        $this->authorize('update', $product);
-        $this->record_id = $product->id;
-        $this->name = $product->name;
-        $this->desc = $product->desc;
-        $this->category_id = $product->category->id;
-        $this->updateMode = true;
+        if($this->canEdit)
+        {
+            $product = Product::findOrFail($id);
+            $this->record_id = $product->id;
+            $this->name = $product->name;
+            $this->desc = $product->desc;
+            $this->category_id = $product->category->id;
+            $this->updateMode = true;
+        }
+ 
     }
     //End edit
 
@@ -110,7 +133,6 @@ public function mount(){
     {
         $updateProduct = null;
         $validatedData = $this->validate();
-
         $product = Product::findOrFail($this->record_id);
 
         if ($this->image != null) {
@@ -135,7 +157,7 @@ public function mount(){
         if ($updateProduct)
             session()->flash('info', 'Product successfully updated!');
         else
-            session()->flash('error', 'Product cannot be deleted!');
+            session()->flash('error', 'Product cannot be updated!');
 
         $this->resetInputFields();
     }
@@ -150,4 +172,6 @@ public function mount(){
         $this->category_id = null;
         $this->updateMode = false;
     }
+
+  
 }

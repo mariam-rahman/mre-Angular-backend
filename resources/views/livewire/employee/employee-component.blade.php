@@ -38,10 +38,10 @@ $counter = 0;
                                 <td>{{$employee->email}}</td>
                                 <td>{{$employee->phone}}</td>
                                 <td>
-                                    <button class="btn btn-danger px-1 py-0 " wire:click="delete({{$employee->id}})">Delete</button>
-                                    <button class="btn btn-secondary px-1 py-0 ml-1" data-toggle="modal" data-target=".bd-example-modal-lg" wire:click="edit({{$employee->id}})">Edit</button>
-                                    <a href="{{route('employee.show',$employee->id)}}" class="btn btn-success px-1 py-0 ml-1">Show</a>
-                                    <button wire:click="payslip({{$employee->id}})" class="btn btn-info px-1 py-0 ml-1">PaySlip</button>
+                                    <button class="btn btn-outline-danger px-1 py-1 " wire:click="delete({{$employee->id}})"><i class="fa fa-trash-o " aria-hidden="true"></i> Delete</button>
+                                    <button class="btn btn-outline-secondary px-1 py-1 ml-1" data-toggle="modal" data-target=".bd-example-modal-lg" wire:click="edit({{$employee->id}})"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>Edit</button>
+                                    <a href="{{route('employee.show',$employee->id)}}" class="btn btn-outline-success px-1 py-1 ml-1"><i class="fa fa-eye" aria-hidden="true"></i>  Show</a>
+                                    <button wire:click="payslip({{$employee->id}})" class="btn btn-outline-info px-1 py-1 ml-1"><i class="fa fa-money" aria-hidden="true"></i>  PaySlip</button>
                                 </td>
                             </tr>
                             @endforeach

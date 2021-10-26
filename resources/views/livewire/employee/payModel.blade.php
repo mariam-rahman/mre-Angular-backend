@@ -26,11 +26,12 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-primary" wire:click="createPayment({{$employee->id}})">Pay</button>
-                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> <i class="fa fa-times-circle fa-fw"></i> Close</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 

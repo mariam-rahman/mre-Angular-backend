@@ -2,7 +2,11 @@
     <div class="modal-dialog " role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Permission</h5>
+                @if($updateMode)
+                    <h5 class="modal-title">Edit Permission</h5>                
+                @else           
+                    <h5 class="modal-title">Add Permission</h5>               
+                @endif
                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                 </button>
             </div>
@@ -20,8 +24,13 @@
                                 </div>
                             </div>
                                 <div class="modal-footer">
+
+                                @if($updateMode)
+                                <button wire:click='update()' class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-pencil-square-o"></i>  Update</button>
+                                @else
                                     <button wire:click="save()" class="btn btn-secondary">save</button>
-                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                                @endif
+                                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> <i class="fa fa-times-circle"></i> Close</button>
 
                                 </div>
                         </form>

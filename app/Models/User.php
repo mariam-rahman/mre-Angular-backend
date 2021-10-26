@@ -40,23 +40,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    public function hasRole()
-    {
-        $permissions = $this->permissions;
-        foreach ($permissions as $perm)
-            switch ($perm->name) {
-                case 'delete_product':
-                    return true;
-                    break;
-                case 'update_product':
-                    return true;
-                    break;
-                default:
-                    break;
-            }
-        return false;
-    }
 
 
     public function permissions()

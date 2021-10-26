@@ -4,16 +4,15 @@ namespace App\Http\Livewire\Customer;
 
 use App\Models\Sale;
 
+use App\Models\Payment;
 use Livewire\Component;
 use App\Models\Customer;
-use App\Models\Payment;
-use GuzzleHttp\Psr7\Query;
 use App\Models\Sale_detail;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CustomerComponent extends Component
 {
-
+    use AuthorizesRequests;
     public $name;
     public $email;
     public $phone;
@@ -26,6 +25,10 @@ class CustomerComponent extends Component
     public $sell_details;
     public $detail_of_sales;
     public $customer_data;
+    public $debts;
+    public $customer_id;
+    public $amount;
+
     public function render() //it acts as index function
     {
         $this->customers = Customer::latest()->get();
@@ -79,10 +82,9 @@ class CustomerComponent extends Component
       $customers = Customer::findOrFail($this->record_id);
       $customers->update($validateCustomer);
       
-
       if ($customers->update($validateCustomer))
       session()->flash('info', 'Category successfully updated!');
-  else
+      else
       session()->flash('error', 'Category cannot be deleted!');
       $this->resetField();
     }
@@ -105,6 +107,20 @@ class CustomerComponent extends Component
 
     }
 
+    public function debt($customer_id){
+            $this->customer_id = $customer_id;
+            $this->debts = Payment::where('customer_id',$customer_id)
+            ->where('debt','>',0) 
+            ->get();
+            $this->customer_data = Payment::where('customer_id',$customer_id)
+            ->selectRaw("SUM(debt) as debt")
+            ->selectRaw("SUM(paid) as paid")
+            ->first();
+            $this->name = Customer::Where('id',$customer_id)->first();
+        
+      $this->isVisible = 2;
+    }
+
     public function goBack(){
         $this->isVisible = 0;
     }
@@ -118,6 +134,48 @@ class CustomerComponent extends Component
       $this->updateMode = false;
     }
 
+    public function debtDetails($sale_id){
 
-    
+       $this->sell_details = Sale_detail::Where('sale_id',$sale_id)->get();
+       $this->isVisible = 4;
+    }
+
+    public function gobackdebt(){
+        $this->customer_data = Payment::where('customer_id',$this->customer_id)
+        ->selectRaw("SUM(debt) as debt")
+        ->selectRaw("SUM(paid) as paid")
+        ->first();
+        $this->isVisible = 2;
+    }
+
+   
+
+    public function deptPay($customerId){
+        $this->customer_id = $customerId;
+        $this->isVisible = 3;
+    }
+
+    public function saveDept(){
+       
+        $payments = Payment::where('customer_id',$this->customer_id)->get();
+        foreach($payments as $model){
+            
+          if(($model->debt) > $this->amount)
+           {
+                 $model->debt = ($model->debt)-($this->amount);
+                 $model->paid += ($this->amount);
+                 $model->update();
+                 break;
+           }
+           else {
+            $remaining =($this->amount)-($model->debt);
+            $model->debt = 0;
+            $model->paid += ($model->debt);
+            $model->update();
+            $this->amount = $remaining;
+            continue;
+           }
+        }
+        $this->isVisible = 2;
+    }
 }

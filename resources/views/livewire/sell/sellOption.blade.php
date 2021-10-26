@@ -1,4 +1,4 @@
-<div class="card ">
+<div class="card p-2">
             <div class="card-body">
                 <div class="basic-form">
                     <div class="basic-form custom_file_input">
@@ -13,6 +13,7 @@
                                         <option value="{{$customer->id}}">{{$customer->name}}</option>
                                         @endforeach
                                     </select>
+                                    @error('customer_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-6">
                                     <label>Source</label>
@@ -22,10 +23,12 @@
                                         <option value="2">Sub stock</option>
                                         <option value="3">On sale</option>
                                     </select>
+                                    @error('stock_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-6">
                                 <label>Date</label>
-                                <input type="Date" wire:model="sell_date" class="form-control mre">
+                                <input type="Date" wire:model="sell_date" class="form-control">
+                                @error('sell_date') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                                 
                             </div>

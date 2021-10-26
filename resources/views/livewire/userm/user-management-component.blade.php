@@ -30,8 +30,8 @@
                         <div class="row">
                             <div class="col-sm-6 d-flex">
                                
-                                    <button wire:click="delete({{$user->id}})" class="btn btn-danger px-1 py-0 ">Delete</button>
-                                <button wire:click="edit({{$user->id}})" class="btn btn-secondary px-1 py-0 ml-1" data-toggle="modal" data-target="#userModal">Edit</button>
+                                    <button wire:click="delete({{$user->id}})" class="btn btn-outline-danger px-1 py-1 "> <i class="fa fa-trash-o"></i> Delete</button>
+                                <button wire:click="edit({{$user->id}})" class="btn btn-outline-secondary px-1 py-1 ml-1" data-toggle="modal" data-target="#userModal"> <i class="fa fa-pencil fa-fw"></i> Edit</button>
                             </div>
                         </div>
                     </td>

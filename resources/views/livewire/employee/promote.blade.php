@@ -14,14 +14,16 @@
                             <div>
                                 <label>Salary</label>
                                 <input type="number" wire:model="salary" class="form-control">
+                                @error('salary') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div>
                                 <label>Designation</label>
                                 <input type="text" wire:model="designation" class="form-control ">
+                                @error('designation') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" wire:click="savePromote({{$employee->id}})">save</button>
-                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-danger" data-dismiss="modal"> <i class="fa fa-times-circle fa-fw"></i> Close</button>
                             </div>
                         </form>
                     </div>

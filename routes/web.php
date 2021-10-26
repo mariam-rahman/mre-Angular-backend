@@ -2,13 +2,17 @@
 
 use Livewire\Livewire;
 use App\Models\Purchase;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Livewire\LoginComponent;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\MresController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SlipController;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\OnsaleController;
@@ -19,11 +23,13 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubstockController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Livewire\Category\CategoryComponent;
 use App\Http\Livewire\Employee\EmployeeComponent;
 use App\Http\Livewire\EmployeeComponent\Employee;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 //use App\Http\Livewire\CategoryComponent;
 
@@ -38,14 +44,11 @@ use App\Http\Livewire\EmployeeComponent\Employee;
 |
 */
 
-
+// Route::get('make',function(){
+//     return Hash::make("1234");
+// });
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
-Route::view('note','summernote');
-Route::view('form','form');
-Route::view('table','datatable');
-Route::view('modal','modals');
-Route::view('dropdown','dropdown');
-
+Route::post('dashboard/chart',[DashboardController::class,'chart_value'])->name('dashboard.chart_value');
 Route::view('index','index');
 
 
@@ -54,18 +57,14 @@ Auth::routes();
 //use App\Http\Livewire\CategoryComponent;
 
 Route::get('/',[MresController::class,'view_category'])->name('view.index');
+Route::get('Mres.image_deatils/{product}',[MresController::class,'image_deatils'])->name('Mres.image_deatils');
+
 Route::get('view/about',[MresController::class,'about'])->name('view.about');
 Route::get('view/product',[MresController::class,'view_product'])->name('view.product');
 Route::get('view/contact',[MresController::class,'contact'])->name('view.contact');
 Route::get('view/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
-
-
-
-
-
-
-//Authenticated pages
-Route::group([  ], function(){
+//email
+Route::post('sent',[SendEmailController::class,'contactFormEmail'])->name('send.email');
     //user
 Route::get('user',[UserController::class,'index'])->name('user.index');
 Route::post('user/store',[UserController::class,'store'])->name('user.store');
@@ -75,9 +74,6 @@ Route::put('user/{user}/update',[UserController::class,'update'])->name('user.up
 Route::get('user/create',[UserController::class,'create'])->name('user.create');
 
 //Permissions
-Route::get('permission',[UserController::class,'permission'])->name('permission.index');
-Route::post('permission',[UserController::class,'permissionStore'])->name('permission.store');
-
 
 //Categories livewire
 Route::view('category','admin/category/index')->name('category');
@@ -157,8 +153,8 @@ Route::get('substock/pdf/view', [SubstockController::class, 'createPDF'])->name(
 Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale.sell_detail');
 
 
+Route::view('notification','admin/notification/notificationDetails');
 
-});
 //Route::get('category',CategoryComponent::class);
 
 

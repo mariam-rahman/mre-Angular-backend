@@ -1,3 +1,6 @@
+
+<div class="card p-2">
+    
 <div class="row">
     <div class="col-6">
         <ul>
@@ -50,4 +53,5 @@
             @endforeach
         </tbody>
     </table>
+</div>
 </div>

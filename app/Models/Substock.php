@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Substock extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
     public function product(){
         return $this->belongsTo(Product::class);
     }

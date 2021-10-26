@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card p-2">
     <div class="card-header">
     <h2>Sales Details</h2>
         
@@ -37,7 +37,7 @@
         <ul>
             <li class="d-flex">
             <h4 class="text-primary">Paid:</h4>
-            <div class=" card-title ml-2">{{$payment_record->paid }}</div>
+            <div class=" card-title ml-2">{{$payment_record->paid ?? '' }}</div>
             </li>
             </ul>
         </div>
@@ -45,7 +45,7 @@
         <ul>
             <li class="d-flex">
             <h4 class="text-primary">Debt:</h4>
-            <div class=" card-title ml-2">{{$payment_record->debt }}</div>
+            <div class=" card-title ml-2">{{$payment_record->debt ?? '' }}</div>
             </li>
             </ul>
         </div>
@@ -64,7 +64,7 @@
                         <th>Name</th>
                         <th>Qty</th>
                         <th>Total payment</th>
-                        <th>Action</th>
+                     
                     </tr>
                 </thead>
                 <tbody>
@@ -76,14 +76,7 @@
                         <td>{{$sell->qty}}</td>
                         <td>{{$sell->sell_price}}</td>
                         <td>
-                            <div class="d-flex">
-                                
-                                  
-                                    
-                                
-                                <button  wire:click="deleteProduct({{$sell->product_id}},{{$sell->id}},{{$sell->qty}},{{$sale->stock_id}})" class="btn btn-danger px-1 py-0 ml-1" >Delete</button>
-
-                            </div>
+                          
                         </td>
 
                     </tr>
@@ -95,4 +88,3 @@
     </div>
 </div>
 </div>
-@include('partials.toaster')

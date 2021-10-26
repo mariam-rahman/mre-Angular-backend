@@ -1,15 +1,14 @@
+
 <div class="mb-4">
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sellModal">Add Product</button>
 </div>
 <div class="card">
     <div class="card-header">
 
-    <div><a href="{{route('sale.invoice',$sale->id)}}" class="btn btn-warning text-white">Print invoice</a></div>
-    <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
-    </div>
-
     <div>
-   
+        <h3 class="text-secondary">Sale Form</h3>
+    </div>
+    <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
     </div>
 
     <div class="row d-flex mt-4 pl-4">
@@ -65,9 +64,9 @@
                             <div class="d-flex">
                                 
                                   
-                                    <button wire:click="" class="btn btn-danger px-1 py-0">Delete</button>
+                                    <button wire:click="" class="btn btn-outline-danger px-1 py-1"> <i class="fa trash-o" aria-hidden="true"></i> Delete</button>
                                 
-                                <button wire:click="" class="btn btn-secondary px-1 py-0 ml-1">Edit</button>
+                                <button wire:click="" class="btn btn-outline-secondary px-1 pr-2 py-1 ml-1"> <i class="fa fa-pencil fa-fw"></i> Edit</button>
 
                             </div>
                         </td>

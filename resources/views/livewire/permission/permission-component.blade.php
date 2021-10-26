@@ -20,15 +20,15 @@ $counter = 0;
                     <tbody>
                        @foreach($permissions as $perm)
                         <tr>
-                            <td>1</td>
+                            <td>{{++$counter}}</td>
                             <td>{{$perm->name}}</td>
                             <td>
                                 <div class="row">
                                     <div class="col-sm-6 d-flex">
                                        
-                                            <button wire:click="" class="btn btn-danger px-1 py-0 ">Delete</button>
+                                            <button wire:click="delete({{$perm->id}})" class="btn btn-outline-danger px-1 py-1 "> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                    
-                                        <button wire:click="" class="btn btn-secondary px-1 py-0 ml-1" data-toggle="modal" data-target="#basicModal">Edit</button>
+                                        <button wire:click="edit({{$perm->id}})" class="btn btn-outline-secondary px-1 py-1 ml-1" data-toggle="modal" data-target="#basicModal"> <i class="fa fa-pencil fa-fw"></i> Edit</button>
 
                                     </div>
                                 </div>

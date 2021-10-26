@@ -10,7 +10,7 @@ $counter = 0;
             <h4 class="card-title">List of Products</h4>
             @else
             <h4 class="card-title"> Product details</h4>
-            <button class="btn btn-outline-dark" wire:click="goBack()">Back</button>
+            <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
             @endif
         </div>
         <div class="card-body">
@@ -38,9 +38,9 @@ $counter = 0;
                             <td>{{$substock->product->category->title ?? ''}}</td>
 
                             <td>
-                                <button type="button" class="btn btn-secondary  px-1 py-0" data-toggle="modal" data-target="#moveModal" wire:click="setId({{$substock->product_id}})">Move to OnSale</button>
-                                <button wire:click="details({{$substock->product_id}})" class="btn btn-info px-1 py-0">Details</button>
-                                <a href="{{route('sale.index')}}" class="btn btn-success px-1 py-0">Sale</a>
+                                <button type="button" class="btn btn-outline-secondary  px-1 py-1" data-toggle="modal" data-target="#moveModal" wire:click="setId({{$substock->product_id}})"><i class="fa fa-arrow-right" aria-hidden="true"></i> Move to OnSale</button>
+                                <button wire:click="details({{$substock->product_id}})" class="btn btn-outline-info px-1 py-1"> <i class="fa fa-snowflake-o" aria-hidden="true"></i> Details</button>
+                                <a href="{{route('sale.index')}}" class="btn btn-outline-success px-1 py-1"> <i class="fa fa-check" aria-hidden="true"></i> Sale</a>
                             </td>
                         </tr>
                         @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Userm;
 
 use App\Models\User;
 use Livewire\Component;
+use App\Classes\MREPolicy;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,19 +12,24 @@ use Illuminate\Support\Facades\Hash;
 class UserManagementComponent extends Component
 {
     public $name;
-     public $users;
+     public $users = [];
      public $permissions=null;
      public $password;
     public $password_confirmation;
     public $email;
-    public $updateMode = true;
+    public $updateMode = false;
     public $user_id;
-    public $perms;
+    public $perms = [];
     public $userPerms = [];
-
+    private $policy;
+    function __construct()
+    {
+        $this->policy = new MREPolicy();
+        
+    }
     public function render()
     {
-
+      
         $this->users = User::latest()->get();
         return view('livewire.userm.user-management-component');
     }
@@ -65,10 +71,11 @@ class UserManagementComponent extends Component
         $user = User::findOrfail($user_id);
          $this->name = $user->name;
          $this->email = $user->email;
-        $this->updateMode = false;
-        $perms = $user->permissions;
-        for($i=0; $i<count($perms); $i++)
-        $this->userPerms[$i] = $perms[$i]->id;
+        $this->updateMode = true;
+        $this->perms = $user->permissions->pluck('id');
+       
+        // for($i=0; $i<count($perms); $i++)
+        // $this->userPerms[$i] = $perms[$i]->id;
         $this->permissions = Permission::all();
     }
 
@@ -85,7 +92,7 @@ class UserManagementComponent extends Component
             session()->flash('error', 'User cannot be updated!');
         }
         $this->resetData();
-        $this->updateMode = true;
+        $this->updateMode = false;
     }
     public function create(){
      
