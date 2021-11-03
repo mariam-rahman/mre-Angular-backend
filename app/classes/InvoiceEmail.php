@@ -3,7 +3,7 @@ namespace App\Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
 
-class ContactForm {
+class InvoiceEmail {
     
  function send($data)
  {

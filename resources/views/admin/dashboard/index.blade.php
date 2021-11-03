@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@include('partials.sidenav')
 
+@section('content')
+
+@include('partials.sidenav')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript">
@@ -18,10 +20,6 @@
     ['Nevember', "{{$month11}}", "{{$profit11}}"],
     ['December', "{{$month12}}", "{{$profit12}}"]
 </script>
-
-@section('content')
-
-
 <div class="container">
     <div class="row mt-5">
         <div class="col-xl-12">

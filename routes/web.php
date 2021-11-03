@@ -143,6 +143,7 @@ Route::resource('sale',SaleController::class);
 //Route::post('sell',[SaleController::class,'sell'])->name('sale.sell');
 
 Route::get('invoice/{id}',[SaleController::class,'printInvoice'])->name('sale.invoice');
+Route::get('notification/{id}',[SaleController::class,'viewNotification'])->name('sale.notification');
 
 
 

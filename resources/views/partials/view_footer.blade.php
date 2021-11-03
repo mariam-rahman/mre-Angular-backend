@@ -14,20 +14,17 @@
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">0093-202100903</a>
+                            <a class="text-decoration-none" href="tel:0093-202100903">0093-202100903</a>
                         </li>
                         <li>
                             <i class="fa fa-phone fa-fw"></i>
-                            <a class="text-decoration-none" href="tel:010-020-0340">0093-777274757</a>
+                            <a class="text-decoration-none" href="tel:0093-777274757">0093-777274757</a>
                         </li>
                         <li>
                             <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">monirrahman@gmail.com</a>
+                            <a class="text-decoration-none" href="mailto:info@monirrahmanelectric.com">info@monirrahmanelectric.com</a>
                         </li>
-                        <li>
-                            <i class="fa fa-envelope fa-fw"></i>
-                            <a class="text-decoration-none" href="mailto:info@company.com">monirrahman@yahoo.com</a>
-                        </li>
+                       
                     </ul>
                 </div>
 
@@ -92,7 +89,7 @@
                 <div class="row pt-2">
                     <div class="col-12">
                         <p class="text-left text-light">
-                            Copyright &copy; 2021 Something
+                            Copyright MRES &copy; 2021 Something
                             | Designed by <a rel="sponsored" href="https://templatemo.com/" target="_blank">someone</a>
                         </p>
                     </div>

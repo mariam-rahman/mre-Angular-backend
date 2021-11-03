@@ -2,6 +2,8 @@
 
 namespace App\Notifications;
 
+use App\Classes\ContactForm;
+use App\Classes\EmailNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -17,13 +19,18 @@ class SellNotification extends Notification
      *
      * @return void
      */
-    public $sale;
     public $payment;
+    public $sale;
+    public $stock;
     public function __construct($sale, $pay)
     {
-        $this->sale = $sale;
+
         $this->payment = $pay;
-       
+        $this->sale = $sale;
+
+        if ($sale->stock_id == 2) $this->stock = 'Sub stock';
+        else if ($sale->stock_id == 3) $this->stock = 'Shop';
+        else $this->stock = 'Main stock';
     }
 
     /**
@@ -34,7 +41,7 @@ class SellNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -43,14 +50,13 @@ class SellNotification extends Notification
      * @param  mixed  $notifiable
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
-    }
 
+    public function toBroadcast($notifiable)
+    {
+        $mail = new EmailNotification();
+        $mail->sendInvoiceEmail($this->sale, $this->payment, $this->stock);
+        return [];
+    }
     /**
      * Get the array representation of the notification.
      *
@@ -59,11 +65,13 @@ class SellNotification extends Notification
      */
     public function toArray($notifiable)
     {
-        if(Auth::user()->isAdmin)
+        //    if(Auth::user()->isAdmin)
         return [
-            'id'=>$this->sale->id,
-            'user'=>$notifiable->name,
-            'paid'=>$this->payment->paid
+            'id' => $this->sale->id,
+            'user' => Auth::user()->name,
+            'stock' => $this->stock,
+            'paid' => $this->payment->paid,
+            'date' => $this->payment->created_at
         ];
     }
 }

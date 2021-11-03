@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Purchase;
 use App\Models\Substock;
 use App\Models\Sale_detail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\SellNotification;
@@ -25,7 +26,7 @@ class SaleController extends Controller
     public function index()
     {
         $sales = Sale::latest()->get();
-        return view('admin/sale/index',compact('sales'));
+        return view('admin/sale/index', compact('sales'));
     }
 
     /**
@@ -36,7 +37,7 @@ class SaleController extends Controller
     public function create()
     {
         $customers = Customer::all();
-        return view('admin/sale/optionForm',compact('customers'));
+        return view('admin/sale/optionForm', compact('customers'));
     }
 
     /**
@@ -52,7 +53,7 @@ class SaleController extends Controller
         $sale->stock_id = $request->stock_id;
         $sale->sell_date = $request->sell_date;
         $sale->save();
-        return view('admin/sale/sellForm',compact('sale'));
+        return view('admin/sale/sellForm', compact('sale'));
     }
 
     /**
@@ -100,34 +101,35 @@ class SaleController extends Controller
         //
     }
 
-    public function details($product_id){
+    public function details($product_id)
+    {
         $total_sale = Sale::selectRaw("SUM(qty) as qty")
-        ->selectRaw("product_id")
-        ->groupBy("product_id")
-        ->where('product_id',$product_id)->first();
+            ->selectRaw("product_id")
+            ->groupBy("product_id")
+            ->where('product_id', $product_id)->first();
 
-        $items = Sale::where('product_id',$product_id)->get();
-    
-        return view('admin/sale/item_detail',compact('items','total_sale'));
+        $items = Sale::where('product_id', $product_id)->get();
 
+        return view('admin/sale/item_detail', compact('items', 'total_sale'));
     }
 
 
-public function saleCustomer($customer_id){
-    $sales = Sale::selectRaw("SUM(qty) as qty")
-    ->selectRaw("customer_id")
-    ->selectRaw("product_id")
-    ->groupBy("customer_id")
-    ->groupBy("product_id")
-    ->get();
+    public function saleCustomer($customer_id)
+    {
+        $sales = Sale::selectRaw("SUM(qty) as qty")
+            ->selectRaw("customer_id")
+            ->selectRaw("product_id")
+            ->groupBy("customer_id")
+            ->groupBy("product_id")
+            ->get();
 
-    return view('admin/sale/soldTo_customer',compact('sales'));
+        return view('admin/sale/soldTo_customer', compact('sales'));
+    }
 
-}
 
-
-    public function showSellForm($sale_id){
-        return view('admin/sale/sellForm',compact('sale_id'));
+    public function showSellForm($sale_id)
+    {
+        return view('admin/sale/sellForm', compact('sale_id'));
     }
 
     // public function sell(Request $request){
@@ -143,110 +145,123 @@ public function saleCustomer($customer_id){
     // }
 
 
-    public function sell(Request $request){
-    $purchases = null;
-    $countQty = null;
-
-    if($request->stock_id==3)
+    public function sell(Request $request)
     {
-        $countQty = $this->getQtyCount3($request->product_id);
-        $purchases = Onsale::where('product_id', $request->product_id)->where('remaining_qty','>',0)->get();
-    }
-     elseif($request->stock_id == 2)
-     {
-        $countQty = $this->getQtyCount2($request->product_id);
-        $purchases = Substock::where('product_id', $request->product_id)->where('remaining_qty','>',0)->get();
- 
-     }
-     else
-     {
-        $countQty = $this->getQtyCount1($request->product_id);
-        $purchases = Purchase::where('product_id', $request->product_id)->where('remaining_qty','>',0)->get();
-  
-    }
-    
+        $purchases = null;
+        $countQty = null;
 
-     $qty = $request->qty;
-     $cqty = $qty;
-     if ($qty > $countQty) {
-         $sale = Sale::find($request->sell_id);
-         return view('admin/sale/sellForm',compact('sale'));
-     }
-
-     foreach ($purchases as $purchase) {
-        $remain = $purchase->remaining_qty;
-        if ($remain == 0 || $remain < 0) continue;
-
-        $remainQty = $cqty-$remain;
-
-        if($remainQty <= 0){
-
-            $purchase->remaining_qty = -($remainQty);
-            $purchase->update();
-
-            $sellD = new Sale_detail();
-            $sellPrice = ($request->qty)*($request->sell_price);
-            $sellD->sell_price = $sellPrice;
-            $sellD->sale_id = $request->sell_id;
-            $sellD->product_id = $request->product_id;
-            $sellD->qty = $request->qty;
-            $sellD->save();
-            break;
+        if ($request->stock_id == 3) {
+            $countQty = $this->getQtyCount3($request->product_id);
+            $purchases = Onsale::where('product_id', $request->product_id)->where('remaining_qty', '>', 0)->get();
+        } elseif ($request->stock_id == 2) {
+            $countQty = $this->getQtyCount2($request->product_id);
+            $purchases = Substock::where('product_id', $request->product_id)->where('remaining_qty', '>', 0)->get();
+        } else {
+            $countQty = $this->getQtyCount1($request->product_id);
+            $purchases = Purchase::where('product_id', $request->product_id)->where('remaining_qty', '>', 0)->get();
         }
 
-        if($remainQty > 0){
-            $purchase->remaining_qty = 0;
-            $purchase->update();
 
-            $sellD = new Sale_detail();
-            $sellPrice = ($request->qty)*($request->sell_price);
-            $sellD->sell_price = $sellPrice;
-            $sellD->sale_id = $request->sell_id;
-            $sellD->product_id = $request->product_id;
-            $sellD->qty = $remain;
-            $sellD->save();
-            $cqty = $remainQty;
-            continue;
+        $qty = $request->qty;
+        $cqty = $qty;
+        if ($qty > $countQty) {
+            $sale = Sale::find($request->sell_id);
+            return view('admin/sale/sellForm', compact('sale'));
         }
-    }
+
+        foreach ($purchases as $purchase) {
+            $remain = $purchase->remaining_qty;
+            if ($remain == 0 || $remain < 0) continue;
+
+            $remainQty = $cqty - $remain;
+
+            if ($remainQty <= 0) {
+
+                $purchase->remaining_qty = - ($remainQty);
+                $purchase->update();
+
+                $sellD = new Sale_detail();
+                $sellPrice = ($request->qty) * ($request->sell_price);
+                $sellD->sell_price = $sellPrice;
+                $sellD->sale_id = $request->sell_id;
+                $sellD->product_id = $request->product_id;
+                $sellD->qty = $request->qty;
+                $sellD->save();
+                break;
+            }
+
+            if ($remainQty > 0) {
+                $purchase->remaining_qty = 0;
+                $purchase->update();
+
+                $sellD = new Sale_detail();
+                $sellPrice = ($request->qty) * ($request->sell_price);
+                $sellD->sell_price = $sellPrice;
+                $sellD->sale_id = $request->sell_id;
+                $sellD->product_id = $request->product_id;
+                $sellD->qty = $remain;
+                $sellD->save();
+                $cqty = $remainQty;
+                continue;
+            }
+        }
         $sale = Sale::find($request->sell_id);
-        return view('admin/sale/sellForm',compact('sale'));
+        return view('admin/sale/sellForm', compact('sale'));
     }
 
 
-
-    public function printInvoice($id){
+    public function viewNotification($id)
+    {
+        $notification = Auth::user()->notifications()->where('id', $id)->first();
+        if ($notification) {
+            $notification->markAsRead();
+            $sale = Sale::find($notification->data['id']);
+            $payment = Payment::Where('sale_id', $notification->data['id'])->first();
+            return view('pdf_view', compact('sale', 'payment'));
+        }
+        return null;
+    }
+    public function printInvoice($id)
+    {
+     
         $sale = Sale::find($id);
-        $payment = Payment::Where('sale_id',$id)->first();
-        Notification::send(Auth::user(), new SellNotification($sale,$payment));
-        return view('pdf_view',compact('sale','payment'));
+        $payment = Payment::Where('sale_id', $id)->first();
+        if (!Auth::user()->isAdmin){
+            $user = User::find(1);
+            Notification::send($user, new SellNotification($sale, $payment));
+        }
+       return view('pdf_view', compact('sale', 'payment'));
     }
-  
-    public function getQtyCount1($product_id){
-         return Purchase::Where('product_id', $product_id)
-        ->selectRaw("SUM(remaining_qty) as remaining_qty")
-        ->selectRaw("product_id")
-        ->groupBy('product_id')
-        ->first()->remaining_qty ?? 0;
-    }
-    public function getQtyCount2($product_id){
-        return Substock::Where('product_id', $product_id)
-       ->selectRaw("SUM(remaining_qty) as remaining_qty")
-       ->selectRaw("product_id")
-       ->groupBy('product_id')
-       ->first()->remaining_qty ?? 0;
-   }
-   public function getQtyCount3($product_id){
-    return Onsale::Where('product_id', $product_id)
-   ->selectRaw("SUM(remaining_qty) as remaining_qty")
-   ->selectRaw("product_id")
-   ->groupBy('product_id')
-   ->first()->remaining_qty ?? 0;
-}
 
-    public function sell_detail($id){
+    public function getQtyCount1($product_id)
+    {
+        return Purchase::Where('product_id', $product_id)
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->first()->remaining_qty ?? 0;
+    }
+    public function getQtyCount2($product_id)
+    {
+        return Substock::Where('product_id', $product_id)
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->first()->remaining_qty ?? 0;
+    }
+    public function getQtyCount3($product_id)
+    {
+        return Onsale::Where('product_id', $product_id)
+            ->selectRaw("SUM(remaining_qty) as remaining_qty")
+            ->selectRaw("product_id")
+            ->groupBy('product_id')
+            ->first()->remaining_qty ?? 0;
+    }
+
+    public function sell_detail($id)
+    {
         $sale = Sale::find($id);
         $isVisible = true;
-        return view('admin/sale/sellForm',compact('sale','isVisible'));
+        return view('admin/sale/sellForm', compact('sale', 'isVisible'));
     }
 }

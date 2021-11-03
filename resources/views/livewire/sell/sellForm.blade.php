@@ -81,4 +81,3 @@
         <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentModal">Add Product</button> -->
     </div>
 </div>
-@include('partials.toaster')
