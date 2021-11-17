@@ -58,7 +58,7 @@
                                         @foreach($permissions as $permission)
 
                                         <div class="col-md-4">
-                                            <li><input type="checkbox"  wire:model.defer="perms" value="{{$permission->id}}" @if($perms->contains($permission->id)) checked @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{$permission->name}}</span></li>
+                                            <li><input type="checkbox"  wire:model.defer="perms.{{$permission->id}}" value="{{$permission->id}}" @if($perms->contains($permission->id)) checked @endif>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>{{$permission->name}}</span></li>
                                         </div>
 
                                         @endforeach
@@ -127,4 +127,3 @@
                 </div>
             </div>
         </div>
-        @include('partials.toaster')

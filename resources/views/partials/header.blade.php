@@ -31,7 +31,7 @@
                    
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown notification_dropdown">
-                            @if(Auth::user()->isAdmin)
+                            @if(Auth::user()->isAdmin??'')
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-bell"></i>
                                  

@@ -47,6 +47,7 @@ class UserManagementComponent extends Component
         $this->validateOnly($property);
     }
     public function save(){
+       
         $this->validate();
         $user = new User();
         $user->name = $this->name;
@@ -59,6 +60,7 @@ class UserManagementComponent extends Component
 
     public function delete($id){
         $user = User::findOrfail($id);
+        $user->permissions()->detach();
       if($user->delete())
       session()->flash('success', 'User successfully deleted!');
       else 
@@ -80,11 +82,17 @@ class UserManagementComponent extends Component
     }
 
     public function update(){
+       
         $this->validate();
         $update = User::findOrfail($this->user_id);
         $update->name = $this->name;
         $update->email = $this->email;
         $update->password = $this->password;
+        
+        $update->permissions()->sync($this->perms);
+        $update->update();
+
+
         if($update->update()){
 
             session()->flash('info', 'User successfully updated!');
@@ -94,9 +102,13 @@ class UserManagementComponent extends Component
         $this->resetData();
         $this->updateMode = false;
     }
+
+
+
     public function create(){
      
         $this->permissions = Permission::all();
+
     }
 
 

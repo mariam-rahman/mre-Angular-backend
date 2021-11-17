@@ -24,8 +24,15 @@
 <body>
   <!-- Container -->
   <div class="container-fluid invoice-container">
+<div class="row float-right ">
+<div class="col-md-12 mb-5 ">
+<a href="route(dashboard.index)" class="btn btn-outline-primary">Back</a>
+</div>
+</div>
+<br><br>
+
     <!-- Header -->
-    <header>
+  
       <div class="row align-items-center">
         <div class="col-sm-7 text-center text-sm-left mb-3 mb-sm-0">
           <img id="logo" src="{{asset('images/logo.png')}}" width="100" />
@@ -35,10 +42,11 @@
         </div>
       </div>
       <hr>
-    </header>
+ 
 
     <!-- Main Content -->
     <main>
+     
       <div class="row">
         <div class="col-sm-6"><strong>Date:</strong> {{$sale->sell_date}}</div>
         <div class="col-sm-6 text-sm-right"> <strong>Invoice No:</strong> {{$sale->id}}</div>

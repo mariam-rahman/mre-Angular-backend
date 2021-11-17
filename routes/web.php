@@ -29,6 +29,7 @@ use App\Http\Controllers\SendEmailController;
 use App\Http\Livewire\Category\CategoryComponent;
 use App\Http\Livewire\Employee\EmployeeComponent;
 use App\Http\Livewire\EmployeeComponent\Employee;
+use Illuminate\Routing\RouteGroup;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 //use App\Http\Livewire\CategoryComponent;
@@ -44,28 +45,24 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
+Route::view('index','index');
 // Route::get('make',function(){
 //     return Hash::make("1234");
 // });
-Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
-Route::post('dashboard/chart',[DashboardController::class,'chart_value'])->name('dashboard.chart_value');
-Route::view('index','index');
-
 
 
 Auth::routes();
-//use App\Http\Livewire\CategoryComponent;
 
-Route::get('/',[MresController::class,'view_category'])->name('view.index');
-Route::get('Mres.image_deatils/{product}',[MresController::class,'image_deatils'])->name('Mres.image_deatils');
+Route::middleware('auth')->group(function(){
+//Dashboard
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
+Route::post('dashboard/chart',[DashboardController::class,'chart_value'])->name('dashboard.chart_value');
 
-Route::get('view/about',[MresController::class,'about'])->name('view.about');
-Route::get('view/product',[MresController::class,'view_product'])->name('view.product');
-Route::get('view/contact',[MresController::class,'contact'])->name('view.contact');
-Route::get('view/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
+
 //email
 Route::post('sent',[SendEmailController::class,'contactFormEmail'])->name('send.email');
-    //user
+
+//user
 Route::get('user',[UserController::class,'index'])->name('user.index');
 Route::post('user/store',[UserController::class,'store'])->name('user.store');
 Route::delete('user/{user}',[UserController::class,'destroy'])->name('user.destroy');
@@ -107,16 +104,15 @@ Route::resource('permission',PermissionController::class);
 
 //Stock
 Route::resource('stock',StockController::class);
-Route::get('stockDisplay',[StockController::class,'stockDispaly'])->name('stock.display');
 
 //onsale
 Route::resource('onsale',OnsaleController::class);
-Route::get('onsale/sellForm/{product_id}',[OnsaleController::class,'sellForm'])->name('onsale.sellform');
-Route::post('onsale/sellStore/{product_id}',[OnsaleController::class,'sellStore'])->name('onsale.sellStore');
-Route::get('onsale/details/{product_id}',[OnsaleController::class,'details'])->name('onsale.details');
+// Route::get('onsale/sellForm/{product_id}',[OnsaleController::class,'sellForm'])->name('onsale.sellform');
+// Route::post('onsale/sellStore/{product_id}',[OnsaleController::class,'sellStore'])->name('onsale.sellStore');
+// Route::get('onsale/details/{product_id}',[OnsaleController::class,'details'])->name('onsale.details');
 
-Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
-Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
+// Route::post('moveToOnSale/{purchaseId}',[PurchaseController::class,'moveToOnSale'])->name('moveToOnSale');
+// Route::get('moveToOnSale/{purchaseId}',[PurchaseController::class,'showOnSaleForm'])->name('showOnSaleForm');
 
 
 
@@ -155,6 +151,19 @@ Route::get('sell-detail/{id}',[SaleController::class,'sell_detail'])->name('sale
 
 
 Route::view('notification','admin/notification/notificationDetails');
+});
+
+//belong to website
+Route::get('/',[MresController::class,'view_category'])->name('view.index');
+Route::get('Mres.image_deatils/{product}',[MresController::class,'image_deatils'])->name('Mres.image_deatils');
+
+Route::get('view/about',[MresController::class,'about'])->name('view.about');
+Route::get('view/product',[MresController::class,'view_product'])->name('view.product');
+Route::get('view/contact',[MresController::class,'contact'])->name('view.contact');
+Route::get('view/category-filer/{category}',[MresController::class,'category_filter'])->name('category.filter');
+//End
+
+
 
 //Route::get('category',CategoryComponent::class);
 

@@ -226,7 +226,7 @@ class SaleController extends Controller
      
         $sale = Sale::find($id);
         $payment = Payment::Where('sale_id', $id)->first();
-        if (!Auth::user()->isAdmin){
+        if (!Auth::user()->isAdmin??''){
             $user = User::find(1);
             Notification::send($user, new SellNotification($sale, $payment));
         }
