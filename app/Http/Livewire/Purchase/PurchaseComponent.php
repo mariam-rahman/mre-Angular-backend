@@ -69,11 +69,24 @@ public $purchase_id;
     public function delete($id){
 
         $purchase = Purchase::findOrFail($id);
-       if ($purchase->delete()){
-           session()->flash('success', 'Purchase successfully deleted!');
-       }else{
-        session()->flash('success', 'Purchase cannot be deleted!');
-       }
+        $stock_id = $purchase->stock_id;
+        if($stock_id == 1)
+        $purchase->delete();
+
+        if($stock_id == 2){
+            $substock = Substock::Where('purchase_id',$id)->delete();
+            $purchase->delete();
+        
+        }
+
+      
+         
+       
+    //    if ($purchase->delete()){
+    //        session()->flash('success', 'Purchase successfully deleted!');
+    //    }else{
+    //     session()->flash('success', 'Purchase cannot be deleted!');
+    //    }
     }
 
     public function edit($id){

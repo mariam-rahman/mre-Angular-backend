@@ -4,7 +4,6 @@
         <button class="btn btn-outline-secondary" wire:click="goBack()">Back</button>
     </div>
     <div class="row d-flex mt-4">
-
         <div class="col-6">
             <li class=" d-flex">
                 <h4 class="text-primary">Total Paid:</h4>

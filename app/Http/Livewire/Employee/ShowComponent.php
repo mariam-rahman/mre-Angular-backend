@@ -14,7 +14,7 @@ class ShowComponent extends Component
     public $designation;
    public $eId;
 
-    public function render()
+    public function render() 
     {
         $this->employee = Employee::findOrFail($this->eId);
         return view('livewire.employee.show-component');
@@ -26,6 +26,9 @@ class ShowComponent extends Component
         'designation' => 'required'
     ];
 
+
+
+
     public function updated($property)
     {
         $this->validateOnly($property);
@@ -35,6 +38,8 @@ class ShowComponent extends Component
     public function mount($id){
         $this->eId = $id;
     }
+
+
 
     public function savePromote($id){
 
@@ -49,12 +54,16 @@ class ShowComponent extends Component
        $this->clear();
     }
 
+
+
     public function editPromote($id){
         $promote = Salary::findOrfail($id);
         $this->promote_id = $promote->id;
         $this->salary = $promote->salary;
         $this->designation = $promote->designation;
     }
+
+    
 
     public function updatePromote(){
         $this->validate();

@@ -107,7 +107,7 @@ class EmployeeComponent extends Component
 
 
     //Delete Emplyee
-    public function delete($id)
+    public function delete($id) 
     {
         $employee = Employee::findOrFail($id);
         $oldiamge = "storage/" . $employee->image;

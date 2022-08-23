@@ -46,7 +46,7 @@
                                                 <option>Choose stocks</option>
                                                 <option value="1">Main stock</option>
                                                 <option value="2">Substock</option>
-                                                <option value="3">On sale</option>
+                                             
                                             </select>
                                             @error('stock_id') <span class="text-danger">{{ $message }}</span> @enderror
                                         </div>

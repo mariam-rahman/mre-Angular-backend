@@ -25,11 +25,11 @@
                                     </select>
                                     @error('stock_id') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
-                                <div class="form-group col-6">
+                                <!-- <div class="form-group col-6">
                                 <label>Date</label>
                                 <input type="Date" wire:model="sell_date" class="form-control">
                                 @error('sell_date') <span class="text-danger">{{ $message }}</span> @enderror
-                                </div>
+                                </div> -->
                                 
                             </div>
                                 <button wire:click="sellCreate()"  class="btn btn-primary">Continue </button>

@@ -17,8 +17,8 @@ class CreateBorrowers extends Migration
             $table->id();
             $table->integer('customer_id');
             $table->integer('sale_id');
-            $table->decimal('payment');
-            $table->decimal('borrow');
+            $table->decimal('payment',12);
+            $table->decimal('borrow',12);
             $table->timestamps();
         });
     }

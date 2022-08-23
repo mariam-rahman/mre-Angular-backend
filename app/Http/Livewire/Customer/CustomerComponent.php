@@ -27,7 +27,7 @@ class CustomerComponent extends Component
     public $customer_data;
     public $debts;
     public $customer_id;
-    public $amount;
+    public $amount; 
 
     public function render() //it acts as index function
     {
@@ -95,7 +95,7 @@ class CustomerComponent extends Component
         $this->isVisible = 1;
 
       $this->sell_details = Sale::query()
-      ->select('p.name as name', 's.sell_date as date', 'd.sell_price as price', 'd.qty as qty')
+      ->select('p.name as name', 's.created_at as date', 'd.sell_price as price', 'd.qty as qty')
       ->from('sales AS s')
       ->join('sale_details as d','s.id','=','d.sale_id')
       ->join('products as p','p.id','=','d.product_id')

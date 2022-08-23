@@ -16,11 +16,11 @@ class CreateOnsales extends Migration
         Schema::create('onsales', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->integer('sell_price');
+            $table->decimal('sell_price',12);
             $table->integer('remaining_qty');
             $table->integer('stock_id');
             $table->integer('qty');
-            $table->decimal('discount',12);
+            $table->integer('discount');
 
             $table->timestamps();
         });

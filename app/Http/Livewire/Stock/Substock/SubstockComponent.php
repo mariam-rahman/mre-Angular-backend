@@ -17,6 +17,8 @@ class SubstockComponent extends Component
     public $product_id;
     public $discount;
     public $sell_price;
+
+
     public function render()
     {
         $this->substocks = Substock::selectRaw("SUM(qty) as qty")
@@ -34,6 +36,7 @@ class SubstockComponent extends Component
         ->selectRaw("product_id")
         ->groupBy('product_id')
         ->where('product_id',$product_id)->first();
+        
            $this->items = Substock::where('product_id',$product_id)->get();
         
     }

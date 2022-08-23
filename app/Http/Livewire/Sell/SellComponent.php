@@ -63,13 +63,11 @@ class SellComponent extends Component
     function sellCreate()
     {
         $this->validate(['customer_id'=>'required',
-                          'sell_date'=>'required',
                           'stock_id'=>'required'  ]);
                           
         $this->sale = Sale::create(
             [
                 'customer_id' => $this->customer_id,
-                'sell_date' => $this->sell_date,
                 'stock_id' => $this->stock_id
             ]
         );
@@ -227,7 +225,7 @@ class SellComponent extends Component
         foreach($this->sale->sell_details as $sell) 
         $this->totalPayment += $sell->sell_price;
     } 
-    public function goBack(){
+    public function goBack(){ 
         $this->visible = 0;
     }
 

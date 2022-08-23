@@ -9,7 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = []; 
 
     public function slips(){
         return $this->hasMany(Slip::class)->orderBy('id','desc');

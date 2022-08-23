@@ -4,7 +4,7 @@
 
 @include('partials.sidenav')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script type="text/javascript">
     ['Monthly', 'Sales', 'Revenues'],
     ['January', "{{$month1}}", "{{$profit1}}"],
@@ -19,7 +19,7 @@
     ['october', "{{$month10}}", "{{$profit10}}"],
     ['Nevember', "{{$month11}}", "{{$profit11}}"],
     ['December', "{{$month12}}", "{{$profit12}}"]
-</script>
+</script> -->
 <div class="container">
     <div class="row mt-5">
         <div class="col-xl-12">
@@ -168,7 +168,7 @@
         <br>
         <hr>
         <br>
-        <h3 class="mb-3">Select year to analyiz profit accuarding sold product</h3>
+        <!-- <h3 class="mb-3">Select year to analyiz profit accuarding sold product</h3>
         <div class="card-body">
     <div class="basic-form">
         <form action="{{route('dashboard.chart_value')}}" method="POST" >
@@ -187,20 +187,52 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
 
            
            
         <br><br>
+        <div class="d-flex">
+        <div class="row" style="flex-wrap:nowrap">
         <p>Sales and Profit of the Business</p>
+        <div class="col-md-10 d-flex">
         <canvas id="myChart" style="width:100%; max-width:900px;"></canvas>
+        </div>
+        </div>
+
+        <div>
+        <div class="row d-flex">
+        <div class="col-md-2 d-flex mr-2 bg-primary" style="height: 20px;" style="width: 10px;">  
+        </div>
+        <div class="d-flex">
+        <p>Sold Product</p>
+        </div>
+        
+        </div>
+
+        <div class="row">
+        <div class="col-md-2 d-flex mr-2 bg-success  " style="height: 20px;">  
+        </div>
+        <p class="">Revenues</p>
+        </div>
+        </div>
+    
+      </div>
+</div>
+        
+      
+        
+       
+        
+        
+        
     </center>
     <!--end here-->
 
 
     <!--code for chart-->
 
-    <script>
+    <!-- <script>
         var xValues = ["January", "February", "March", "April", "May", "Jun", "Julay", "Agust", "September", "October", "November", "December"];
 
         new Chart("myChart", {
@@ -223,7 +255,7 @@
                 }
             }
         });
-    </script>
+    </script> -->
 </div>
 </div>
 </div>

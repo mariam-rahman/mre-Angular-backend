@@ -23,7 +23,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Action</th>

@@ -22,10 +22,6 @@
                 </ol>
             </div>
         </div>
-
-
-
-       
         <div class="row">
             <div class="col-xl-12 col-xxl-12">
                 <div class="card w-75 justify-content-center">

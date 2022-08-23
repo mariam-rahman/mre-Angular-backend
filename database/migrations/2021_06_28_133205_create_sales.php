@@ -16,7 +16,6 @@ class CreateSales extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->integer('customer_id');
-            $table->string('sell_date');
             $table->integer('stock_id');
             $table->timestamps();
         });

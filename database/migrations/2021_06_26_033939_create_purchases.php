@@ -16,7 +16,7 @@ class CreatePurchases extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->integer('price');
+            $table->decimal('price',12);
             $table->integer('qty');
             $table->integer('remaining_qty');
             $table->integer('stock_id');

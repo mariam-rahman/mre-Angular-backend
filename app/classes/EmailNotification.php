@@ -35,18 +35,46 @@ class EmailNotification {
     }
  }
 
- function sendInvoiceEmail($sale, $pay,$stock){
+ function sendInvoiceEmail($products, $payment){
    $user = Auth::user();
    $this->mail->setFrom($user->email, $user->name);
    $this->mail->Subject = "Sold product";
-   $body = "<p>
-   <ul>
-   <li>$sale->id</li>
-   <li>$stock</li>
-   <li>$pay->paid</li>
-   <li>$pay->created_at</li>
-   </ul>
-   </p> <address>Regards,<br> MRE</address>";
+
+   $product = "";
+   foreach($products as $p)
+   {
+  $product .= "<tr style='text-align:center'>
+    <td style='border: 1px solid black;border-collapse: collapse;'>$p->product_name</td>
+    <td style='border: 1px solid black;border-collapse: collapse;'>$p->sell_price</td>
+    <td style='border: 1px solid black;border-collapse: collapse;'>$p->qty</td>
+  </tr>
+";
+   }
+   
+   $body = "
+   <div>
+   <table style='width:50%;border: 1px solid black;border-collapse: collapse;'>
+   <tr style='border: 1px solid black;border-collapse: collapse;'>
+   <th style='border: 1px solid black;border-collapse: collapse;'>Item</th>
+   <th style='border: 1px solid black;border-collapse: collapse;'>Qty</th>
+   <th style='border: 1px solid black;border-collapse: collapse;'>Price</th>
+   </tr>
+   $product
+   </table>
+   <br>
+   <ul style='list-style-type:none'>
+   <li style='display: inline-block;'>
+   <strong>Invoice date: </strong> $payment->created_at
+   </li>
+   <li style='display:inline-block;'>
+   <strong>Invoice No: </strong>$payment->id
+   </li>
+   <li style='display: inline-block;'>
+   <strong >Invoice to: </strong>$payment->cname
+   </li>  
+ </ul>
+ </div>
+   ";
    $this->mail->msgHTML($body);
    return $this->mail->send();
    if (!$this->mail->send()) {
@@ -55,6 +83,7 @@ class EmailNotification {
     return 'Message sent!';
 }
  }
+ 
 public function enmailToAll(){
     $employee = Employee::all();
     $this->mail->addAddress($employee->email, null);
