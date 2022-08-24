@@ -55,7 +55,8 @@ class ApiWebproductController extends Controller
 
     function categoryFilter($id){
            $categoryFiltter = Webproduct::where('category_id', '=', $id)->get();
-           return $categoryFiltter;
+
+           return ["lists"=>$categoryFiltter,"size"=>count($categoryFiltter)];
     }
 
 
